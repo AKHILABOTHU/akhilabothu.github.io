@@ -69,18 +69,14 @@
 		<nav class="main-nav hero-height " v-bind:class="{active: isActive, hidden:!isActive}">
 			<div class="menu-close waves-effect waves-light" v-on:click="changeNav()"><span class="fa fa-times"></span>
 			</div>
-			<ul>
+		<ul>
 				<li><a href="#0" class="animatescroll-link" onclick="$('html').animatescroll();">Home</a></li>
-				<li><a href="#0" class="service-section-nav animatescroll-link"
-						onclick="$('#service-section').animatescroll();">Worked on</a></li>
-				<li><a href="#0" class="skill-section-nav animatescroll-link"
-						onclick="$('#skill-section').animatescroll();">Skill</a></li>
-				<li><a href="#0" class="education-section-nav animatescroll-link"
-						onclick="$('#education-section').animatescroll();">Education</a></li>
-				<li><a href="#0" class="experience-section-nav animatescroll-link"
-						onclick="$('#experience-section').animatescroll();">Experience</a></li>
-				<li><a href="#0" class="experience-section-nav animatescroll-link"
-						onclick="$('#contact-section').animatescroll();">Contact</a></li>
+				<li><a href="#0" class="service-section-nav animatescroll-link" onclick="$('#service-section').animatescroll();">Worked on</a></li>
+				<li><a href="#0" class="skill-section-nav animatescroll-link" onclick="$('#skill-section').animatescroll();">Skill</a></li>
+				<li><a href="#0" class="experience-section-nav animatescroll-link" onclick="$('#experience-section').animatescroll();">Experience</a></li>
+				<li><a href="#0" class="education-section-nav animatescroll-link" onclick="$('#education-section').animatescroll();">Education</a></li>
+				<li><a href="#0" class="certification-section-nav animatescroll-link" onclick="$('#certification-section').animatescroll();">Certifications</a></li>
+				
 				<!-- <li><a href="#0" class="contact-section-nav animatescroll-link" onclick="$('#contact-section').animatescroll();">Contact</a></li> -->
 			</ul>
 		</nav>
@@ -105,8 +101,8 @@
 							<div class="col s12 w-block shadow-bg pd-0">
 								<div class="col m5 s12 about-img parallax-layer al-center pd-50">
 									<div class="about-img-content image-bg shadow-bg layer" data-depth="0.1"
-										data-image-bg="img/me.jpg">
-										<a href="resume/Akhil Abothu.pdf" target="_blank"
+										v-bind:style="{ background: 'url(' + user.profilePic + ') center top / cover no-repeat' }">
+										<a v-bind:href="user.resume" target="_blank"
 											class="btn-circle tooltipped layer shadow-bg" data-position="top"
 											data-delay="50" data-tooltip="Download Resume" data-depth="0.25"><span
 												class="fa fa-download"></span></a>
@@ -151,72 +147,30 @@
 			<div class="container">
 				<div class="row">
 					<div class="col s12 section-title">
-						<h2>Worked on</h2>
+						<h2>{{workedOn.title}}</h2>
 					</div>
-
 					<div class="col s12">
-
-						<!-- Single Service -->
 						<div class="col l4 m6 s12 service-wrapper wow zoomIn" data-wow-duration="0.5s"
-							data-wow-delay="0.3s" data-wow-offset="0">
+							data-wow-delay="0.3s" data-wow-offset="0" v-for="work in workedOn.works">
 							<div class="col s12 w-block shadow-bg">
 								<div class="service-center">
 									<div class="service-icon">
-										<span class="fa fa-laptop"></span>
+										<span class="fa" v-bind:class="work.icon"></span>
 									</div>
 									<div class="service-title">
-										Front End
+										{{work.title}}
 									</div>
 								</div>
-								<div class="service-desc">
-									<p>
-										Vue.js, React
+								<div class="service-desc" >
+									<p v-for="technology in work.technologies">
+										{{technology}}
 									</p>
 								</div>
 							</div>
 						</div>
-						<div class="col l4 m6 s12 service-wrapper wow zoomIn" data-wow-duration="0.5s"
-							data-wow-delay="0.3s" data-wow-offset="0">
-							<div class="col s12 w-block shadow-bg">
-								<div class="service-center">
-									<div class="service-icon">
-										<span class="fa fa-server"></span>
-									</div>
-									<div class="service-title">
-										Back End
-									</div>
-								</div>
-								<div class="service-desc">
-									<p>
-										Java, Spring MVC, Spring Boot
-									</p>
-								</div>
-							</div>
-						</div>
-						<div class="col l4 m6 s12 service-wrapper wow zoomIn" data-wow-duration="0.5s"
-							data-wow-delay="0.3s" data-wow-offset="0">
-							<div class="col s12 w-block shadow-bg">
-								<div class="service-center">
-									<div class="service-icon">
-										<span class="fa fa-database"></span>
-									</div>
-									<div class="service-title">
-										Database
-									</div>
-								</div>
-								<div class="service-desc">
-									<p>
-										MySQL
-									</p>
-								</div>
-							</div>
-						</div>
-
 					</div>
-				</div>
 			</div>
 		</section>
-		<!--/ Service Section -->
 
 
 		<!-- Skill Section -->
@@ -224,107 +178,25 @@
 			<div class="container">
 				<div class="row">
 					<div class="col s12 section-title">
-						<h2>Skill</h2>
+						<h2>{{skill.title}}</h2>
 					</div>
 					<div class="col s12">
 						<div
 							class="col s12 section-content skill-wrapper w-block shadow-bg pdt-50 pdr-40 pdb-50 pdl-40">
 							<!-- Progress bar Left -->
-							<div class="col l6 s12 skill-data">
+							<div class="col l6 s12 skill-data" v-for="(skill,index) in skill.skills" v-bind:class="{'skill-data-alt':index%2==0}">
 
 								<!-- Single Skill -->
-								<div class="skillbar clearfix " data-percent="90%">
-									<div class="skillbar-title" style="background: #e44d26;"><span>HTML5</span></div>
-									<div class="skillbar-bar" style="background: #f16529;"></div>
-									<div class="skill-bar-percent">90%</div>
+								<div class="skillbar clearfix " v-bind:data-percent="skill.percentage">
+									<div class="skillbar-title" v-bind:style="{background: skill.nameColor}"><span>{{skill.name}}</span></div>
+									<div class="skillbar-bar" v-bind:style="{background: skill.progressColor}"></div>
+									<div class="skill-bar-percent">{{skill.percentage}}</div>
 								</div> <!-- End Skill Bar -->
 								<!--/ Single Skill -->
 
-								<!-- Single Skill -->
-
-								<!--/ Single Skill -->
-
-								<!-- Single Skill -->
-								<div class="skillbar clearfix " data-percent="70%">
-									<div class="skillbar-title" style="background: #264de4;"><span>CSS3</span></div>
-									<div class="skillbar-bar" style="background: #2965f1;"></div>
-									<div class="skill-bar-percent">70%</div>
-								</div> <!-- End Skill Bar -->
-								<!--/ Single Skill -->
-
-								<!-- Single Skill -->
-								<div class="skillbar clearfix " data-percent="70%">
-									<div class="skillbar-title" style="background: #d6ba33;"><span>Javascript</span>
-									</div>
-									<div class="skillbar-bar" style="background: #fdde39;"></div>
-									<div class="skill-bar-percent">70%</div>
-								</div> <!-- End Skill Bar -->
-								<!--/ Single Skill -->
-
-								<!-- Single Skill -->
-								<div class="skillbar clearfix " data-percent="30%">
-									<div class="skillbar-title" style="background: #247cda;"><span>React</span></div>
-									<div class="skillbar-bar" style="background: #346092;"></div>
-									<div class="skill-bar-percent">30%</div>
-								</div> <!-- End Skill Bar -->
-								<!--/ Single Skill -->
-
-								<!-- Single Skill -->
-								<div class="skillbar clearfix " data-percent="40%">
-									<div class="skillbar-title" style="background: #41b883	;"><span>VueJs</span></div>
-									<div class="skillbar-bar" style="background: #6ddaa9;"></div>
-									<div class="skill-bar-percent">40%</div>
-								</div> <!-- End Skill Bar -->
-								<!--/ Single Skill -->
-
+								
 							</div>
 							<!--/ Progress bar Left -->
-
-							<!-- Progress bar Right -->
-							<div class="col l6 s12 skill-data skill-data-alt">
-
-								<!-- Single Skill -->
-								<div class="skillbar clearfix " data-percent="70%">
-									<div class="skillbar-title" style="background: #009aff;"><span>Core Java</span>
-									</div>
-									<div class="skillbar-bar" style="background: #65b6ea;"></div>
-									<div class="skill-bar-percent">70%</div>
-								</div> <!-- End Skill Bar -->
-								<!--/ Single Skill -->
-
-								<!-- Single Skill -->
-								<div class="skillbar clearfix " data-percent="60%">
-									<div class="skillbar-title" style="background: #4d4d4d;"><span>Servlet</span></div>
-									<div class="skillbar-bar" style="background: #757171;"></div>
-									<div class="skill-bar-percent">60%</div>
-								</div> <!-- End Skill Bar -->
-								<!--/ Single Skill -->
-
-								<!-- Single Skill -->
-								<div class="skillbar clearfix " data-percent="60%">
-									<div class="skillbar-title" style="background: #000;"><span>JSP</span></div>
-									<div class="skillbar-bar" style="background: #565050;"></div>
-									<div class="skill-bar-percent">60%</div>
-								</div> <!-- End Skill Bar -->
-								<!--/ Single Skill -->
-
-								<!-- Single Skill -->
-								<div class="skillbar clearfix " data-percent="70%">
-									<div class="skillbar-title" style="background: #78c158"><span>SpringMVC</span></div>
-									<div class="skillbar-bar" style="background: #78c158;"></div>
-									<div class="skill-bar-percent">70%</div>
-								</div> <!-- End Skill Bar -->
-								<!--/ Single Skill -->
-								<!-- Single Skill -->
-								<div class="skillbar clearfix " data-percent="40%">
-									<div class="skillbar-title" style="background: #78c158;"><span>SpringBoot</span>
-									</div>
-									<div class="skillbar-bar" style="background: #97de78;"></div>
-									<div class="skill-bar-percent">40%</div>
-								</div> <!-- End Skill Bar -->
-							</div>
-							<!--/ Progress bar Right -->
-
 						</div>
 					</div>
 				</div>
@@ -332,185 +204,36 @@
 		</section>
 		<!--/ Skill Section -->
 
-
-		<!-- Education Section -->
-		<section id="education-section" class="education-section">
-			<div class="container">
-				<div class="row">
-					<div class="col s12 section-title">
-						<h2>Education</h2>
-					</div>
-					<div class="col s12">
-						<div class="col s12 section-content pd-0">
-							<ul class="timeline">
-
-								<!-- Single Education - Left Side -->
-								<li class="wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0.3s"
-									data-wow-offset="0">
-									<div class="timeline-badge">
-										<a><i class="fa fa-circle"></i></a>
-									</div>
-									<div class="timeline-panel w-block shadow-bg pd-30">
-										<div class="timeline-tag">
-											Sai Spurthi Institute of Technology (JNTUH)
-										</div>
-										<div class="timeline-title timeline-title-alt">
-											Bachelor of Engineering in Computer Science and Engineering
-										</div>
-										<div class="timeline-time">2013-2017</div>
-									</div>
-								</li>
-								<!--/ Single Education - Left Side -->
-
-								<!-- Single Education - Right Side -->
-								<li class="timeline-inverted wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0.3s"
-									data-wow-offset="0">
-									<div class="timeline-badge">
-										<a><i class="fa fa-circle"></i></a>
-									</div>
-									<div class="timeline-panel w-block shadow-bg pd-30">
-										<div class="timeline-tag">
-											Sri C.V Raman Junior College (BIEAP)
-										</div>
-										<div class="timeline-title timeline-title-alt">
-											Intermediate (MPC)
-										</div>
-										<div class="timeline-time">2011-2013</div>
-									</div>
-								</li>
-
-								<!-- Single Education - Left Side -->
-								<li class="wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0.3s"
-									data-wow-offset="0">
-									<div class="timeline-badge">
-										<a><i class="fa fa-circle"></i></a>
-									</div>
-									<div class="timeline-panel w-block shadow-bg pd-30">
-										<div class="timeline-tag">
-											Z.P.S.S Nacharam High School (BSEAP)
-										</div>
-										<div class="timeline-title timeline-title-alt">
-											SSC
-										</div>
-										<div class="timeline-time">2010-2011</div>
-									</div>
-								</li>
-
-								<li class="clearfix no-float"></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!--/ Education Section -->
-
-
-		<!-- Experience Section -->
 		<section id="experience-section" class="experience-section">
 			<div class="container">
 				<div class="row">
 					<div class="col s12 section-title">
-						<h2>Experience</h2>
+						<h2>{{experience.title}}</h2>
 					</div>
 					<div class="col s12">
 						<div class="col s12 section-content pd-0">
 							<ul class="timeline">
 
-								<li class="timeline-inverted wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0.3s"
+								<li class="wow fadeIn" v-for="(experience , index) in experience.experiences" v-bind:class="{'timeline-inverted': index%2==0}" data-wow-duration="0.5s" data-wow-delay="0.3s"
 									data-wow-offset="0">
 									<div class="timeline-badge">
 										<a><i class="fa fa-circle"></i></a>
 									</div>
 									<div class="timeline-panel w-block shadow-bg pd-30">
 										<div class="timeline-tag">
-											Capgemini
+											{{experience.company}}
 										</div>
 										<div class="timeline-title timeline-title-alt">
-											Associate Consultant
+											{{experience.designation}}
 										</div>
 										<div class="timeline-desc">
 											<p>
-												
+												{{experience.description}}
 											</p>
 										</div>
-										<div class="timeline-time">From 2021 February to Present </div>
+										<div class="timeline-time">{{experience.period}}</div>
 									</div>
 								</li>
-
-
-
-								<!-- Single Experience - Left Side -->
-								<li class="wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0.3s"
-									data-wow-offset="0">
-									<div class="timeline-badge">
-										<a><i class="fa fa-circle"></i></a>
-									</div>
-									<div class="timeline-panel w-block shadow-bg pd-30">
-										<div class="timeline-tag">
-											GV Soft Solutions
-										</div>
-										<div class="timeline-title timeline-title-alt">
-											Associate Application Developer
-										</div>
-										<div class="timeline-desc">
-											<p>
-
-											</p>
-										</div>
-										<div class="timeline-time">From 2018 June to 2021 February (2 Years 8 Months)
-										</div>
-									</div>
-								</li>
-								<!--/ Single Experience - Left Side -->
-
-								<!-- Single Experience - Right Side -->
-								<li class="timeline-inverted wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0.3s"
-									data-wow-offset="0">
-									<div class="timeline-badge">
-										<a><i class="fa fa-circle"></i></a>
-									</div>
-									<div class="timeline-panel w-block shadow-bg pd-30">
-										<div class="timeline-tag">
-											Wevio India Info Solutions Private Limited
-										</div>
-										<div class="timeline-title timeline-title-alt">
-											Software Engineer
-										</div>
-										<div class="timeline-desc">
-											<p>
-												
-											</p>
-										</div>
-										<div class="timeline-time">From 2017 October to 2018 May (8 Months)</div>
-									</div>
-								</li>
-								<!--/ Single Experience - Right Side -->
-
-								<li class="wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0.3s"
-									data-wow-offset="0">
-									<div class="timeline-badge">
-										<a><i class="fa fa-circle"></i></a>
-									</div>
-									<div class="timeline-panel w-block shadow-bg pd-30">
-										<div class="timeline-tag">
-											TATA Institute of Social Sciences
-										</div>
-										<div class="timeline-title timeline-title-alt">
-											Service Engineer
-										</div>
-										<div class="timeline-desc">
-											<p>
-
-											</p>
-										</div>
-										<div class="timeline-time">From 2017 June to 2017 September (3 Months)</div>
-									</div>
-								</li>
-
-
-								<!--/ Single Experience - Right Side -->
-
 								<li class="clearfix no-float"></li>
 							</ul>
 						</div>
@@ -520,101 +243,69 @@
 		</section>
 		<!--/ Experience Section -->
 
+
 		<!-- Education Section -->
 		<section id="education-section" class="education-section">
 			<div class="container">
 				<div class="row">
 					<div class="col s12 section-title">
-						<h2>Certifications</h2>
+						<h2>{{education.title}}</h2>
+					</div>
+					<div class="col s12">
+						<div class="col s12 section-content pd-0">
+							<ul class="timeline">
+								<li class="wow fadeIn" v-for="(education , index) in education.educations" v-bind:class="{'timeline-inverted': index%2==0}"  data-wow-duration="0.5s" data-wow-delay="0.3s"
+									data-wow-offset="0">
+									<div class="timeline-badge">
+										<a><i class="fa fa-circle"></i></a>
+									</div>
+									<div class="timeline-panel w-block shadow-bg pd-30">
+										<div class="timeline-tag">
+											{{education.school}} {{education.position}}
+										</div>
+										<div class="timeline-title timeline-title-alt">
+											{{education.specification}}
+										</div>
+										<div class="timeline-time">{{education.period}}</div>
+									</div>
+								</li>
+								<li class="clearfix no-float"></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!--/ Education Section -->
+		
+		<!-- Education Section -->
+		<section id="certification-section" class="certification-section">
+			<div class="container">
+				<div class="row">
+					<div class="col s12 section-title">
+						<h2>{{certification.title}}</h2>
 					</div>
 					<div class="col s12">
 						<div class="col s12 section-content pd-0">
 							<ul class="timeline">
 
-								<!-- Single Education - Right Side -->
-								<li class="timeline-inverted wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0.3s"
+							
+								<li class=" wow fadeIn" v-for="(certificate , index) in certification.certifications" v-bind:class="{'timeline-inverted': index%2==0}" data-wow-duration="0.5s" data-wow-delay="0.3s"
 									data-wow-offset="0">
 									<div class="timeline-badge">
 										<a><i class="fa fa-circle"></i></a>
 									</div>
 									<div class="timeline-panel w-block shadow-bg pd-30">
 										<div class="timeline-tag">
-											Microsoft Certified : Azure Fundamentals
+											{{certificate.certificateName}}
 										</div>
 										<div class="timeline-title timeline-title-alt">
-											Microsoft
+											{{certificate.sponsor}}
 										</div>
-										<div class="timeline-time">2021</div>
-										<div class="down_cerrt"> <a href="certificates\Microsoft_Azure.pdf" target="_blank">MTA
-											Certificate</a></div>
+										<div class="timeline-time">{{certificate.year}}</div>
+										<div class="down_cerrt" v-for="certificateLink in certificate.certificates"> <a v-bind:href="certificateLink.link" target="_blank">{{certificateLink.title}}</a></div>
 									</div>
-								</li>	
-
-								<!-- Single Education - Left Side -->
-								<li class="wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0.3s"
-									data-wow-offset="0">
-									<div class="timeline-badge">
-										<a><i class="fa fa-circle"></i></a>
-									</div>
-									<div class="timeline-panel w-block shadow-bg pd-30">
-										<div class="timeline-tag">
-											IT Essentials </div>
-										<div class="timeline-title timeline-title-alt">
-											Cisco
-										</div>
-										<div class="timeline-time">2017</div>
-
-										<div class="down_cerrt"><a
-												href="certificates\AKHILABOTHU-ITE-BATCH-02-CISCO Letter.pdf"target="_blank">Letter</a>
-											<span>||</span>
-											<a
-												href="certificates\AKHILABOTHU-ITE-BATCH-02-CISCOCertificate.pdf"target="_blank">Certificate</a>
-										</div>
-									</div>
-								</li>
-								<!--/ Single Education - Left Side -->
-
-								<!-- Single Education - Right Side -->
-								<li class="timeline-inverted wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0.3s"
-									data-wow-offset="0">
-									<div class="timeline-badge">
-										<a><i class="fa fa-circle"></i></a>
-									</div>
-									<div class="timeline-panel w-block shadow-bg pd-30">
-										<div class="timeline-tag">
-											Database Design & Database Programming with SQL
-										</div>
-										<div class="timeline-title timeline-title-alt">
-											Orcle & TASK
-										</div>
-										<div class="timeline-time">2016</div>
-										<div class="down_cerrt"><a
-												href="certificates\ABOTHU-AKHIL-DATABASE-DESIGN-ORACLE-TASK.pdf"target="_blank">Database
-												Design</a> <span>||</span> <a
-												href="certificates\ABOTHU-AKHIL-DATABASE-PROGRAMMING-WITH-SQL-ORACLE-TASK.pdf"target="_blank">Database
-												Programming</a></div>
-									</div>
-								</li>
-
-								<!-- Single Education - Left Side -->
-								<li class="wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0.3s"
-									data-wow-offset="0">
-									<div class="timeline-badge">
-										<a><i class="fa fa-circle"></i></a>
-									</div>
-									<div class="timeline-panel w-block shadow-bg pd-30">
-										<div class="timeline-tag">
-											Microsoft Technology Associate Database Fundamentals.
-										</div>
-										<div class="timeline-title timeline-title-alt">
-											Microsoft & TASK
-										</div>
-										<div class="timeline-time">2015</div>
-										<div class="down_cerrt"> <a href="certificates\MTACertificate.pdf"target="_blank">MTA
-												Certificate</a></div>
-									</div>
-								</li>
-
+								</li>			
 								<li class="clearfix no-float"></li>
 							</ul>
 						</div>
@@ -625,7 +316,7 @@
 		<!--/ Education Section -->
 
 		<!-- Contact Section -->
-		<section id="contact-section" class="contact-section">
+		<!-- <section id="contact-section" class="contact-section">
 			<div class="container">
 				<div class="row">
 					<div class="col s12 section-title">
@@ -640,7 +331,7 @@
 						</div>
 					</div>
 				</div>
-		</section>
+		</section> -->
 		<!--/ Contact Section -->
 
 
