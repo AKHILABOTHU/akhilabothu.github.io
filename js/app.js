@@ -24,7 +24,7 @@ new Vue({
 			educations:[
 				{
 					"school":"Sai Spurthi Institute of Technology (JNTUH)",
-					"specification":"Bachelor of Engineering in Computer Science and Engineering",
+					"specification":"Bachelor of Technology in Computer Science and Engineering",
 					"period":"2013-2017",
 				},
 				{
