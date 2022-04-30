@@ -2984,11 +2984,11 @@ width:110px;
 	color:rgba(0, 0, 0, 0.4);
 }
 
-.copyleft {
-  display:inline-block;
-  transform: rotate(180deg);
-  font-size:20px;
-}
+	/* .copyleft {
+	display:inline-block;
+	transform: rotate(180deg);
+	font-size:20px;
+	} */
 .contact_details
 {
 	margin:0 auto;
