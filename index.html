@@ -1,381 +1,795 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-	<meta name="description" content="">
-	<meta name="keywords" content="akhil abothu resume">
-	<meta charset="UTF-8">
-	<meta name="author" content="Akhil Abothu">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Akhil Abothu</title>
-	<link rel="shortcut icon" href="img/favicon.ico" />
-	<link type="text/css" rel="stylesheet" media="all"
-		href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i,700,700i">
-	<link type="text/css" rel="stylesheet" media="all"
-		href="https://fonts.googleapis.com/css?family=Dosis:400,500,600,700,800">
-	<link type="text/css" rel="stylesheet" media="all"
-		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-	<link type="text/css" rel="stylesheet" media="all" href="css/animate.css">
-	<link type="text/css" rel="stylesheet" media="all" href="css/materialize.min.css">
-	<link type="text/css" rel="stylesheet" media="all" href="css/magnific-popup.css">
-	<link type="text/css" rel="stylesheet" media="all" href="css/owl.carousel.css">
-	<link type="text/css" rel="stylesheet" media="all" href="css/owl.theme.css">
-	<link type="text/css" rel="stylesheet" media="all" href="css/owl.transitions.css">
-	<link type="text/css" rel="stylesheet" media="all" href="style.css">
-	<link id="tile-colorscheme-css" type="text/css" rel="stylesheet" media="all" href="css/color-1.css">
-	<link type="text/css" rel="stylesheet" media="all" href="css/responsive.css">
-	<script type="text/javascript" src="js/modernizr.js"></script>
-	<script src="https://code.jquery.com/jquery-3.3.1.js"
-		integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-	<script type="text/javascript" src="js/new.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./assets/images/favicon.ico" />
+    <title>Akhil Abothu</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="./assets/css/styles.css" rel="stylesheet">
 </head>
 
-<body>
-	<div id="app">
+<body :class="{ 'dark-theme': darkMode }">
+    <!-- Loader -->
+<div id="loader">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg fixed-top navbar-custom">
+            <div class="container">
+                <a class="navbar-brand fw-bold fs-4 gradient-text" href="#">
+                    Akhil Abothu
+                </a>
 
-		<!-- Preloader -->
-		<div class="preloader">
-			<div class="preloader-inner">
-				<div class="preloader-wrapper active">
-					<div class="spinner-layer">
-						<div class="circle-clipper left">
-							<div class="circle"></div>
-						</div>
-						<div class="gap-patch">
-							<div class="circle"></div>
-						</div>
-						<div class="circle-clipper right">
-							<div class="circle"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!--/ Preloader -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#skills">Skills</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#experience">Experience</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#dev-diary">DevDiary</a>
+                        </li>
+                        <li class="nav-item">
+                            <button @click="darkMode = !darkMode" class="btn btn-outline-secondary rounded-circle ms-2">
+                                <i :class="darkMode ? 'fas fa-sun' : 'fas fa-moon'"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero-section d-flex align-items-center gradient-bg mesh-bg">
+            <div class="hero-overlay"></div>
+
+            <div class="container position-relative">
+                <div class="row align-items-center">
+                    <!-- Profile Picture Section - Left Side -->
+                    <!-- Profile Picture Section - Top Always -->
+                    <div class="col-lg-5 d-flex justify-content-center order-1 mb-4 mb-lg-0">
+                        <div class="position-relative">
+                            <!-- Floating Profile Card -->
+                            <div class="floating glass-card p-4" style="max-width: 20rem;">
+                                <!-- Profile Image -->
+                                <div class="text-center mb-4">
+                                    <div class="position-relative d-inline-block">
+                                        <div class="rounded-circle p-2 shadow-lg"
+                                            style="width: 12rem; height: 12rem; background: linear-gradient(135deg, #667eea, #764ba2);">
+                                            <div
+                                                class="w-100 h-100 rounded-circle bg-white d-flex align-items-center justify-content-center overflow-hidden">
+                                                <img src="./assets/images/me.jpg" alt="Profile" class="rounded-circle"
+                                                    style="width: 100%; height: 100%; object-fit: cover;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                               
+                            </div>
+
+                            <!-- Floating Tech Icons -->
+                            <div class="floating-icon floating-icon-1 animate-pulse-slow">
+                                <i class="fab fa-java fs-4"></i>
+                            </div>
+                            <div class="floating-icon floating-icon-2 animate-pulse-slow" style="animation-delay: 1s;">
+                                <i class="fab fa-vuejs fs-4"></i>
+                            </div>
+                            <div class="floating-icon floating-icon-3 animate-pulse-slow" style="animation-delay: 2s;">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Section - Right Side -->
+                    <!-- Text Content Below Image -->
+                    <div class="col-lg-7 text-white fade-in-up order-2 text-center text-lg-start">
+                        <div class="mb-4">
+                            <span class="badge bg-light bg-opacity-10 text-white px-3 py-2 rounded-pill">
+                                🚀 Available for new opportunities
+                            </span>
+                        </div>
+                        <h1 class="display-1 fw-bold mb-4">
+                            Hi, I'm <span class="text-warning">Akhil</span>
+                        </h1>
+                        <div class="display-5 mb-4 text-info text-center text-lg-start" style="height: 5rem;">
+                            <div class="typewriter">{{ currentRole }}</div>
+                        </div>
+                        <p class="lead mb-4 text-light">
+                            {{ profileSummary }}
+                        </p>
+
+                        <!-- Contact Info Pills -->
+                        <!-- Contact Info Pills -->
+                        <div class="d-flex flex-wrap justify-content-center justify-content-lg-start mb-4">
+                            <div class="contact-pill">
+                                <i class="fas fa-map-marker-alt text-warning"></i>
+                                <span>{{ location }}</span>
+                            </div>
+                            <div class="contact-pill">
+                                <i class="fas fa-envelope text-warning"></i>
+                                <span>{{ email }}</span>
+                            </div>
+                            <div class="contact-pill">
+                                <i class="fas fa-phone text-warning"></i>
+                                <span>{{ phone }}</span>
+                            </div>
+                        </div>
+
+                       <!-- Buttons -->
+<div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3 mb-5">
+  
+  <!-- Download Resume Button (Modal Trigger) -->
+  <button type="button"
+          class="btn btn-gradient px-4 py-3 rounded-pill"
+          data-bs-toggle="modal"
+          data-bs-target="#resumeModal">
+    <i class="fas fa-download me-2"></i>
+    Download Resume
+  </button>
+
+  <!-- Connect Button -->
+  <button @click="scrollToSection('contact')"
+          class="btn btn-outline-light px-4 py-3 rounded-pill">
+    Let's Connect
+  </button>
+</div>
+
+<!-- Resume Download Modal -->
+<div class="modal fade" id="resumeModal" tabindex="-1" aria-labelledby="resumeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      
+      <div class="modal-header border-0">
+        <h5 class="modal-title text-light" id="resumeModalLabel">Choose Resume Format</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body text-center">
+        <p class="text-white-50 mb-4">Select a format to download:</p>
+        <a href="./assets/pages/akhil_abothu.html" download class="btn btn-outline-primary me-3">
+          <i class="fas fa-code me-2"></i> HTML
+        </a>
+        <a href="./assets/pages/akhil_abothu.pdf" download class="btn btn-outline-danger">
+          <i class="fas fa-file-pdf me-2"></i> PDF
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-5" :class="darkMode ? 'bg-dark' : 'bg-light'">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="display-4 fw-bold mb-3" :class="darkMode ? 'text-white' : 'text-dark'">
+                        About <span class="gradient-text">Me</span>
+                    </h2>
+                    <div class="mx-auto mb-4"
+                        style="width: 6rem; height: 0.25rem; background: linear-gradient(135deg, #667eea, #764ba2);">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Main About Content -->
+                    <div class="col-lg-8">
+                        <div class="card card-hover h-100 border-0 shadow-sm">
+                            <div class="card-body p-4">
+                                <h4 class="card-title mb-4">
+                                    <i class="fas fa-user-tie text-primary me-3"></i>
+                                    Professional Journey
+                                </h4>
+                                <div class="fs-6 text-muted">
+                                    <p class="mb-3">
+                                        With <strong>{{ experienceYears }}+ years</strong> of experience in software
+                                        development, I've evolved from a curious computer science graduate to a seasoned
+                                        full-stack developer with a passion for cutting-edge technologies.
+                                    </p>
+                                    <p class="mb-3">
+                                        My expertise spans across <strong>Java Spring Boot</strong> for robust backend
+                                        architectures and <strong>Vue.js</strong> for dynamic frontend experiences.
+                                        Recently, I've been diving deep into the world of <strong>Generative
+                                            AI</strong>, exploring how artificial intelligence can transform business
+                                        solutions.
+                                    </p>
+                                    <p class="mb-0">
+                                        I believe in writing clean, scalable code and building applications that not
+                                        only meet business requirements but also provide exceptional user experiences.
+                                        My goal is to bridge the gap between traditional development and AI-powered
+                                        solutions.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Side Stats & Skills -->
+                    <div class="col-lg-4">
+                        <div class="row g-3">
+                            <!-- Quick Stats -->
+                            <div class="col-12">
+                                <div class="card card-hover border-0 shadow-sm">
+                                    <div class="card-body p-4">
+                                        <h5 class="card-title mb-3">
+                                            <i class="fas fa-chart-line text-success me-2"></i>
+                                            Quick Stats
+                                        </h5>
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <span class="text-muted">Experience</span>
+                                            <span class="fw-bold text-primary">{{ experienceYears }}+ Years</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <span class="text-muted">Projects</span>
+                                            <span class="fw-bold text-success">{{ projectsCompleted }}+</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <span class="text-muted">Certifications</span>
+                                            <span class="fw-bold" style="color: #a55eea;">{{ certificationsCount
+                                                }}</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="text-muted">Current Role</span>
+                                            <span class="fw-bold text-success">{{role}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Work Focus -->
+                            <div class="col-12">
+                                <div class="card card-hover border-0 shadow-sm">
+                                    <div class="card-body p-4">
+                                        <h5 class="card-title mb-3">
+                                            <i class="fas fa-bullseye text-danger me-2"></i>
+                                            Work Focus
+                                        </h5>
+                                        <div class="mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <div class="bg-primary rounded-circle me-3"
+                                                    style="width: 0.75rem; height: 0.75rem;"></div>
+                                                <span class="text-muted">Backend Development</span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <div class="bg-success rounded-circle me-3"
+                                                    style="width: 0.75rem; height: 0.75rem;"></div>
+                                                <span class="text-muted">Frontend Development</span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <div class="rounded-circle me-3"
+                                                    style="width: 0.75rem; height: 0.75rem; background-color: #a55eea;">
+                                                </div>
+                                                <span class="text-muted">AI Integration</span>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-5">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="display-4 fw-bold mb-3">
+                        Skills & <span class="gradient-text">Expertise</span>
+                    </h2>
+                    <div class="mx-auto mb-4"
+                        style="width: 6rem; height: 0.25rem; background: linear-gradient(135deg, #667eea, #764ba2);">
+                    </div>
+                    <p class="lead text-muted">
+                        A comprehensive overview of my technical skills and proficiency levels
+                    </p>
+                </div>
+
+                <!-- Skill Categories -->
+                <div class="row g-4 mb-5">
+                    <!-- Backend Skills -->
+                    <div class="col-lg-4">
+                        <div class="card card-hover border-0 shadow-sm h-100">
+                            <div class="card-body p-4">
+                                <div class="text-center mb-4">
+                                    <div class="skill-category-icon backend-icon">
+                                        <i class="fas fa-server"></i>
+                                    </div>
+                                    <h4 class="fw-bold">Backend</h4>
+                                </div>
+                                <div v-for="skill in backendSkills" :key="skill.name" class="mb-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="fw-medium">{{ skill.name }}</span>
+                                        <span class="small fw-bold" :class="skill.textColor">{{ skill.percentage
+                                            }}%</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar skill-bar" :class="skill.bgColor"
+                                            :style="{ width: animateSkills ? skill.percentage + '%' : '0%' }"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Frontend Skills -->
+                    <div class="col-lg-4">
+                        <div class="card card-hover border-0 shadow-sm h-100">
+                            <div class="card-body p-4">
+                                <div class="text-center mb-4">
+                                    <div class="skill-category-icon frontend-icon">
+                                        <i class="fas fa-palette"></i>
+                                    </div>
+                                    <h4 class="fw-bold">Frontend</h4>
+                                </div>
+                                <div v-for="skill in frontendSkills" :key="skill.name" class="mb-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="fw-medium">{{ skill.name }}</span>
+                                        <span class="small fw-bold" :class="skill.textColor">{{ skill.percentage
+                                            }}%</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar skill-bar" :class="skill.bgColor"
+                                            :style="{ width: animateSkills ? skill.percentage + '%' : '0%' }"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Database & AI Skills -->
+                    <div class="col-lg-4">
+                        <div class="card card-hover border-0 shadow-sm h-100">
+                            <div class="card-body p-4">
+                                <div class="text-center mb-4">
+                                    <div class="skill-category-icon database-icon">
+                                        <i class="fas fa-database"></i>
+                                    </div>
+                                    <h4 class="fw-bold">Database & AI</h4>
+                                </div>
+                                <div v-for="skill in databaseAISkills" :key="skill.name" class="mb-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="fw-medium">{{ skill.name }}</span>
+                                        <span class="small fw-bold" :class="skill.textColor">{{ skill.percentage
+                                            }}%</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar skill-bar" :class="skill.bgColor"
+                                            :style="{ width: animateSkills ? skill.percentage + '%' : '0%' }"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Recommendation Button -->
+                <div class="text-center">
+                    <button @click="getAIRecommendation" class="btn btn-lg px-4 py-3 rounded-pill fw-semibold"
+                        style="background: linear-gradient(135deg, #a55eea, #26d0ce); border: none; color: white;">
+                        <i class="fas fa-magic me-2"></i>
+                        Get AI-Powered Learning Recommendation
+                    </button>
+
+                    <div v-if="skillRecommendation" class="mt-4">
+                        <div class="ai-recommendation mx-auto" style="max-width: 48rem;">
+                            <div class="d-flex">
+                                <div class="me-3">
+                                    <div class="rounded-circle d-flex align-items-center justify-content-center"
+                                        style="width: 3rem; height: 3rem; background: linear-gradient(135deg, #a55eea, #26d0ce);">
+                                        <i class="fas fa-robot text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold mb-2 text-primary">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        AI Learning Recommendation
+                                    </h5>
+                                    <p class="mb-0">{{ skillRecommendation }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="py-5" :class="darkMode ? 'bg-dark' : 'bg-light'">
+            <div class="container">
+                <div class="text-center mb-5" :class="darkMode ? 'text-white' : 'text-dark'">
+                    <h2 class="display-4 fw-bold mb-3">
+                        Work <span class="gradient-text">Experience</span>
+                    </h2>
+                    <div class="mx-auto mb-4"
+                        style="width: 60px; height: 4px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 2px;">
+                    </div>
+                    <p class="lead" :class="darkMode ? 'text-white' : 'text-dark'">My professional journey and key
+                        achievements</p>
+                </div>
+
+                <div class="timeline">
+                    <div class="row" v-for="(pair, index) in experiencePairs" :key="index">
+                        <div class="col-lg-6 timeline-item" v-if="pair.left">
+                            <div class="timeline-content">
+                                <div class="card-body p-4">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div
+                                            class="rounded-circle d-flex align-items-center justify-content-center me-3 experience-icon">
+                                            <i :class="pair.left.icon" class="text-white fs-4"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="fw-bold mb-1">{{ pair.left.position }}</h5>
+                                            <h6 class="company-name mb-0 fw-semibold">{{ pair.left.company }}</h6>
+                                            <small class="text-muted" v-if="pair.left.client">Client: {{
+                                                pair.left.client }}</small>
+                                            <small class="text-muted d-block" v-if="pair.left.project">Project: {{
+                                                pair.left.project }}</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <small class="text-muted">
+                                            <i class="fas fa-calendar me-1"></i> {{ pair.left.duration }}
+                                        </small>
+                                        <small class="text-muted ms-3">
+                                            <i class="fas fa-map-marker-alt me-1"></i> {{ pair.left.location }}
+                                        </small>
+                                    </div>
+
+                                    <p class="text-muted mb-3">{{ pair.left.description }}</p>
+
+                                    <div class="mb-3">
+                                        <h6 class="fw-semibold mb-2">Key Achievements:</h6>
+                                        <ul class="list-unstyled mb-0">
+                                            <li v-for="achievement in pair.left.achievements" :key="achievement">
+                                                <i class="fas fa-check-circle text-success me-2"></i>
+                                                <small>{{ achievement }}</small>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div>
+                                        <h6 class="fw-semibold mb-2 small">Technologies Used:</h6>
+                                        <div class="d-flex flex-wrap gap-1">
+                                            <span v-for="tech in pair.left.technologies" :key="tech"
+                                                class="badge bg-primary bg-opacity-10 text-primary rounded-pill px-3 py-1 small">
+                                                {{ tech }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 timeline-item right" v-if="pair.right">
+                            <div class="timeline-content">
+                                <div class="card-body p-4">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div
+                                            class="rounded-circle d-flex align-items-center justify-content-center me-3 experience-icon">
+                                            <i :class="pair.right.icon" class="text-white fs-4"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="fw-bold mb-1">{{ pair.right.position }}</h5>
+                                            <h6 class="company-name mb-0 fw-semibold">{{ pair.right.company }}</h6>
+                                            <small class="text-muted" v-if="pair.right.client">Client: {{
+                                                pair.right.client }}</small>
+                                            <small class="text-muted d-block" v-if="pair.right.project">Project: {{
+                                                pair.right.project }}</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <small class="text-muted">
+                                            <i class="fas fa-calendar me-1"></i> {{ pair.right.duration }}
+                                        </small>
+                                        <small class="text-muted ms-3">
+                                            <i class="fas fa-map-marker-alt me-1"></i> {{ pair.right.location }}
+                                        </small>
+                                    </div>
+
+                                    <p class="text-muted mb-3">{{ pair.right.description }}</p>
+
+                                    <div class="mb-3">
+                                        <h6 class="fw-semibold mb-2">Key Achievements:</h6>
+                                        <ul class="list-unstyled mb-0">
+                                            <li v-for="achievement in pair.right.achievements" :key="achievement">
+                                                <i class="fas fa-check-circle text-success me-2"></i>
+                                                <small>{{ achievement }}</small>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div>
+                                        <h6 class="fw-semibold mb-2 small">Technologies Used:</h6>
+                                        <div class="d-flex flex-wrap gap-1">
+                                            <span v-for="tech in pair.right.technologies" :key="tech"
+                                                class="badge bg-primary bg-opacity-10 text-primary rounded-pill px-3 py-1 small">
+                                                {{ tech }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+<section id="testimonials" class="py-5 bg-light">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="display-4 fw-bold mb-3">
+        <span class="gradient-text">Testimonials</span>
+      </h2>
+      <div class="mx-auto mb-4"
+           style="width: 6rem; height: 0.25rem; background: linear-gradient(135deg, #667eea, #764ba2);">
+      </div>
+      <p class="lead text-muted">What others say about working with me</p>
+    </div>
+
+    <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+
+        <!-- Testimonial 1 -->
+        <div class="carousel-item active">
+          <div class="text-center px-4">
+            <blockquote class="blockquote">
+              <p class="fs-5 fst-italic">
+                “Akhil is one of the most dependable and driven professionals I’ve come across. His proactive mindset and attention to detail have made a real impact on our projects.”
+              </p>
+            </blockquote>
+            <footer class="blockquote-footer">
+              Navita, Sr. Consultant at Capgemini
+              <a href="https://www.linkedin.com/in/navita" target="_blank" class="ms-2">
+                <i class="fab fa-linkedin fa-lg text-primary"></i>
+              </a>
+            </footer>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="carousel-item">
+          <div class="text-center px-4">
+            <blockquote class="blockquote">
+              <p class="fs-5 fst-italic">
+                “Your exceptional problem-solving skills and ability to engage well with the team have made a significant contribution to the success of our projects.”
+              </p>
+            </blockquote>
+            <footer class="blockquote-footer">
+              Siddhartha Malempati, Commons Collective
+              <a href="https://www.linkedin.com/in/siddhartha-malempati" target="_blank" class="ms-2">
+                <i class="fab fa-linkedin fa-lg text-primary"></i>
+              </a>
+            </footer>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="carousel-item">
+          <div class="text-center px-4">
+            <blockquote class="blockquote">
+              <p class="fs-5 fst-italic">
+                “Akhil is a go-getter who adds great value to the team.”
+              </p>
+            </blockquote>
+            <footer class="blockquote-footer">
+              Nithin Reddy Kesari, MD at RUI Labs
+              <a href="https://www.linkedin.com/in/nithin-reddy-kesari" target="_blank" class="ms-2">
+                <i class="fab fa-linkedin fa-lg text-primary"></i>
+              </a>
+            </footer>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Controls -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+  </div>
+</section>
 
 
-		<!-- Header -->
-		<header class="header header-hidden shadow-bg">
-			<div class="site-logo"><a href="#0" class="animatescroll-link" onclick="$('html').animatescroll();">{{
-					user.name }}</a></div>
-			<div class="menu-bar waves-effect waves-light " v-on:click="changeNav()"><span class="fa fa-bars"></span>
-			</div>
-		</header>
-		<!--/ Header -->
+        <!-- Contact Section -->
+        <section id="contact" class="py-5 gradient-bg">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="display-4 fw-bold mb-3 text-white">
+                        Let's <span class="text-warning">Connect</span>
+                    </h2>
+                    <div class="mx-auto mb-4"
+                        style="width: 6rem; height: 0.25rem; background: linear-gradient(135deg, #ffd700, #ff8c00);">
+                    </div>
+                    <p class="lead text-light">
+                        Ready to bring your ideas to life? Let's discuss your next project!
+                    </p>
+                </div>
 
+                <div class="row">
+                    <!-- Contact Form -->
+                    <div class="col-lg-8 mx-auto">
+                        <div class="glass-card p-4">
+                            <form @submit.prevent="sendMessage">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label text-white fw-semibold">
+                                            <i class="fas fa-user me-2"></i>
+                                            Full Name
+                                        </label>
+                                        <input v-model="contactForm.name" type="text"
+                                            class="form-control form-control-lg" placeholder="Your full name" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label text-white fw-semibold">
+                                            <i class="fas fa-envelope me-2"></i>
+                                            Email Address
+                                        </label>
+                                        <input v-model="contactForm.email" type="email"
+                                            class="form-control form-control-lg" placeholder="your.email@example.com"
+                                            required>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label text-white fw-semibold">
+                                            <i class="fas fa-tag me-2"></i>
+                                            Subject
+                                        </label>
+                                        <input v-model="contactForm.subject" type="text"
+                                            class="form-control form-control-lg" placeholder="What's this about?"
+                                            required>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label text-white fw-semibold">
+                                            <i class="fas fa-comment me-2"></i>
+                                            Message
+                                        </label>
+                                        <textarea v-model="contactForm.message" class="form-control" rows="5"
+                                            placeholder="Tell me about your project or idea..." required></textarea>
+                                    </div>
+                                    <!-- Centered Google reCAPTCHA -->
+<div class="d-flex justify-content-center my-3">
+  <div class="g-recaptcha" data-sitekey="6LdZnoUrAAAAANwP2oXJ0X5mNINaARMipJDReelZ"></div>
+</div>
+                                    <div class="col-12 text-center">
+                                        <button type="submit" class="btn btn-gradient btn-lg px-5 py-3 rounded-pill">
+                                            <i class="fas fa-paper-plane me-2"></i>
+                                            Send Message
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
 
-		<!-- Nav Menu -->
-		<nav class="main-nav hero-height " v-bind:class="{active: isActive, hidden:!isActive}">
-			<div class="menu-close waves-effect waves-light" v-on:click="changeNav()"><span class="fa fa-times"></span>
-			</div>
-		<ul>
-				<li><a href="#0" class="animatescroll-link" onclick="$('html').animatescroll();">Home</a></li>
-				<li><a href="#0" class="service-section-nav animatescroll-link" onclick="$('#service-section').animatescroll();">Worked on</a></li>
-				<li><a href="#0" class="skill-section-nav animatescroll-link" onclick="$('#skill-section').animatescroll();">Skill</a></li>
-				<li><a href="#0" class="experience-section-nav animatescroll-link" onclick="$('#experience-section').animatescroll();">Experience</a></li>
-				<li><a href="#0" class="education-section-nav animatescroll-link" onclick="$('#education-section').animatescroll();">Education</a></li>
-				<li><a href="#0" class="certification-section-nav animatescroll-link" onclick="$('#certification-section').animatescroll();">Certifications</a></li>
-				
-				<!-- <li><a href="#0" class="contact-section-nav animatescroll-link" onclick="$('#contact-section').animatescroll();">Contact</a></li> -->
-			</ul>
-		</nav>
-		<!--/ Nav Menu -->
+                <!-- Contact Info Cards -->
+                <div class="row g-4 mt-5">
+                    <div class="col-md-4">
+                        <div class="glass-card p-4 text-center">
+                            <div class="mb-3">
+                                <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto"
+                                    style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #ff6b6b, #ee5a24);">
+                                    <i class="fas fa-map-marker-alt text-white fs-4"></i>
+                                </div>
+                            </div>
+                            <h5 class="text-white fw-bold mb-2">Location</h5>
+                            <p class="text-light mb-0">{{ location }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+  <div class="glass-card p-4 text-center">
+    <div class="mb-3">
+      <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto"
+        style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #26d0ce, #1a9be6);">
+        <i class="fas fa-envelope text-white fs-4"></i>
+      </div>
+    </div>
+    <h5 class="text-white fw-bold mb-2">Email</h5>
+    <p class="text-light mb-0">
+      <a :href="`mailto:${email}`" class="text-light text-decoration-none">{{ email }}</a>
+    </p>
+  </div>
+</div>
 
+<div class="col-md-4">
+  <div class="glass-card p-4 text-center">
+    <div class="mb-3">
+      <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto"
+        style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #a55eea, #fd79a8);">
+        <i class="fas fa-phone text-white fs-4"></i>
+      </div>
+    </div>
+    <h5 class="text-white fw-bold mb-2">Phone</h5>
+    <p class="text-light mb-0">
+      <a :href="`tel:${phone}`" class="text-light text-decoration-none">{{ phone }}</a>
+    </p>
+  </div>
+</div>
 
-		<!-- Top Section -->
-		<div class="site-header top-section top-section-home image-bg parallax-section">
-			<div class="overlay-section"></div>
-		</div>
-		<!--/ Top Section -->
+                </div>
 
+                <!-- Social Links -->
+                <div class="text-center mt-5">
+                    <h5 class="text-white fw-bold mb-3">Follow Me</h5>
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="https://www.linkedin.com/in/akhil-abothu/" target="_blank" class="btn btn-outline-light rounded-circle" style="width: 3rem; height: 3rem;">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://github.com/AKHILABOTHU/" target="_blank" class="btn btn-outline-light rounded-circle" style="width: 3rem; height: 3rem;">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.instagram.com/developerdiarieshq/" target="_blank" class="btn btn-outline-light rounded-circle" style="width: 3rem; height: 3rem;">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-
-		<!-- About Section -->
-		<section id="about-section" class="about-section">
-			<div class="section-content">
-				<div class="container">
-					<div class="row">
-						<div class="col s12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s"
-							data-wow-offset="0">
-							<div class="col s12 w-block shadow-bg pd-0">
-								<div class="col m5 s12 about-img parallax-layer al-center pd-50">
-									<div class="about-img-content image-bg shadow-bg layer" data-depth="0.1"
-										v-bind:style="{ background: 'url(' + user.profilePic + ') center top / cover no-repeat' }">
-										<a v-bind:href="user.resume" target="_blank"
-											class="btn-circle tooltipped layer shadow-bg" data-position="top"
-											data-delay="50" data-tooltip="Download Resume" data-depth="0.25"><span
-												class="fa fa-download"></span></a>
-									</div>
-									<div class="about-name">{{user.name}}</div>
-									<div class="about-title">{{user.role}}</div>
-								</div>
-								<div class="col m7 s12 about-data-wrapper pd-50">
-									<div class="about-desc pd-0">
-										<div class="about-section-title">About Me</div>
-										<div class="about-data">
-											<p>
-												{{user.bio}}
-											</p>
-
-
-
-											<div><span>Age</span>{{user.age}}</div>
-											<div><span>City</span>{{user.city}}</div>
-											<div><span>Email</span>{{user.email}}</div>
-											<div><span>Phone</span>{{user.phone}}</div>
-
-										</div>
-									</div>
-								</div>
-								<div class="about-social col s12 pd-0">
-									<a class="waves-effect waves-light" href="https://github.com/AKHILABOTHU/"
-										target="_blank"><span class="fa fa-github"></span></a>
-									<a class="waves-effect waves-light" href="https://www.linkedin.com/in/akhil-abothu/"
-										target="_blank"><span class="fa fa-linkedin"></span></a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!--/ About Section -->
-
-		<!-- Service Section -->
-		<section id="service-section" class="service-section">
-			<div class="container">
-				<div class="row">
-					<div class="col s12 section-title">
-						<h2>{{workedOn.title}}</h2>
-					</div>
-					<div class="col s12">
-						<div class="col l4 m6 s12 service-wrapper wow zoomIn" data-wow-duration="0.5s"
-							data-wow-delay="0.3s" data-wow-offset="0" v-for="work in workedOn.works">
-							<div class="col s12 w-block shadow-bg">
-								<div class="service-center">
-									<div class="service-icon">
-										<span class="fa" v-bind:class="work.icon"></span>
-									</div>
-									<div class="service-title">
-										{{work.title}}
-									</div>
-								</div>
-								<div class="service-desc" >
-									<p v-for="technology in work.technologies">
-										{{technology}}
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-			</div>
-		</section>
-
-
-		<!-- Skill Section -->
-		<section id="skill-section" class="skill-section">
-			<div class="container">
-				<div class="row">
-					<div class="col s12 section-title">
-						<h2>{{skill.title}}</h2>
-					</div>
-					<div class="col s12">
-						<div
-							class="col s12 section-content skill-wrapper w-block shadow-bg pdt-50 pdr-40 pdb-50 pdl-40">
-							<!-- Progress bar Left -->
-							<div class="col l6 s12 skill-data" v-for="(skill,index) in skill.skills" v-bind:class="{'skill-data-alt':index%2==0}">
-
-								<!-- Single Skill -->
-								<div class="skillbar clearfix " v-bind:data-percent="skill.percentage">
-									<div class="skillbar-title" v-bind:style="{background: skill.nameColor}"><span>{{skill.name}}</span></div>
-									<div class="skillbar-bar" v-bind:style="{background: skill.progressColor}"></div>
-									<div class="skill-bar-percent">{{skill.percentage}}</div>
-								</div> <!-- End Skill Bar -->
-								<!--/ Single Skill -->
-
-								
-							</div>
-							<!--/ Progress bar Left -->
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!--/ Skill Section -->
-
-		<section id="experience-section" class="experience-section">
-			<div class="container">
-				<div class="row">
-					<div class="col s12 section-title">
-						<h2>{{experience.title}}</h2>
-					</div>
-					<div class="col s12">
-						<div class="col s12 section-content pd-0">
-							<ul class="timeline">
-
-								<li class="wow fadeIn" v-for="(experience , index) in experience.experiences" v-bind:class="{'timeline-inverted': index%2==0}" data-wow-duration="0.5s" data-wow-delay="0.3s"
-									data-wow-offset="0">
-									<div class="timeline-badge">
-										<a><i class="fa fa-circle"></i></a>
-									</div>
-									<div class="timeline-panel w-block shadow-bg pd-30">
-										<div class="timeline-tag">
-											{{experience.company}}
-										</div>
-										<div class="timeline-title timeline-title-alt">
-											{{experience.designation}}
-										</div>
-										<div class="timeline-desc">
-											<p>
-												{{experience.description}}
-											</p>
-										</div>
-										<div class="timeline-time">{{experience.period}}</div>
-									</div>
-								</li>
-								<li class="clearfix no-float"></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!--/ Experience Section -->
-
-
-		<!-- Education Section -->
-		<section id="education-section" class="education-section">
-			<div class="container">
-				<div class="row">
-					<div class="col s12 section-title">
-						<h2>{{education.title}}</h2>
-					</div>
-					<div class="col s12">
-						<div class="col s12 section-content pd-0">
-							<ul class="timeline">
-								<li class="wow fadeIn" v-for="(education , index) in education.educations" v-bind:class="{'timeline-inverted': index%2==0}"  data-wow-duration="0.5s" data-wow-delay="0.3s"
-									data-wow-offset="0">
-									<div class="timeline-badge">
-										<a><i class="fa fa-circle"></i></a>
-									</div>
-									<div class="timeline-panel w-block shadow-bg pd-30">
-										<div class="timeline-tag">
-											{{education.school}} {{education.position}}
-										</div>
-										<div class="timeline-title timeline-title-alt">
-											{{education.specification}}
-										</div>
-										<div class="timeline-time">{{education.period}}</div>
-									</div>
-								</li>
-								<li class="clearfix no-float"></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!--/ Education Section -->
-		
-		<!-- Education Section -->
-		<section id="certification-section" class="certification-section">
-			<div class="container">
-				<div class="row">
-					<div class="col s12 section-title">
-						<h2>{{certification.title}}</h2>
-					</div>
-					<div class="col s12">
-						<div class="col s12 section-content pd-0">
-							<ul class="timeline">
-
-							
-								<li class=" wow fadeIn" v-for="(certificate , index) in certification.certifications" v-bind:class="{'timeline-inverted': index%2==0}" data-wow-duration="0.5s" data-wow-delay="0.3s"
-									data-wow-offset="0">
-									<div class="timeline-badge">
-										<a><i class="fa fa-circle"></i></a>
-									</div>
-									<div class="timeline-panel w-block shadow-bg pd-30">
-										<div class="timeline-tag">
-											{{certificate.certificateName}}
-										</div>
-										<div class="timeline-title timeline-title-alt">
-											{{certificate.sponsor}}
-										</div>
-										<div class="timeline-time">{{certificate.year}}</div>
-										<div class="down_cerrt" v-for="certificateLink in certificate.certificates"> <a v-bind:href="certificateLink.link" target="_blank">{{certificateLink.title}}</a></div>
-									</div>
-								</li>			
-								<li class="clearfix no-float"></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!--/ Education Section -->
-
-		<!-- Contact Section -->
-		<!-- <section id="contact-section" class="contact-section">
-			<div class="container">
-				<div class="row">
-					<div class="col s12 section-title">
-						<h2>Contact</h2>
-						<div class="col s12 pd-0 mgt-20">
-							<div class="contact_details">
-								<p id="contact_email"><a href="mailto:abothuakhil@gmail.com"
-										id="contact_tele">Email:abothuakhil@gmail.com</a></p>
-								<p id="contact_phone"> <a href="tel:8919059351" id="contact_tele">Phone:(+91)8919059351
-									</a></p>
-							</div>
-						</div>
-					</div>
-				</div>
-		</section> -->
-		<!--/ Contact Section -->
-
-
-		<!-- Footer Section -->
-		<footer class="footer">
-			<div class="container">
-				<div class="row">
-					<div class="col s12 back-to-top-wrapper">
-
-
-						<button onclick="topFunction()" id="myBtn" title="Go to top">
-							<span class="fa fa-angle-up"></span>
-							</a> </button>
-
-
-						<div class="copyright-text">
-							<span class="copyleft">&copy;</span> All rights Reserved.
-						</div>
-					</div>
-				</div>
-			</div>
-		</footer>
-		<!--/ Footer Section -->
-	</div>
-	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
-	<script type="text/javascript" src="js/animatescroll.js"></script>
-	<script type="text/javascript" src="js/materialize.min.js"></script>
-	<script type="text/javascript" src="js/device.min.js"></script>
-	<script type="text/javascript" src="js/parallax.js"></script>
-	<script type="text/javascript" src="js/jquery.parallax.js"></script>
-	<script type="text/javascript" src="js/imagesloaded.pkgd.min.js"></script>
-	<script type="text/javascript" src="js/isotope.js"></script>
-	<script type="text/javascript" src="js/magnific-popup.js"></script>
-	<script type="text/javascript" src="js/masonry.pkgd.min.js"></script>
-	<script type="text/javascript" src="js/owl.carousel.js"></script>
-	<script type="text/javascript" src="js/smoothscroll.js"></script>
-	<script type="text/javascript" src="js/waypoints.min.js"></script>
-	<script type="text/javascript" src="js/wow.js"></script>
-	<script type="text/javascript" src="js/custom.js"></script>
-
+        <!-- Footer -->
+        <footer class="py-4" :class="darkMode ? 'bg-dark' : 'bg-light'">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p class="mb-0" :class="darkMode ? 'text-light' : 'text-muted'">
+                            © {{currentYear}} {{ fullName }}. All rights reserved.
+                        </p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <p class="mb-0" :class="darkMode ? 'text-light' : 'text-muted'">
+                            Built with ❤️ using Vue.js & Bootstrap
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="./assets/js/app.js"></script>
 </body>
-<script src="js/app.js"></script>
-<script>
-
-</script>
 
 </html>

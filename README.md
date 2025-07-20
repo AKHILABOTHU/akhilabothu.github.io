@@ -1,1 +1,0 @@
-# akhilabothu.github.io
