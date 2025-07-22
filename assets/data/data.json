@@ -9,7 +9,7 @@
   "phone": "+91 8919059351",
   "projectsCompleted": 7,
   "certificationsCount": 2,
-  "role":"Consultant",
+  "role": "Consultant",
   "profileSummary": "Passionate Full Stack Developer specializing in Java Spring Boot, Vue.js, and Generative AI. I love creating innovative solutions that make a difference.",
   "contactForm": {
     "name": "",
@@ -18,19 +18,64 @@
     "message": ""
   },
   "backendSkills": [
-    { "name": "Java Spring Boot", "percentage": 80, "bgColor": "bg-danger", "textColor": "text-success" },
-    { "name": "RESTful APIs", "percentage": 85, "bgColor": "bg-warning", "textColor": "text-warning" },
-    { "name": "Microservices", "percentage": 60, "bgColor": "bg-info", "textColor": "text-info" }
+    {
+      "name": "Java Spring Boot",
+      "percentage": 80,
+      "bgColor": "bg-danger",
+      "textColor": "text-success"
+    },
+    {
+      "name": "RESTful APIs",
+      "percentage": 85,
+      "bgColor": "bg-warning",
+      "textColor": "text-warning"
+    },
+    {
+      "name": "Microservices",
+      "percentage": 60,
+      "bgColor": "bg-info",
+      "textColor": "text-info"
+    }
   ],
   "frontendSkills": [
-    { "name": "Vue.js", "percentage": 70, "bgColor": "bg-success", "textColor": "text-success" },
-    { "name": "JavaScript/ES6+", "percentage": 60, "bgColor": "bg-warning", "textColor": "text-warning" },
-    { "name": "HTML5/CSS3", "percentage": 85, "bgColor": "bg-primary", "textColor": "text-primary" },
-    { "name": "Bootstrap", "percentage": 70, "bgColor": "bg-info", "textColor": "text-info" }
+    {
+      "name": "Vue.js",
+      "percentage": 70,
+      "bgColor": "bg-success",
+      "textColor": "text-success"
+    },
+    {
+      "name": "JavaScript/ES6+",
+      "percentage": 60,
+      "bgColor": "bg-warning",
+      "textColor": "text-warning"
+    },
+    {
+      "name": "HTML5/CSS3",
+      "percentage": 85,
+      "bgColor": "bg-primary",
+      "textColor": "text-primary"
+    },
+    {
+      "name": "Bootstrap",
+      "percentage": 70,
+      "bgColor": "bg-info",
+      "textColor": "text-info"
+    }
   ],
   "databaseAISkills": [
-    { "name": "MySQL", "percentage": 60, "bgColor": "bg-primary", "textColor": "text-primary" },
-    { "name": "Generative AI", "percentage": 10, "bgColor": "bg-danger", "textColor": "text-info" }
+    {
+      "name": "MySQL",
+      "percentage": 60,
+      "bgColor": "bg-primary",
+      "textColor": "text-primary"
+    },
+    {
+      "name": "Generative AI",
+      "percentage": 10,
+      "bgColor": "bg-danger",
+      "textColor": "text-info"
+    }
   ],
   "experiences": [
     {
@@ -49,7 +94,14 @@
         "Deployed on Tomcat, handled unit testing and UAT bugs",
         "Managed code commits, releases, and coordination"
       ],
-      "technologies": ["Java", "Spring Boot 4", "Angular 8", "SQL", "Maven", "Eclipse"]
+      "technologies": [
+        "Java",
+        "Spring Boot 4",
+        "Angular 8",
+        "SQL",
+        "Maven",
+        "Eclipse"
+      ]
     },
     {
       "position": "Consultant",
@@ -66,7 +118,14 @@
         "Deployed on Tomcat and supported UAT bug fixes",
         "Led team collaboration and task allocation"
       ],
-      "technologies": ["Java", "Spring Boot 4", "Angular 13", "SQL", "Maven", "Eclipse"]
+      "technologies": [
+        "Java",
+        "Spring Boot 4",
+        "Angular 13",
+        "SQL",
+        "Maven",
+        "Eclipse"
+      ]
     },
     {
       "position": "Associate Consultant",
@@ -84,7 +143,15 @@
         "Integrated with third-party APIs",
         "Fixed vulnerabilities and UAT bugs"
       ],
-      "technologies": ["Java", "Spring MVC", "HTML", "JavaScript", "Maven", "Wildfly", "GIT"]
+      "technologies": [
+        "Java",
+        "Spring MVC",
+        "HTML",
+        "JavaScript",
+        "Maven",
+        "Wildfly",
+        "GIT"
+      ]
     },
     {
       "position": "Associate Consultant",
@@ -101,7 +168,15 @@
         "Migrated project from Spring MVC with JSP to Spring Boot + React",
         "Managed deployment, testing, and bug fixes"
       ],
-      "technologies": ["Java", "Spring Boot", "React", "MySQL", "Maven", "Tomcat", "GIT"]
+      "technologies": [
+        "Java",
+        "Spring Boot",
+        "React",
+        "MySQL",
+        "Maven",
+        "Tomcat",
+        "GIT"
+      ]
     },
     {
       "position": "Associate Software Developer",
@@ -118,7 +193,14 @@
         "Handled backend API dev and production support",
         "Manual tested and deployed on Tomcat"
       ],
-      "technologies": ["Java", "Vue.js", "MySQL", "Maven", "JWT", "Tomcat"]
+      "technologies": [
+        "Java",
+        "Vue.js",
+        "MySQL",
+        "Maven",
+        "JWT",
+        "Tomcat"
+      ]
     },
     {
       "position": "Trainee Software Developer",
@@ -135,7 +217,36 @@
         "Coordinated production deployment and testing",
         "Handled defect fixing and debugging in Dev env"
       ],
-      "technologies": ["Java", "Spring", "JSP", "MySQL", "Tomcat", "Eclipse"]
+      "technologies": [
+        "Java",
+        "Spring",
+        "JSP",
+        "MySQL",
+        "Tomcat",
+        "Eclipse"
+      ]
+    }
+  ],
+  "testimonials": [
+    {
+      "quote": "Akhil is one of the most dependable and driven professionals I’ve come across. His proactive mindset and attention to detail have made a real impact on our projects.",
+      "author": "Navita, Sr. Consultant at Capgemini",
+      "linkedin": "https://www.linkedin.com/in/navita-009a76208/"
+    },
+    {
+      "quote": "Your exceptional problem-solving skills and ability to engage well with the team have made a significant contribution to the success of our projects.",
+      "author": "Siddhartha Malempati, Commons Collective",
+      "linkedin": "https://www.linkedin.com/in/siddhartha-malempati-1a274b120/"
+    },
+    {
+      "quote": "Akhil is a go-getter who adds great value to the team.",
+      "author": "Nithin Reddy Kesari, MD at RUI Labs",
+      "linkedin": "https://www.linkedin.com/in/kesarinithin/"
+    },
+    {
+      "quote": "Akhil is one of the most talented backend developers I’ve worked with. His strong technical skills, problem-solving mindset, and commitment to quality consistently stand out. He fosters a collaborative and positive work environment.",
+      "author": "Shrutika Kamble, Associate Consultant at Capgemini",
+      "linkedin": "https://www.linkedin.com/in/shrutika-kamble-193195261/"
     }
   ],
   "projects": [
@@ -146,7 +257,14 @@
       "icon": "fas fa-shopping-cart",
       "gradient": "linear-gradient(135deg, #667eea, #764ba2)",
       "description": "A comprehensive e-commerce solution with advanced features like AI-powered recommendations, real-time inventory management, and secure payment processing.",
-      "technologies": ["Java Spring Boot", "Vue.js", "MySQL", "Redis", "Stripe API", "Docker"]
+      "technologies": [
+        "Java Spring Boot",
+        "Vue.js",
+        "MySQL",
+        "Redis",
+        "Stripe API",
+        "Docker"
+      ]
     },
     {
       "title": "AI Chat Assistant",
@@ -155,7 +273,14 @@
       "icon": "fas fa-robot",
       "gradient": "linear-gradient(135deg, #a55eea, #26d0ce)",
       "description": "An intelligent chatbot powered by OpenAI GPT-3.5, capable of understanding context and providing human-like responses for customer support.",
-      "technologies": ["Python", "FastAPI", "OpenAI API", "React", "PostgreSQL", "WebSocket"]
+      "technologies": [
+        "Python",
+        "FastAPI",
+        "OpenAI API",
+        "React",
+        "PostgreSQL",
+        "WebSocket"
+      ]
     }
   ]
 }

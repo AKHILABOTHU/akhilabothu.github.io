@@ -560,6 +560,7 @@
         <!-- Testimonials Section -->
         <section id="testimonials" class="py-5 bg-light">
             <div class="container">
+                <!-- Heading -->
                 <div class="text-center mb-5">
                     <h2 class="display-4 fw-bold mb-3">
                         <span class="gradient-text">Testimonials</span>
@@ -570,86 +571,23 @@
                     <p class="lead text-muted">What others say about working with me</p>
                 </div>
 
+                <!-- Carousel -->
                 <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
-
-                        <!-- Testimonial 1 -->
-                        <div class="carousel-item active">
+                        <div class="carousel-item" :class="{ active: index === 0 }"
+                            v-for="(testimonial, index) in testimonials" :key="index">
                             <div class="text-center px-4">
                                 <blockquote class="blockquote">
-                                    <p class="fs-5 fst-italic">
-                                        “Akhil is one of the most dependable and driven professionals I’ve come across.
-                                        His proactive mindset and attention to detail have made a real impact on our
-                                        projects.”
-                                    </p>
+                                    <p class="fs-5 fst-italic">“{{ testimonial.quote }}”</p>
                                 </blockquote>
                                 <footer class="blockquote-footer">
-                                    Navita, Sr. Consultant at Capgemini
-                                    <a href="https://www.linkedin.com/in/navita-009a76208/" target="_blank"
-                                        class="ms-2">
+                                    {{ testimonial.author }}
+                                    <a :href="testimonial.linkedin" target="_blank" class="ms-2">
                                         <i class="fab fa-linkedin fa-lg text-primary"></i>
                                     </a>
                                 </footer>
                             </div>
                         </div>
-
-                        <!-- Testimonial 2 -->
-                        <div class="carousel-item">
-                            <div class="text-center px-4">
-                                <blockquote class="blockquote">
-                                    <p class="fs-5 fst-italic">
-                                        “Your exceptional problem-solving skills and ability to engage well with the
-                                        team have made a significant contribution to the success of our projects.”
-                                    </p>
-                                </blockquote>
-                                <footer class="blockquote-footer">
-                                    Siddhartha Malempati, Commons Collective
-                                    <a href="https://www.linkedin.com/in/siddhartha-malempati-1a274b120/"
-                                        target="_blank" class="ms-2">
-                                        <i class="fab fa-linkedin fa-lg text-primary"></i>
-                                    </a>
-                                </footer>
-                            </div>
-                        </div>
-
-                        <!-- Testimonial 3 -->
-                        <div class="carousel-item">
-                            <div class="text-center px-4">
-                                <blockquote class="blockquote">
-                                    <p class="fs-5 fst-italic">
-                                        “Akhil is a go-getter who adds great value to the team.”
-                                    </p>
-                                </blockquote>
-                                <footer class="blockquote-footer">
-                                    Nithin Reddy Kesari, MD at RUI Labs
-                                    <a href="https://www.linkedin.com/in/kesarinithin/" target="_blank" class="ms-2">
-                                        <i class="fab fa-linkedin fa-lg text-primary"></i>
-                                    </a>
-                                </footer>
-                            </div>
-                        </div>
-
-                        <!-- Testimonial 4 -->
-                        <div class="carousel-item">
-                            <div class="text-center px-4">
-                                <blockquote class="blockquote">
-                                    <p class="fs-5 fst-italic">
-                                        “Akhil is one of the most talented backend developers I’ve worked with. His
-                                        strong technical skills, problem-solving mindset, and commitment to quality
-                                        consistently stand out. He fosters a collaborative and positive work
-                                        environment.”
-                                    </p>
-                                </blockquote>
-                                <footer class="blockquote-footer">
-                                    Shrutika Kamble, Associate Consultant at Capgemini
-                                    <a href="https://www.linkedin.com/in/shrutika-kamble-193195261/" target="_blank"
-                                        class="ms-2">
-                                        <i class="fab fa-linkedin fa-lg text-primary"></i>
-                                    </a>
-                                </footer>
-                            </div>
-                        </div>
-
                     </div>
 
                     <!-- Controls -->
