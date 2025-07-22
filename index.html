@@ -20,11 +20,11 @@
 
 <body :class="{ 'dark-theme': darkMode }">
     <!-- Loader -->
-<div id="loader">
-  <div class="spinner-border text-primary" role="status">
-    <span class="visually-hidden">Loading...</span>
-  </div>
-</div>
+    <div id="loader">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
     <div id="app">
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg fixed-top navbar-custom">
@@ -90,7 +90,7 @@
                                     </div>
                                 </div>
 
-                               
+
                             </div>
 
                             <!-- Floating Tech Icons -->
@@ -141,47 +141,50 @@
                             </div>
                         </div>
 
-                       <!-- Buttons -->
-<div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3 mb-5">
-  
-  <!-- Download Resume Button (Modal Trigger) -->
-  <button type="button"
-          class="btn btn-gradient px-4 py-3 rounded-pill"
-          data-bs-toggle="modal"
-          data-bs-target="#resumeModal">
-    <i class="fas fa-download me-2"></i>
-    Download Resume
-  </button>
+                        <!-- Buttons -->
+                        <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3 mb-5">
 
-  <!-- Connect Button -->
-  <button @click="scrollToSection('contact')"
-          class="btn btn-outline-light px-4 py-3 rounded-pill">
-    Let's Connect
-  </button>
-</div>
+                            <!-- Download Resume Button (Modal Trigger) -->
+                            <button type="button" class="btn btn-gradient px-4 py-3 rounded-pill" data-bs-toggle="modal"
+                                data-bs-target="#resumeModal">
+                                <i class="fas fa-download me-2"></i>
+                                Download Resume
+                            </button>
 
-<!-- Resume Download Modal -->
-<div class="modal fade" id="resumeModal" tabindex="-1" aria-labelledby="resumeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      
-      <div class="modal-header border-0">
-        <h5 class="modal-title text-light" id="resumeModalLabel">Choose Resume Format</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
+                            <!-- Connect Button -->
+                            <button @click="scrollToSection('contact')"
+                                class="btn btn-outline-light px-4 py-3 rounded-pill">
+                                Let's Connect
+                            </button>
+                        </div>
 
-      <div class="modal-body text-center">
-        <p class="text-white-50 mb-4">Select a format to download:</p>
-        <a href="./assets/pages/akhil_abothu.html" download class="btn btn-outline-primary me-3">
-          <i class="fas fa-code me-2"></i> HTML
-        </a>
-        <a href="./assets/pages/akhil_abothu.pdf" download class="btn btn-outline-danger">
-          <i class="fas fa-file-pdf me-2"></i> PDF
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
+                        <!-- Resume Download Modal -->
+                        <div class="modal fade" id="resumeModal" tabindex="-1" aria-labelledby="resumeModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+
+                                    <div class="modal-header border-0">
+                                        <h5 class="modal-title text-light" id="resumeModalLabel">Choose Resume Format
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+
+                                    <div class="modal-body text-center">
+                                        <p class="text-white-50 mb-4">Select a format to download:</p>
+                                        <a href="./assets/pages/akhil_abothu.html" download
+                                            class="btn btn-outline-primary me-3">
+                                            <i class="fas fa-code me-2"></i> HTML
+                                        </a>
+                                        <a href="./assets/pages/akhil_abothu.pdf" download
+                                            class="btn btn-outline-danger">
+                                            <i class="fas fa-file-pdf me-2"></i> PDF
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
@@ -295,7 +298,7 @@
                                                 <span class="text-muted">AI Integration</span>
                                             </div>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -555,84 +558,112 @@
         </section>
 
         <!-- Testimonials Section -->
-<section id="testimonials" class="py-5 bg-light">
-  <div class="container">
-    <div class="text-center mb-5">
-      <h2 class="display-4 fw-bold mb-3">
-        <span class="gradient-text">Testimonials</span>
-      </h2>
-      <div class="mx-auto mb-4"
-           style="width: 6rem; height: 0.25rem; background: linear-gradient(135deg, #667eea, #764ba2);">
-      </div>
-      <p class="lead text-muted">What others say about working with me</p>
-    </div>
+        <section id="testimonials" class="py-5 bg-light">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="display-4 fw-bold mb-3">
+                        <span class="gradient-text">Testimonials</span>
+                    </h2>
+                    <div class="mx-auto mb-4"
+                        style="width: 6rem; height: 0.25rem; background: linear-gradient(135deg, #667eea, #764ba2);">
+                    </div>
+                    <p class="lead text-muted">What others say about working with me</p>
+                </div>
 
-    <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
+                <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
 
-        <!-- Testimonial 1 -->
-        <div class="carousel-item active">
-          <div class="text-center px-4">
-            <blockquote class="blockquote">
-              <p class="fs-5 fst-italic">
-                “Akhil is one of the most dependable and driven professionals I’ve come across. His proactive mindset and attention to detail have made a real impact on our projects.”
-              </p>
-            </blockquote>
-            <footer class="blockquote-footer">
-              Navita, Sr. Consultant at Capgemini
-              <a href="https://www.linkedin.com/in/navita" target="_blank" class="ms-2">
-                <i class="fab fa-linkedin fa-lg text-primary"></i>
-              </a>
-            </footer>
-          </div>
-        </div>
+                        <!-- Testimonial 1 -->
+                        <div class="carousel-item active">
+                            <div class="text-center px-4">
+                                <blockquote class="blockquote">
+                                    <p class="fs-5 fst-italic">
+                                        “Akhil is one of the most dependable and driven professionals I’ve come across.
+                                        His proactive mindset and attention to detail have made a real impact on our
+                                        projects.”
+                                    </p>
+                                </blockquote>
+                                <footer class="blockquote-footer">
+                                    Navita, Sr. Consultant at Capgemini
+                                    <a href="https://www.linkedin.com/in/navita-009a76208/" target="_blank"
+                                        class="ms-2">
+                                        <i class="fab fa-linkedin fa-lg text-primary"></i>
+                                    </a>
+                                </footer>
+                            </div>
+                        </div>
 
-        <!-- Testimonial 2 -->
-        <div class="carousel-item">
-          <div class="text-center px-4">
-            <blockquote class="blockquote">
-              <p class="fs-5 fst-italic">
-                “Your exceptional problem-solving skills and ability to engage well with the team have made a significant contribution to the success of our projects.”
-              </p>
-            </blockquote>
-            <footer class="blockquote-footer">
-              Siddhartha Malempati, Commons Collective
-              <a href="https://www.linkedin.com/in/siddhartha-malempati" target="_blank" class="ms-2">
-                <i class="fab fa-linkedin fa-lg text-primary"></i>
-              </a>
-            </footer>
-          </div>
-        </div>
+                        <!-- Testimonial 2 -->
+                        <div class="carousel-item">
+                            <div class="text-center px-4">
+                                <blockquote class="blockquote">
+                                    <p class="fs-5 fst-italic">
+                                        “Your exceptional problem-solving skills and ability to engage well with the
+                                        team have made a significant contribution to the success of our projects.”
+                                    </p>
+                                </blockquote>
+                                <footer class="blockquote-footer">
+                                    Siddhartha Malempati, Commons Collective
+                                    <a href="https://www.linkedin.com/in/siddhartha-malempati-1a274b120/"
+                                        target="_blank" class="ms-2">
+                                        <i class="fab fa-linkedin fa-lg text-primary"></i>
+                                    </a>
+                                </footer>
+                            </div>
+                        </div>
 
-        <!-- Testimonial 3 -->
-        <div class="carousel-item">
-          <div class="text-center px-4">
-            <blockquote class="blockquote">
-              <p class="fs-5 fst-italic">
-                “Akhil is a go-getter who adds great value to the team.”
-              </p>
-            </blockquote>
-            <footer class="blockquote-footer">
-              Nithin Reddy Kesari, MD at RUI Labs
-              <a href="https://www.linkedin.com/in/nithin-reddy-kesari" target="_blank" class="ms-2">
-                <i class="fab fa-linkedin fa-lg text-primary"></i>
-              </a>
-            </footer>
-          </div>
-        </div>
+                        <!-- Testimonial 3 -->
+                        <div class="carousel-item">
+                            <div class="text-center px-4">
+                                <blockquote class="blockquote">
+                                    <p class="fs-5 fst-italic">
+                                        “Akhil is a go-getter who adds great value to the team.”
+                                    </p>
+                                </blockquote>
+                                <footer class="blockquote-footer">
+                                    Nithin Reddy Kesari, MD at RUI Labs
+                                    <a href="https://www.linkedin.com/in/kesarinithin/" target="_blank" class="ms-2">
+                                        <i class="fab fa-linkedin fa-lg text-primary"></i>
+                                    </a>
+                                </footer>
+                            </div>
+                        </div>
 
-      </div>
+                        <!-- Testimonial 4 -->
+                        <div class="carousel-item">
+                            <div class="text-center px-4">
+                                <blockquote class="blockquote">
+                                    <p class="fs-5 fst-italic">
+                                        “Akhil is one of the most talented backend developers I’ve worked with. His
+                                        strong technical skills, problem-solving mindset, and commitment to quality
+                                        consistently stand out. He fosters a collaborative and positive work
+                                        environment.”
+                                    </p>
+                                </blockquote>
+                                <footer class="blockquote-footer">
+                                    Shrutika Kamble, Associate Consultant at Capgemini
+                                    <a href="https://www.linkedin.com/in/shrutika-kamble-193195261/" target="_blank"
+                                        class="ms-2">
+                                        <i class="fab fa-linkedin fa-lg text-primary"></i>
+                                    </a>
+                                </footer>
+                            </div>
+                        </div>
 
-      <!-- Controls -->
-      <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-      </button>
-    </div>
-  </div>
-</section>
+                    </div>
+
+                    <!-- Controls -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                </div>
+            </div>
+        </section>
 
 
         <!-- Contact Section -->
@@ -691,9 +722,10 @@
                                             placeholder="Tell me about your project or idea..." required></textarea>
                                     </div>
                                     <!-- Centered Google reCAPTCHA -->
-<div class="d-flex justify-content-center my-3">
-  <div class="g-recaptcha" data-sitekey="6LdZnoUrAAAAANwP2oXJ0X5mNINaARMipJDReelZ"></div>
-</div>
+                                    <div class="d-flex justify-content-center my-3">
+                                        <div class="g-recaptcha"
+                                            data-sitekey="6LdZnoUrAAAAANwP2oXJ0X5mNINaARMipJDReelZ"></div>
+                                    </div>
                                     <div class="col-12 text-center">
                                         <button type="submit" class="btn btn-gradient btn-lg px-5 py-3 rounded-pill">
                                             <i class="fas fa-paper-plane me-2"></i>
@@ -721,34 +753,34 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-  <div class="glass-card p-4 text-center">
-    <div class="mb-3">
-      <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto"
-        style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #26d0ce, #1a9be6);">
-        <i class="fas fa-envelope text-white fs-4"></i>
-      </div>
-    </div>
-    <h5 class="text-white fw-bold mb-2">Email</h5>
-    <p class="text-light mb-0">
-      <a :href="`mailto:${email}`" class="text-light text-decoration-none">{{ email }}</a>
-    </p>
-  </div>
-</div>
+                        <div class="glass-card p-4 text-center">
+                            <div class="mb-3">
+                                <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto"
+                                    style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #26d0ce, #1a9be6);">
+                                    <i class="fas fa-envelope text-white fs-4"></i>
+                                </div>
+                            </div>
+                            <h5 class="text-white fw-bold mb-2">Email</h5>
+                            <p class="text-light mb-0">
+                                <a :href="`mailto:${email}`" class="text-light text-decoration-none">{{ email }}</a>
+                            </p>
+                        </div>
+                    </div>
 
-<div class="col-md-4">
-  <div class="glass-card p-4 text-center">
-    <div class="mb-3">
-      <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto"
-        style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #a55eea, #fd79a8);">
-        <i class="fas fa-phone text-white fs-4"></i>
-      </div>
-    </div>
-    <h5 class="text-white fw-bold mb-2">Phone</h5>
-    <p class="text-light mb-0">
-      <a :href="`tel:${phone}`" class="text-light text-decoration-none">{{ phone }}</a>
-    </p>
-  </div>
-</div>
+                    <div class="col-md-4">
+                        <div class="glass-card p-4 text-center">
+                            <div class="mb-3">
+                                <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto"
+                                    style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #a55eea, #fd79a8);">
+                                    <i class="fas fa-phone text-white fs-4"></i>
+                                </div>
+                            </div>
+                            <h5 class="text-white fw-bold mb-2">Phone</h5>
+                            <p class="text-light mb-0">
+                                <a :href="`tel:${phone}`" class="text-light text-decoration-none">{{ phone }}</a>
+                            </p>
+                        </div>
+                    </div>
 
                 </div>
 
@@ -756,13 +788,16 @@
                 <div class="text-center mt-5">
                     <h5 class="text-white fw-bold mb-3">Follow Me</h5>
                     <div class="d-flex justify-content-center gap-3">
-                        <a href="https://www.linkedin.com/in/akhil-abothu/" target="_blank" class="btn btn-outline-light rounded-circle" style="width: 3rem; height: 3rem;">
+                        <a href="https://www.linkedin.com/in/akhil-abothu/" target="_blank"
+                            class="btn btn-outline-light rounded-circle" style="width: 3rem; height: 3rem;">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
-                        <a href="https://github.com/AKHILABOTHU/" target="_blank" class="btn btn-outline-light rounded-circle" style="width: 3rem; height: 3rem;">
+                        <a href="https://github.com/AKHILABOTHU/" target="_blank"
+                            class="btn btn-outline-light rounded-circle" style="width: 3rem; height: 3rem;">
                             <i class="fab fa-github"></i>
                         </a>
-                        <a href="https://www.instagram.com/developerdiarieshq/" target="_blank" class="btn btn-outline-light rounded-circle" style="width: 3rem; height: 3rem;">
+                        <a href="https://www.instagram.com/developerdiarieshq/" target="_blank"
+                            class="btn btn-outline-light rounded-circle" style="width: 3rem; height: 3rem;">
                             <i class="fab fa-instagram"></i>
                         </a>
                     </div>
