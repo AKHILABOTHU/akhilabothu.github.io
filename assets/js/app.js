@@ -55,6 +55,13 @@
 
           window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
             this.darkMode = e.matches;
+
+            window.dataLayer = window.dataLayer || [];
+           function gtag(){dataLayer.push(arguments);}
+           gtag('js', new Date());
+             gtag('config', 'G-M03N4RZ6E9');
+
+
           });
 
           const observer = new IntersectionObserver((entries) => {
