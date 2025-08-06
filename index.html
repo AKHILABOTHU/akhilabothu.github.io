@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./assets/images/favicon.ico" />
+    <title>Akhil Abothu</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="./assets/css/styles.css" rel="stylesheet">
+</head>
+
+<body :class="{ 'dark-theme': darkMode }">
+    <!-- Loader -->
+    <div id="loader">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg fixed-top navbar-custom">
+            <div class="container">
+                <a class="navbar-brand fw-bold fs-4 gradient-text" href="#">
+                    Akhil Abothu
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#skills">Skills</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#experience">Experience</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#dev-diary">DevDiary</a>
+                        </li>
+                        <li class="nav-item">
+                            <button @click="darkMode = !darkMode" class="btn btn-outline-secondary rounded-circle ms-2">
+                                <i :class="darkMode ? 'fas fa-sun' : 'fas fa-moon'"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero-section d-flex align-items-center gradient-bg mesh-bg">
+            <div class="hero-overlay"></div>
+
+            <div class="container position-relative">
+                <div class="row align-items-center">
+                    <!-- Profile Picture Section - Left Side -->
+                    <!-- Profile Picture Section - Top Always -->
+                    <div class="col-lg-5 d-flex justify-content-center order-1 mb-4 mb-lg-0">
+                        <div class="position-relative">
+                            <!-- Floating Profile Card -->
+                            <div class="floating glass-card p-4" style="max-width: 20rem;">
+                                <!-- Profile Image -->
+                                <div class="text-center mb-4">
+                                    <div class="position-relative d-inline-block">
+                                        <div class="rounded-circle p-2 shadow-lg"
+                                            style="width: 12rem; height: 12rem; background: linear-gradient(135deg, #667eea, #764ba2);">
+                                            <div
+                                                class="w-100 h-100 rounded-circle bg-white d-flex align-items-center justify-content-center overflow-hidden">
+                                                <img src="./assets/images/me.jpg" alt="Profile" class="rounded-circle"
+                                                    style="width: 100%; height: 100%; object-fit: cover;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <!-- Floating Tech Icons -->
+                            <div class="floating-icon floating-icon-1 animate-pulse-slow">
+                                <i class="fab fa-java fs-4"></i>
+                            </div>
+                            <div class="floating-icon floating-icon-2 animate-pulse-slow" style="animation-delay: 1s;">
+                                <i class="fab fa-vuejs fs-4"></i>
+                            </div>
+                            <div class="floating-icon floating-icon-3 animate-pulse-slow" style="animation-delay: 2s;">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Section - Right Side -->
+                    <!-- Text Content Below Image -->
+                    <div class="col-lg-7 text-white fade-in-up order-2 text-center text-lg-start">
+                        <div class="mb-4">
+                            <span class="badge bg-light bg-opacity-10 text-white px-3 py-2 rounded-pill">
+                                🚀 Available for new opportunities
+                            </span>
+                        </div>
+                        <h1 class="display-1 fw-bold mb-4">
+                            Hi, I'm <span class="text-warning">Akhil</span>
+                        </h1>
+                        <div class="display-5 mb-4 text-info text-center text-lg-start" style="height: 5rem;">
+                            <div class="typewriter">{{ currentRole }}</div>
+                        </div>
+                        <p class="lead mb-4 text-light">
+                            {{ profileSummary }}
+                        </p>
+
+                        <!-- Contact Info Pills -->
+                        <!-- Contact Info Pills -->
+                        <div class="d-flex flex-wrap justify-content-center justify-content-lg-start mb-4">
+                            <div class="contact-pill">
+                                <i class="fas fa-map-marker-alt text-warning"></i>
+                                <span>{{ location }}</span>
+                            </div>
+                            <div class="contact-pill">
+                                <i class="fas fa-envelope text-warning"></i>
+                                <span>{{ email }}</span>
+                            </div>
+                            <div class="contact-pill">
+                                <i class="fas fa-phone text-warning"></i>
+                                <span>{{ phone }}</span>
+                            </div>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3 mb-5">
+
+                            <!-- Download Resume Button (Modal Trigger) -->
+                            <button type="button" class="btn btn-gradient px-4 py-3 rounded-pill" data-bs-toggle="modal"
+                                data-bs-target="#resumeModal">
+                                <i class="fas fa-download me-2"></i>
+                                Download Resume
+                            </button>
+
+                            <!-- Connect Button -->
+                            <button @click="scrollToSection('contact')"
+                                class="btn btn-outline-light px-4 py-3 rounded-pill">
+                                Let's Connect
+                            </button>
+                        </div>
+
+                        <!-- Resume Download Modal -->
+                        <div class="modal fade" id="resumeModal" tabindex="-1" aria-labelledby="resumeModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+
+                                    <div class="modal-header border-0">
+                                        <h5 class="modal-title text-light" id="resumeModalLabel">Choose Resume Format
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+
+                                    <div class="modal-body text-center">
+                                        <p class="text-white-50 mb-4">Select a format to download:</p>
+                                        <a href="./assets/pages/akhil_abothu.html" download
+                                            class="btn btn-outline-primary me-3">
+                                            <i class="fas fa-code me-2"></i> HTML
+                                        </a>
+                                        <a href="./assets/pages/akhil_abothu.pdf" download
+                                            class="btn btn-outline-danger">
+                                            <i class="fas fa-file-pdf me-2"></i> PDF
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-5" :class="darkMode ? 'bg-dark' : 'bg-light'">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="display-4 fw-bold mb-3" :class="darkMode ? 'text-white' : 'text-dark'">
+                        About <span class="gradient-text">Me</span>
+                    </h2>
+                    <div class="mx-auto mb-4"
+                        style="width: 6rem; height: 0.25rem; background: linear-gradient(135deg, #667eea, #764ba2);">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Main About Content -->
+                    <div class="col-lg-8">
+                        <div class="card card-hover h-100 border-0 shadow-sm">
+                            <div class="card-body p-4">
+                                <h4 class="card-title mb-4">
+                                    <i class="fas fa-user-tie text-primary me-3"></i>
+                                    Professional Journey
+                                </h4>
+                                <div class="fs-6 text-muted">
+                                    <p class="mb-3">
+                                        With <strong>{{ experienceYears }}+ years</strong> of experience in software
+                                        development, I've evolved from a curious computer science graduate to a seasoned
+                                        full-stack developer with a passion for cutting-edge technologies.
+                                    </p>
+                                    <p class="mb-3">
+                                        My expertise spans across <strong>Java Spring Boot</strong> for robust backend
+                                        architectures and <strong>Vue.js</strong> for dynamic frontend experiences.
+                                        Recently, I've been diving deep into the world of <strong>Generative
+                                            AI</strong>, exploring how artificial intelligence can transform business
+                                        solutions.
+                                    </p>
+                                    <p class="mb-0">
+                                        I believe in writing clean, scalable code and building applications that not
+                                        only meet business requirements but also provide exceptional user experiences.
+                                        My goal is to bridge the gap between traditional development and AI-powered
+                                        solutions.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Side Stats & Skills -->
+                    <div class="col-lg-4">
+                        <div class="row g-3">
+                            <!-- Quick Stats -->
+                            <div class="col-12">
+                                <div class="card card-hover border-0 shadow-sm">
+                                    <div class="card-body p-4">
+                                        <h5 class="card-title mb-3">
+                                            <i class="fas fa-chart-line text-success me-2"></i>
+                                            Quick Stats
+                                        </h5>
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <span class="text-muted">Experience</span>
+                                            <span class="fw-bold text-primary">{{ experienceYears }}+ Years</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <span class="text-muted">Projects</span>
+                                            <span class="fw-bold text-success">{{ projectsCompleted }}+</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <span class="text-muted">Certifications</span>
+                                            <span class="fw-bold" style="color: #a55eea;">{{ certificationsCount
+                                                }}</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="text-muted">Current Role</span>
+                                            <span class="fw-bold text-success">{{role}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Work Focus -->
+                            <div class="col-12">
+                                <div class="card card-hover border-0 shadow-sm">
+                                    <div class="card-body p-4">
+                                        <h5 class="card-title mb-3">
+                                            <i class="fas fa-bullseye text-danger me-2"></i>
+                                            Work Focus
+                                        </h5>
+                                        <div class="mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <div class="bg-primary rounded-circle me-3"
+                                                    style="width: 0.75rem; height: 0.75rem;"></div>
+                                                <span class="text-muted">Backend Development</span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <div class="bg-success rounded-circle me-3"
+                                                    style="width: 0.75rem; height: 0.75rem;"></div>
+                                                <span class="text-muted">Frontend Development</span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <div class="rounded-circle me-3"
+                                                    style="width: 0.75rem; height: 0.75rem; background-color: #a55eea;">
+                                                </div>
+                                                <span class="text-muted">AI Integration</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-5">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="display-4 fw-bold mb-3">
+                        Skills & <span class="gradient-text">Expertise</span>
+                    </h2>
+                    <div class="mx-auto mb-4"
+                        style="width: 6rem; height: 0.25rem; background: linear-gradient(135deg, #667eea, #764ba2);">
+                    </div>
+                    <p class="lead text-muted">
+                        A comprehensive overview of my technical skills and proficiency levels
+                    </p>
+                </div>
+
+                <!-- Skill Categories -->
+                <div class="row g-4 mb-5">
+                    <!-- Backend Skills -->
+                    <div class="col-lg-4">
+                        <div class="card card-hover border-0 shadow-sm h-100">
+                            <div class="card-body p-4">
+                                <div class="text-center mb-4">
+                                    <div class="skill-category-icon backend-icon">
+                                        <i class="fas fa-server"></i>
+                                    </div>
+                                    <h4 class="fw-bold">Backend</h4>
+                                </div>
+                                <div v-for="skill in backendSkills" :key="skill.name" class="mb-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="fw-medium">{{ skill.name }}</span>
+                                        <span class="small fw-bold" :class="skill.textColor">{{ skill.percentage
+                                            }}%</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar skill-bar" :class="skill.bgColor"
+                                            :style="{ width: animateSkills ? skill.percentage + '%' : '0%' }"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Frontend Skills -->
+                    <div class="col-lg-4">
+                        <div class="card card-hover border-0 shadow-sm h-100">
+                            <div class="card-body p-4">
+                                <div class="text-center mb-4">
+                                    <div class="skill-category-icon frontend-icon">
+                                        <i class="fas fa-palette"></i>
+                                    </div>
+                                    <h4 class="fw-bold">Frontend</h4>
+                                </div>
+                                <div v-for="skill in frontendSkills" :key="skill.name" class="mb-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="fw-medium">{{ skill.name }}</span>
+                                        <span class="small fw-bold" :class="skill.textColor">{{ skill.percentage
+                                            }}%</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar skill-bar" :class="skill.bgColor"
+                                            :style="{ width: animateSkills ? skill.percentage + '%' : '0%' }"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Database & AI Skills -->
+                    <div class="col-lg-4">
+                        <div class="card card-hover border-0 shadow-sm h-100">
+                            <div class="card-body p-4">
+                                <div class="text-center mb-4">
+                                    <div class="skill-category-icon database-icon">
+                                        <i class="fas fa-database"></i>
+                                    </div>
+                                    <h4 class="fw-bold">Database & AI</h4>
+                                </div>
+                                <div v-for="skill in databaseAISkills" :key="skill.name" class="mb-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="fw-medium">{{ skill.name }}</span>
+                                        <span class="small fw-bold" :class="skill.textColor">{{ skill.percentage
+                                            }}%</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar skill-bar" :class="skill.bgColor"
+                                            :style="{ width: animateSkills ? skill.percentage + '%' : '0%' }"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Recommendation Button -->
+                <div class="text-center">
+                    <button @click="getAIRecommendation" class="btn btn-lg px-4 py-3 rounded-pill fw-semibold"
+                        style="background: linear-gradient(135deg, #a55eea, #26d0ce); border: none; color: white;">
+                        <i class="fas fa-magic me-2"></i>
+                        Get AI-Powered Learning Recommendation
+                    </button>
+
+                    <div v-if="skillRecommendation" class="mt-4">
+                        <div class="ai-recommendation mx-auto" style="max-width: 48rem;">
+                            <div class="d-flex">
+                                <div class="me-3">
+                                    <div class="rounded-circle d-flex align-items-center justify-content-center"
+                                        style="width: 3rem; height: 3rem; background: linear-gradient(135deg, #a55eea, #26d0ce);">
+                                        <i class="fas fa-robot text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold mb-2 text-primary">
+                                        <i class="fas fa-lightbulb me-2"></i>
+                                        AI Learning Recommendation
+                                    </h5>
+                                    <p class="mb-0">{{ skillRecommendation }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="py-5" :class="darkMode ? 'bg-dark' : 'bg-light'">
+            <div class="container">
+                <div class="text-center mb-5" :class="darkMode ? 'text-white' : 'text-dark'">
+                    <h2 class="display-4 fw-bold mb-3">
+                        Work <span class="gradient-text">Experience</span>
+                    </h2>
+                    <div class="mx-auto mb-4"
+                        style="width: 60px; height: 4px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 2px;">
+                    </div>
+                    <p class="lead" :class="darkMode ? 'text-white' : 'text-dark'">My professional journey and key
+                        achievements</p>
+                </div>
+
+                <div class="timeline">
+                    <div class="row" v-for="(pair, index) in experiencePairs" :key="index">
+                        <div class="col-lg-6 timeline-item" v-if="pair.left">
+                            <div class="timeline-content">
+                                <div class="card-body p-4">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div
+                                            class="rounded-circle d-flex align-items-center justify-content-center me-3 experience-icon">
+                                            <i :class="pair.left.icon" class="text-white fs-4"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="fw-bold mb-1">{{ pair.left.position }}</h5>
+                                            <h6 class="company-name mb-0 fw-semibold">{{ pair.left.company }}</h6>
+                                            <small class="text-muted" v-if="pair.left.client">Client: {{
+                                                pair.left.client }}</small>
+                                            <small class="text-muted d-block" v-if="pair.left.project">Project: {{
+                                                pair.left.project }}</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <small class="text-muted">
+                                            <i class="fas fa-calendar me-1"></i> {{ pair.left.duration }}
+                                        </small>
+                                        <small class="text-muted ms-3">
+                                            <i class="fas fa-map-marker-alt me-1"></i> {{ pair.left.location }}
+                                        </small>
+                                    </div>
+
+                                    <p class="text-muted mb-3">{{ pair.left.description }}</p>
+
+                                    <div class="mb-3">
+                                        <h6 class="fw-semibold mb-2">Key Achievements:</h6>
+                                        <ul class="list-unstyled mb-0">
+                                            <li v-for="achievement in pair.left.achievements" :key="achievement">
+                                                <i class="fas fa-check-circle text-success me-2"></i>
+                                                <small>{{ achievement }}</small>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div>
+                                        <h6 class="fw-semibold mb-2 small">Technologies Used:</h6>
+                                        <div class="d-flex flex-wrap gap-1">
+                                            <span v-for="tech in pair.left.technologies" :key="tech"
+                                                class="badge bg-primary bg-opacity-10 text-primary rounded-pill px-3 py-1 small">
+                                                {{ tech }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 timeline-item right" v-if="pair.right">
+                            <div class="timeline-content">
+                                <div class="card-body p-4">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div
+                                            class="rounded-circle d-flex align-items-center justify-content-center me-3 experience-icon">
+                                            <i :class="pair.right.icon" class="text-white fs-4"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="fw-bold mb-1">{{ pair.right.position }}</h5>
+                                            <h6 class="company-name mb-0 fw-semibold">{{ pair.right.company }}</h6>
+                                            <small class="text-muted" v-if="pair.right.client">Client: {{
+                                                pair.right.client }}</small>
+                                            <small class="text-muted d-block" v-if="pair.right.project">Project: {{
+                                                pair.right.project }}</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <small class="text-muted">
+                                            <i class="fas fa-calendar me-1"></i> {{ pair.right.duration }}
+                                        </small>
+                                        <small class="text-muted ms-3">
+                                            <i class="fas fa-map-marker-alt me-1"></i> {{ pair.right.location }}
+                                        </small>
+                                    </div>
+
+                                    <p class="text-muted mb-3">{{ pair.right.description }}</p>
+
+                                    <div class="mb-3">
+                                        <h6 class="fw-semibold mb-2">Key Achievements:</h6>
+                                        <ul class="list-unstyled mb-0">
+                                            <li v-for="achievement in pair.right.achievements" :key="achievement">
+                                                <i class="fas fa-check-circle text-success me-2"></i>
+                                                <small>{{ achievement }}</small>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div>
+                                        <h6 class="fw-semibold mb-2 small">Technologies Used:</h6>
+                                        <div class="d-flex flex-wrap gap-1">
+                                            <span v-for="tech in pair.right.technologies" :key="tech"
+                                                class="badge bg-primary bg-opacity-10 text-primary rounded-pill px-3 py-1 small">
+                                                {{ tech }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-5 bg-light">
+            <div class="container">
+                <!-- Heading -->
+                <div class="text-center mb-5">
+                    <h2 class="display-4 fw-bold mb-3">
+                        <span class="gradient-text">Testimonials</span>
+                    </h2>
+                    <div class="mx-auto mb-4"
+                        style="width: 6rem; height: 0.25rem; background: linear-gradient(135deg, #667eea, #764ba2);">
+                    </div>
+                    <p class="lead text-muted">What others say about working with me</p>
+                </div>
+
+                <!-- Carousel -->
+                <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item" :class="{ active: index === 0 }"
+                            v-for="(testimonial, index) in testimonials" :key="index">
+                            <div class="text-center px-4">
+                                <blockquote class="blockquote">
+                                    <p class="fs-5 fst-italic">“{{ testimonial.quote }}”</p>
+                                </blockquote>
+                                <footer class="blockquote-footer">
+                                    {{ testimonial.author }}
+                                    <a :href="testimonial.linkedin" target="_blank" class="ms-2">
+                                        <i class="fab fa-linkedin fa-lg text-primary"></i>
+                                    </a>
+                                </footer>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-5 gradient-bg">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="display-4 fw-bold mb-3 text-white">
+                        Let's <span class="text-warning">Connect</span>
+                    </h2>
+                    <div class="mx-auto mb-4"
+                        style="width: 6rem; height: 0.25rem; background: linear-gradient(135deg, #ffd700, #ff8c00);">
+                    </div>
+                    <p class="lead text-light">
+                        Ready to bring your ideas to life? Let's discuss your next project!
+                    </p>
+                </div>
+
+                <div class="row">
+                    <!-- Contact Form -->
+                    <div class="col-lg-8 mx-auto">
+                        <div class="glass-card p-4">
+                            <form @submit.prevent="sendMessage">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label text-white fw-semibold">
+                                            <i class="fas fa-user me-2"></i>
+                                            Full Name
+                                        </label>
+                                        <input v-model="contactForm.name" type="text"
+                                            class="form-control form-control-lg" placeholder="Your full name" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label text-white fw-semibold">
+                                            <i class="fas fa-envelope me-2"></i>
+                                            Email Address
+                                        </label>
+                                        <input v-model="contactForm.email" type="email"
+                                            class="form-control form-control-lg" placeholder="your.email@example.com"
+                                            required>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label text-white fw-semibold">
+                                            <i class="fas fa-tag me-2"></i>
+                                            Subject
+                                        </label>
+                                        <input v-model="contactForm.subject" type="text"
+                                            class="form-control form-control-lg" placeholder="What's this about?"
+                                            required>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label text-white fw-semibold">
+                                            <i class="fas fa-comment me-2"></i>
+                                            Message
+                                        </label>
+                                        <textarea v-model="contactForm.message" class="form-control" rows="5"
+                                            placeholder="Tell me about your project or idea..." required></textarea>
+                                    </div>
+                                    <!-- Centered Google reCAPTCHA -->
+                                    <div class="d-flex justify-content-center my-3">
+                                        <div class="g-recaptcha"
+                                            data-sitekey="6LdZnoUrAAAAANwP2oXJ0X5mNINaARMipJDReelZ"></div>
+                                    </div>
+                                    <div class="col-12 text-center">
+                                        <button type="submit" class="btn btn-gradient btn-lg px-5 py-3 rounded-pill">
+                                            <i class="fas fa-paper-plane me-2"></i>
+                                            Send Message
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Info Cards -->
+                <div class="row g-4 mt-5">
+                    <div class="col-md-4">
+                        <div class="glass-card p-4 text-center">
+                            <div class="mb-3">
+                                <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto"
+                                    style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #ff6b6b, #ee5a24);">
+                                    <i class="fas fa-map-marker-alt text-white fs-4"></i>
+                                </div>
+                            </div>
+                            <h5 class="text-white fw-bold mb-2">Location</h5>
+                            <p class="text-light mb-0">{{ location }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="glass-card p-4 text-center">
+                            <div class="mb-3">
+                                <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto"
+                                    style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #26d0ce, #1a9be6);">
+                                    <i class="fas fa-envelope text-white fs-4"></i>
+                                </div>
+                            </div>
+                            <h5 class="text-white fw-bold mb-2">Email</h5>
+                            <p class="text-light mb-0">
+                                <a :href="`mailto:${email}`" class="text-light text-decoration-none">{{ email }}</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="glass-card p-4 text-center">
+                            <div class="mb-3">
+                                <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto"
+                                    style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #a55eea, #fd79a8);">
+                                    <i class="fas fa-phone text-white fs-4"></i>
+                                </div>
+                            </div>
+                            <h5 class="text-white fw-bold mb-2">Phone</h5>
+                            <p class="text-light mb-0">
+                                <a :href="`tel:${phone}`" class="text-light text-decoration-none">{{ phone }}</a>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Social Links -->
+                <div class="text-center mt-5">
+                    <h5 class="text-white fw-bold mb-3">Follow Me</h5>
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="https://www.linkedin.com/in/akhil-abothu/" target="_blank"
+                            class="btn btn-outline-light rounded-circle" style="width: 3rem; height: 3rem;">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://github.com/AKHILABOTHU/" target="_blank"
+                            class="btn btn-outline-light rounded-circle" style="width: 3rem; height: 3rem;">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.instagram.com/developerdiarieshq/" target="_blank"
+                            class="btn btn-outline-light rounded-circle" style="width: 3rem; height: 3rem;">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-4" :class="darkMode ? 'bg-dark' : 'bg-light'">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p class="mb-0" :class="darkMode ? 'text-light' : 'text-muted'">
+                            © {{currentYear}} {{ fullName }}. All rights reserved.
+                        </p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <p class="mb-0" :class="darkMode ? 'text-light' : 'text-muted'">
+                            Built with ❤️ using Vue.js & Bootstrap
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="./assets/js/app.js"></script>
+</body>
+
+</html>

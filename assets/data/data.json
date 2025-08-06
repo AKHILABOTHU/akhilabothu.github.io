@@ -1,0 +1,286 @@
+{
+  "darkMode": true,
+  "animateSkills": false,
+  "skillRecommendation": "",
+  "currentRole": "Full Stack Developer",
+  "fullName": "Akhil Abothu",
+  "location": "Telangana, India",
+  "email": "abothuakhil@gmail.com",
+  "phone": "+91 8919059351",
+  "projectsCompleted": 7,
+  "certificationsCount": 2,
+  "role": "Consultant",
+  "profileSummary": "Passionate Full Stack Developer specializing in Java Spring Boot, Vue.js, and Generative AI. I love creating innovative solutions that make a difference.",
+  "contactForm": {
+    "name": "",
+    "email": "",
+    "subject": "",
+    "message": ""
+  },
+  "backendSkills": [
+    {
+      "name": "Java Spring Boot",
+      "percentage": 80,
+      "bgColor": "bg-danger",
+      "textColor": "text-success"
+    },
+    {
+      "name": "RESTful APIs",
+      "percentage": 85,
+      "bgColor": "bg-warning",
+      "textColor": "text-warning"
+    },
+    {
+      "name": "Microservices",
+      "percentage": 60,
+      "bgColor": "bg-info",
+      "textColor": "text-info"
+    }
+  ],
+  "frontendSkills": [
+    {
+      "name": "Vue.js",
+      "percentage": 70,
+      "bgColor": "bg-success",
+      "textColor": "text-success"
+    },
+    {
+      "name": "JavaScript/ES6+",
+      "percentage": 60,
+      "bgColor": "bg-warning",
+      "textColor": "text-warning"
+    },
+    {
+      "name": "HTML5/CSS3",
+      "percentage": 85,
+      "bgColor": "bg-primary",
+      "textColor": "text-primary"
+    },
+    {
+      "name": "Bootstrap",
+      "percentage": 70,
+      "bgColor": "bg-info",
+      "textColor": "text-info"
+    }
+  ],
+  "databaseAISkills": [
+    {
+      "name": "MySQL",
+      "percentage": 60,
+      "bgColor": "bg-primary",
+      "textColor": "text-primary"
+    },
+    {
+      "name": "Generative AI",
+      "percentage": 10,
+      "bgColor": "bg-danger",
+      "textColor": "text-info"
+    }
+  ],
+  "experiences": [
+    {
+      "position": "Consultant",
+      "company": "Capgemini Technology Services India Ltd",
+      "client": "General Electric Corporate",
+      "project": "WAM",
+      "duration": "Oct 2023 – till date",
+      "location": "Hyderabad, India",
+      "icon": "fas fa-laptop-code",
+      "description": "Access management system to assign roles to GE users through approval workflows.",
+      "achievements": [
+        "Gathered and analyzed client requirements",
+        "Estimated and modularized business tasks",
+        "Developed using Spring Boot and Angular 8",
+        "Deployed on Tomcat, handled unit testing and UAT bugs",
+        "Managed code commits, releases, and coordination"
+      ],
+      "technologies": [
+        "Java",
+        "Spring Boot 4",
+        "Angular 8",
+        "SQL",
+        "Maven",
+        "Eclipse"
+      ]
+    },
+    {
+      "position": "Consultant",
+      "company": "Capgemini Technology Services India Ltd",
+      "client": "General Electric Corporate",
+      "project": "Travel & Fleet Applications",
+      "duration": "May 2022 – Oct 2023",
+      "location": "Hyderabad, India",
+      "icon": "fas fa-car",
+      "description": "Travel provided GE users access to cards, news, and travel-related services. Fleet managed vehicle assignment records.",
+      "achievements": [
+        "Analyzed and modularized requirements for Travel & Fleet apps",
+        "Built backend with Spring Boot and frontend with Angular 13",
+        "Deployed on Tomcat and supported UAT bug fixes",
+        "Led team collaboration and task allocation"
+      ],
+      "technologies": [
+        "Java",
+        "Spring Boot 4",
+        "Angular 13",
+        "SQL",
+        "Maven",
+        "Eclipse"
+      ]
+    },
+    {
+      "position": "Associate Consultant",
+      "company": "Capgemini Technology Services India Ltd",
+      "client": "General Electric Corporate",
+      "project": "GPIT (Global Payroll Input Tool)",
+      "duration": "Jan 2022 – May 2022",
+      "location": "Hyderabad, India",
+      "icon": "fas fa-file-invoice-dollar",
+      "description": "Standardized tool for placing employee payroll deductions and payment requests.",
+      "achievements": [
+        "Built Spring MVC controllers, services, repositories",
+        "Migrated project from Ant to Maven",
+        "Converted XML configs to Java-based config",
+        "Integrated with third-party APIs",
+        "Fixed vulnerabilities and UAT bugs"
+      ],
+      "technologies": [
+        "Java",
+        "Spring MVC",
+        "HTML",
+        "JavaScript",
+        "Maven",
+        "Wildfly",
+        "GIT"
+      ]
+    },
+    {
+      "position": "Associate Consultant",
+      "company": "Capgemini Technology Services India Ltd",
+      "client": "General Electric Corporate",
+      "project": "CATBILL (Corporate Air Transport)",
+      "duration": "Apr 2021 – Jan 2022",
+      "location": "Hyderabad, India",
+      "icon": "fas fa-plane-departure",
+      "description": "Monthly billing tool for GE trip expenditures, organized through recurring job batches.",
+      "achievements": [
+        "Built Spring Boot modules and front-end React components",
+        "Configured queues and handled interface communication",
+        "Migrated project from Spring MVC with JSP to Spring Boot + React",
+        "Managed deployment, testing, and bug fixes"
+      ],
+      "technologies": [
+        "Java",
+        "Spring Boot",
+        "React",
+        "MySQL",
+        "Maven",
+        "Tomcat",
+        "GIT"
+      ]
+    },
+    {
+      "position": "Associate Software Developer",
+      "company": "GV Soft Solutions Pvt Ltd",
+      "client": "Internal",
+      "project": "COCO (Competitions & Collaborations)",
+      "duration": "Jun 2018 – Feb 2021",
+      "location": "Hyderabad, India",
+      "icon": "fas fa-users-cog",
+      "description": "A collaborative platform where users can host/join competitions, hire talent, and communicate.",
+      "achievements": [
+        "Built secure APIs, JWT validations, and social login integrations",
+        "Created custom Vue.js components and UIs",
+        "Handled backend API dev and production support",
+        "Manual tested and deployed on Tomcat"
+      ],
+      "technologies": [
+        "Java",
+        "Vue.js",
+        "MySQL",
+        "Maven",
+        "JWT",
+        "Tomcat"
+      ]
+    },
+    {
+      "position": "Trainee Software Developer",
+      "company": "Wevio India Info Solutions Pvt Ltd",
+      "client": "Internal",
+      "project": "MyCube",
+      "duration": "Oct 2017 – May 2018",
+      "location": "Hyderabad, India",
+      "icon": "fas fa-cube",
+      "description": "Customizable safe-selling platform with user-configurable product features and purchasing flow.",
+      "achievements": [
+        "Developed views using JSP, HTML, and Java Beans",
+        "Wrote Spring controllers and JPA-based DB logic",
+        "Coordinated production deployment and testing",
+        "Handled defect fixing and debugging in Dev env"
+      ],
+      "technologies": [
+        "Java",
+        "Spring",
+        "JSP",
+        "MySQL",
+        "Tomcat",
+        "Eclipse"
+      ]
+    }
+  ],
+  "testimonials": [
+    {
+      "quote": "Akhil is one of the most dependable and driven professionals I’ve come across. His proactive mindset and attention to detail have made a real impact on our projects.",
+      "author": "Navita, Sr. Consultant at Capgemini",
+      "linkedin": "https://www.linkedin.com/in/navita-009a76208/"
+    },
+    {
+      "quote": "Your exceptional problem-solving skills and ability to engage well with the team have made a significant contribution to the success of our projects.",
+      "author": "Siddhartha Malempati, Commons Collective",
+      "linkedin": "https://www.linkedin.com/in/siddhartha-malempati-1a274b120/"
+    },
+    {
+      "quote": "Akhil is a go-getter who adds great value to the team.",
+      "author": "Nithin Reddy Kesari, MD at RUI Labs",
+      "linkedin": "https://www.linkedin.com/in/kesarinithin/"
+    },
+    {
+      "quote": "Akhil is one of the most talented backend developers I’ve worked with. His strong technical skills, problem-solving mindset, and commitment to quality consistently stand out. He fosters a collaborative and positive work environment.",
+      "author": "Shrutika Kamble, Associate Consultant at Capgemini",
+      "linkedin": "https://www.linkedin.com/in/shrutika-kamble-193195261/"
+    }
+  ],
+  "projects": [
+    {
+      "title": "E-Commerce Platform",
+      "category": "Full Stack Application",
+      "status": "Yet To Start",
+      "icon": "fas fa-shopping-cart",
+      "gradient": "linear-gradient(135deg, #667eea, #764ba2)",
+      "description": "A comprehensive e-commerce solution with advanced features like AI-powered recommendations, real-time inventory management, and secure payment processing.",
+      "technologies": [
+        "Java Spring Boot",
+        "Vue.js",
+        "MySQL",
+        "Redis",
+        "Stripe API",
+        "Docker"
+      ]
+    },
+    {
+      "title": "AI Chat Assistant",
+      "category": "AI/ML Project",
+      "status": "Yet To Start",
+      "icon": "fas fa-robot",
+      "gradient": "linear-gradient(135deg, #a55eea, #26d0ce)",
+      "description": "An intelligent chatbot powered by OpenAI GPT-3.5, capable of understanding context and providing human-like responses for customer support.",
+      "technologies": [
+        "Python",
+        "FastAPI",
+        "OpenAI API",
+        "React",
+        "PostgreSQL",
+        "WebSocket"
+      ]
+    }
+  ]
+}
