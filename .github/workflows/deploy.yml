@@ -33,6 +33,21 @@ jobs:
       - name: Build
         run: npm run build
       
+      - name: Verify build output
+        run: |
+          if grep -q "/src/main.js" dist/index.html; then
+            echo "ERROR: Built index.html still references source files!"
+            exit 1
+          fi
+          if ! grep -q "/assets/index" dist/index.html; then
+            echo "ERROR: Built index.html doesn't reference bundled assets!"
+            exit 1
+          fi
+          echo "✓ Build verification passed"
+      
+      - name: Add .nojekyll file
+        run: touch dist/.nojekyll
+      
       - name: Setup Pages
         uses: actions/configure-pages@v4
       
