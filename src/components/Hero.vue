@@ -98,7 +98,7 @@
                 </div>
                 <div class="modal-body text-center">
                   <p class="text-white-50 mb-4">Select a format to download:</p>
-                  <a :href="resumeHtml" download class="btn btn-outline-primary me-3">
+                  <a :href="resumeHtml" target="_blank" class="btn btn-outline-primary me-3">
                     <i class="fas fa-code me-2"></i> HTML
                   </a>
                   <a :href="resumePdf" download class="btn btn-outline-danger">
