@@ -98,12 +98,12 @@
                 </div>
                 <div class="modal-body text-center">
                   <p class="text-white-50 mb-4">Select a format to download:</p>
-                  <a :href="resumeHtml" target="_blank" class="btn btn-outline-primary me-3">
+                  <a :href="resumeHtml" download class="btn btn-outline-primary me-3">
                     <i class="fas fa-code me-2"></i> HTML
                   </a>
-                  <button @click="downloadPDF" class="btn btn-outline-danger">
+                  <a :href="resumePdf" download class="btn btn-outline-danger">
                     <i class="fas fa-file-pdf me-2"></i> PDF
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>
@@ -136,105 +136,6 @@ const scrollToSection = (sectionId) => {
   emit('scroll-to-section', sectionId)
 }
 
-const downloadPDF = async () => {
-  try {
-    // Show loading message
-    if (window.Swal) {
-      window.Swal.fire({
-        title: 'Generating PDF...',
-        html: 'Please wait while we generate your resume PDF.',
-        allowOutsideClick: false,
-        didOpen: () => {
-          window.Swal.showLoading()
-        }
-      })
-    }
-    
-    if (window.html2pdf) {
-      // Open the HTML resume in a hidden iframe
-      const iframe = document.createElement('iframe')
-      iframe.style.position = 'fixed'
-      iframe.style.right = '0'
-      iframe.style.bottom = '0'
-      iframe.style.width = '800px'
-      iframe.style.height = '1056px' // letter size height
-      iframe.style.border = 'none'
-      iframe.src = props.resumeHtml
-      document.body.appendChild(iframe)
-      
-      // Wait for iframe to load
-      await new Promise((resolve) => {
-        iframe.onload = resolve
-        // Timeout after 5 seconds
-        setTimeout(resolve, 5000)
-      })
-      
-      try {
-        // Wait a bit more for fonts and styles to load
-        await new Promise(resolve => setTimeout(resolve, 1000))
-        
-        // Get the iframe document
-        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document
-        const element = iframeDoc.body
-        
-        // Configure PDF options
-        const opt = {
-          margin: [0.2, 0.2, 0.2, 0.2],
-          filename: 'Akhil_Abothu_Resume.pdf',
-          image: { type: 'jpeg', quality: 0.98 },
-          html2canvas: { 
-            scale: 2, 
-            useCORS: true, 
-            letterRendering: true,
-            windowWidth: 800
-          },
-          jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-        }
-        
-        // Generate and download PDF
-        await window.html2pdf().set(opt).from(element).save()
-        
-        // Clean up
-        document.body.removeChild(iframe)
-        
-        // Show success message
-        if (window.Swal) {
-          await window.Swal.fire({
-            icon: 'success',
-            title: 'PDF Generated!',
-            text: 'Your resume PDF has been downloaded successfully.',
-            confirmButtonColor: '#3085d6'
-          })
-        }
-      } catch (error) {
-        // Clean up on error
-        document.body.removeChild(iframe)
-        throw error
-      }
-    } else {
-      // Fallback: open HTML resume for manual print
-      window.open(props.resumeHtml, '_blank')
-      if (window.Swal) {
-        await window.Swal.fire({
-          icon: 'info',
-          title: 'Opening Resume',
-          html: 'The resume will open in a new tab. Use your browser\'s Print to PDF option.',
-          confirmButtonColor: '#3085d6'
-        })
-      }
-    }
-  } catch (error) {
-    console.error('PDF generation error:', error)
-    if (window.Swal) {
-      await window.Swal.fire({
-        icon: 'error',
-        title: 'PDF Generation Failed',
-        html: 'There was an error generating the PDF. Please try:<br>1. Download the HTML version<br>2. Open it in your browser<br>3. Use Print to PDF',
-        confirmButtonColor: '#d33'
-      })
-    }
-  }
-}
 
 onMounted(() => {
   const roles = [
