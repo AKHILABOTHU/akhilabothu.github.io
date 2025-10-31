@@ -151,33 +151,51 @@ const downloadPDF = async () => {
     }
     
     if (window.html2pdf) {
-      // Fetch the HTML content
-      const response = await fetch(props.resumeHtml)
-      const htmlText = await response.text()
+      // Open the HTML resume in a hidden iframe
+      const iframe = document.createElement('iframe')
+      iframe.style.position = 'fixed'
+      iframe.style.right = '0'
+      iframe.style.bottom = '0'
+      iframe.style.width = '800px'
+      iframe.style.height = '1056px' // letter size height
+      iframe.style.border = 'none'
+      iframe.src = props.resumeHtml
+      document.body.appendChild(iframe)
       
-      // Create a temporary element to hold the HTML
-      const tempDiv = document.createElement('div')
-      tempDiv.innerHTML = htmlText
-      tempDiv.style.position = 'absolute'
-      tempDiv.style.left = '-9999px'
-      tempDiv.style.width = '800px'
-      document.body.appendChild(tempDiv)
+      // Wait for iframe to load
+      await new Promise((resolve) => {
+        iframe.onload = resolve
+        // Timeout after 5 seconds
+        setTimeout(resolve, 5000)
+      })
       
       try {
+        // Wait a bit more for fonts and styles to load
+        await new Promise(resolve => setTimeout(resolve, 1000))
+        
+        // Get the iframe document
+        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document
+        const element = iframeDoc.body
+        
         // Configure PDF options
         const opt = {
           margin: [0.2, 0.2, 0.2, 0.2],
           filename: 'Akhil_Abothu_Resume.pdf',
           image: { type: 'jpeg', quality: 0.98 },
-          html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+          html2canvas: { 
+            scale: 2, 
+            useCORS: true, 
+            letterRendering: true,
+            windowWidth: 800
+          },
           jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
         }
         
         // Generate and download PDF
-        await window.html2pdf().set(opt).from(tempDiv).save()
+        await window.html2pdf().set(opt).from(element).save()
         
         // Clean up
-        document.body.removeChild(tempDiv)
+        document.body.removeChild(iframe)
         
         // Show success message
         if (window.Swal) {
@@ -190,7 +208,7 @@ const downloadPDF = async () => {
         }
       } catch (error) {
         // Clean up on error
-        document.body.removeChild(tempDiv)
+        document.body.removeChild(iframe)
         throw error
       }
     } else {
