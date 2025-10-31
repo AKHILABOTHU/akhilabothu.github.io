@@ -13,13 +13,13 @@
       <div class="row">
         <!-- Main About Content -->
         <div class="col-lg-8">
-          <div class="card card-hover h-100 border-0 shadow-sm">
+          <div class="card card-hover h-100 border-0 shadow-sm" :class="darkMode ? 'bg-dark text-light' : ''">
             <div class="card-body p-4">
-              <h4 class="card-title mb-4">
+              <h4 class="card-title mb-4" :class="darkMode ? 'text-white' : ''">
                 <i class="fas fa-user-tie text-primary me-3"></i>
                 Professional Journey
               </h4>
-              <div class="fs-6 text-muted">
+              <div class="fs-6" :class="darkMode ? 'text-light' : 'text-muted'">
                 <p class="mb-3">
                   With <strong>{{ experienceYears }}+ years</strong> of experience in software
                   development, I've evolved from a curious computer science graduate to a seasoned
@@ -48,26 +48,26 @@
           <div class="row g-3">
             <!-- Quick Stats -->
             <div class="col-12">
-              <div class="card card-hover border-0 shadow-sm">
+              <div class="card card-hover border-0 shadow-sm" :class="darkMode ? 'bg-dark text-light' : ''">
                 <div class="card-body p-4">
-                  <h5 class="card-title mb-3">
+                  <h5 class="card-title mb-3" :class="darkMode ? 'text-white' : ''">
                     <i class="fas fa-chart-line text-success me-2"></i>
                     Quick Stats
                   </h5>
                   <div class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-muted">Experience</span>
+                    <span :class="darkMode ? 'text-light' : 'text-muted'">Experience</span>
                     <span class="fw-bold text-primary">{{ experienceYears }}+ Years</span>
                   </div>
                   <div class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-muted">Projects</span>
+                    <span :class="darkMode ? 'text-light' : 'text-muted'">Projects</span>
                     <span class="fw-bold text-success">{{ projectsCompleted }}+</span>
                   </div>
                   <div class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-muted">Certifications</span>
+                    <span :class="darkMode ? 'text-light' : 'text-muted'">Certifications</span>
                     <span class="fw-bold" style="color: #a55eea;">{{ certificationsCount }}</span>
                   </div>
                   <div class="d-flex justify-content-between align-items-center">
-                    <span class="text-muted">Current Role</span>
+                    <span :class="darkMode ? 'text-light' : 'text-muted'">Current Role</span>
                     <span class="fw-bold text-success">{{ role }}</span>
                   </div>
                 </div>
@@ -76,9 +76,9 @@
 
             <!-- Work Focus -->
             <div class="col-12">
-              <div class="card card-hover border-0 shadow-sm">
+              <div class="card card-hover border-0 shadow-sm" :class="darkMode ? 'bg-dark text-light' : ''">
                 <div class="card-body p-4">
-                  <h5 class="card-title mb-3">
+                  <h5 class="card-title mb-3" :class="darkMode ? 'text-white' : ''">
                     <i class="fas fa-bullseye text-danger me-2"></i>
                     Work Focus
                   </h5>
@@ -86,14 +86,14 @@
                     <div class="d-flex align-items-center">
                       <div class="bg-primary rounded-circle me-3"
                           style="width: 0.75rem; height: 0.75rem;"></div>
-                      <span class="text-muted">Backend Development</span>
+                      <span :class="darkMode ? 'text-light' : 'text-muted'">Backend Development</span>
                     </div>
                   </div>
                   <div class="mb-2">
                     <div class="d-flex align-items-center">
                       <div class="bg-success rounded-circle me-3"
                           style="width: 0.75rem; height: 0.75rem;"></div>
-                      <span class="text-muted">Frontend Development</span>
+                      <span :class="darkMode ? 'text-light' : 'text-muted'">Frontend Development</span>
                     </div>
                   </div>
                   <div class="mb-2">
@@ -101,7 +101,7 @@
                       <div class="rounded-circle me-3"
                           style="width: 0.75rem; height: 0.75rem; background-color: #a55eea;">
                       </div>
-                      <span class="text-muted">AI Integration</span>
+                      <span :class="darkMode ? 'text-light' : 'text-muted'">AI Integration</span>
                     </div>
                   </div>
                 </div>
@@ -129,6 +129,15 @@ const props = defineProps({
 <style scoped>
 .card {
   transition: all 0.3s ease;
+}
+
+.dark-theme .card {
+  background-color: #2d2d2d !important;
+  color: #ffffff;
+}
+
+.dark-theme .card strong {
+  color: #ffffff;
 }
 </style>
 

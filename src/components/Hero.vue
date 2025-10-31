@@ -98,12 +98,12 @@
                 </div>
                 <div class="modal-body text-center">
                   <p class="text-white-50 mb-4">Select a format to download:</p>
-                  <a :href="resumeHtml" download class="btn btn-outline-primary me-3">
+                  <a :href="resumeHtml" target="_blank" class="btn btn-outline-primary me-3">
                     <i class="fas fa-code me-2"></i> HTML
                   </a>
-                  <a :href="resumePdf" download class="btn btn-outline-danger">
+                  <button @click="downloadPDF" class="btn btn-outline-danger">
                     <i class="fas fa-file-pdf me-2"></i> PDF
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
@@ -134,6 +134,88 @@ const currentRole = ref('Full Stack Developer')
 
 const scrollToSection = (sectionId) => {
   emit('scroll-to-section', sectionId)
+}
+
+const downloadPDF = async () => {
+  try {
+    // Show loading message
+    if (window.Swal) {
+      window.Swal.fire({
+        title: 'Generating PDF...',
+        html: 'Please wait while we generate your resume PDF.',
+        allowOutsideClick: false,
+        didOpen: () => {
+          window.Swal.showLoading()
+        }
+      })
+    }
+    
+    if (window.html2pdf) {
+      // Fetch the HTML content
+      const response = await fetch(props.resumeHtml)
+      const htmlText = await response.text()
+      
+      // Create a temporary element to hold the HTML
+      const tempDiv = document.createElement('div')
+      tempDiv.innerHTML = htmlText
+      tempDiv.style.position = 'absolute'
+      tempDiv.style.left = '-9999px'
+      tempDiv.style.width = '800px'
+      document.body.appendChild(tempDiv)
+      
+      try {
+        // Configure PDF options
+        const opt = {
+          margin: [0.2, 0.2, 0.2, 0.2],
+          filename: 'Akhil_Abothu_Resume.pdf',
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+          jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+        }
+        
+        // Generate and download PDF
+        await window.html2pdf().set(opt).from(tempDiv).save()
+        
+        // Clean up
+        document.body.removeChild(tempDiv)
+        
+        // Show success message
+        if (window.Swal) {
+          await window.Swal.fire({
+            icon: 'success',
+            title: 'PDF Generated!',
+            text: 'Your resume PDF has been downloaded successfully.',
+            confirmButtonColor: '#3085d6'
+          })
+        }
+      } catch (error) {
+        // Clean up on error
+        document.body.removeChild(tempDiv)
+        throw error
+      }
+    } else {
+      // Fallback: open HTML resume for manual print
+      window.open(props.resumeHtml, '_blank')
+      if (window.Swal) {
+        await window.Swal.fire({
+          icon: 'info',
+          title: 'Opening Resume',
+          html: 'The resume will open in a new tab. Use your browser\'s Print to PDF option.',
+          confirmButtonColor: '#3085d6'
+        })
+      }
+    }
+  } catch (error) {
+    console.error('PDF generation error:', error)
+    if (window.Swal) {
+      await window.Swal.fire({
+        icon: 'error',
+        title: 'PDF Generation Failed',
+        html: 'There was an error generating the PDF. Please try:<br>1. Download the HTML version<br>2. Open it in your browser<br>3. Use Print to PDF',
+        confirmButtonColor: '#d33'
+      })
+    }
+  }
 }
 
 onMounted(() => {
