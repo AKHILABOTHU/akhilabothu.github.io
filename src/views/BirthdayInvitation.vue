@@ -165,6 +165,14 @@
             </div>
           </div>
 
+          <!-- Calendar Invite Button -->
+          <div class="calendar-action" @click="saveToCalendar">
+            <div class="cal-btn">
+              <i class="fas fa-calendar-plus"></i>
+              <span>Add to Calendar</span>
+            </div>
+          </div>
+
           <div class="map-rounded">
             <iframe 
                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1366.626264840075!2d80.87861246776308!3d17.233339832712034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sin!4v1769217987293!5m2!1sen!2sin" 
@@ -389,6 +397,20 @@ const scrollToNext = () => {
   const container = document.querySelector('.cards-scroll-snap')
   const height = window.innerHeight
   container.scrollBy({ top: height, behavior: 'smooth' })
+}
+
+const saveToCalendar = () => {
+  const event = {
+    title: "Dhanvik's 1st Birthday Party",
+    start: "20260128T053000Z", // Jan 28, 2026, 11:00 AM IST (UTC +5:30)
+    end: "20260128T103000Z",   // Jan 28, 2026, 4:00 PM IST
+    details: "🧸✨ You are cordially invited to celebrate Dhanvik's first trip around the sun! 🎂✨\n\nJoin us for lunch and celebration.",
+    location: "Nacharam (Village), Dammepeta, Bhadradri-Kothagudem, Telangana - 507306"
+  }
+  
+  const googleUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&dates=${event.start}/${event.end}&details=${event.details}&location=${encodeURIComponent(event.location)}`
+  
+  window.open(googleUrl, '_blank')
 }
 </script>
 
@@ -654,6 +676,27 @@ const scrollToNext = () => {
   color: #777; 
   line-height: 1.4;
 }
+
+.calendar-action {
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+.cal-btn {
+  background: #4285F4; /* Google Blue */
+  color: white;
+  padding: 12px 20px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3);
+  transition: transform 0.2s;
+}
+.cal-btn:active { transform: scale(0.95); }
+.cal-btn i { font-size: 1.2rem; }
 
 .map-rounded { border-radius: 20px; overflow: hidden; border: 4px solid #FFD93D; margin-bottom: 15px; }
 .signature-wrap {
