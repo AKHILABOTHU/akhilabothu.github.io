@@ -175,13 +175,12 @@
 
           <div class="map-rounded">
             <iframe 
-               src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1366.626264840075!2d80.87861246776308!3d17.233339832712034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sin!4v1769217987293!5m2!1sen!2sin" 
+               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3809.281881745494!2d80.87603754162598!3d17.233339832712034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a3693246eb57529%3A0x6b4fb9b5d27eb7b9!2sNacharam%2C%20Telangana%20507306!5e0!3m2!1sen!2sin!4v1706118000000!5m2!1sen!2sin" 
                width="100%" 
-               height="200" 
-               style="border:0;" 
+               height="250" 
+               style="border:0; display: block;" 
                allowfullscreen="" 
-               loading="lazy" 
-               referrerpolicy="no-referrer-when-downgrade"
+               loading="lazy"
              ></iframe>
           </div>
 
@@ -698,7 +697,15 @@ const saveToCalendar = () => {
 .cal-btn:active { transform: scale(0.95); }
 .cal-btn i { font-size: 1.2rem; }
 
-.map-rounded { border-radius: 20px; overflow: hidden; border: 4px solid #FFD93D; margin-bottom: 15px; }
+.map-rounded { 
+  border-radius: 20px; 
+  overflow: hidden; 
+  border: 4px solid #FFD93D; 
+  margin-bottom: 15px; 
+  height: 250px; 
+  min-height: 250px; 
+  background: #f0f0f0;
+}
 .signature-wrap {
   text-align: center;
   margin-top: 25px;
