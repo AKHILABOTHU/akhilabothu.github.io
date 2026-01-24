@@ -1,5 +1,5 @@
 <template>
-  <div class="kids-theme-container" @click="handleInteraction" @touchstart="handleInteraction" @scroll.passive="handleInteraction">
+  <div class="kids-theme-container">
     <!-- Background Moving Elements -->
     <div class="bg-pattern"></div>
     
@@ -48,6 +48,33 @@
           <div class="confetti-rain">
             <div v-for="n in 20" :key="'confetti'+n" class="confetti-piece" :style="confettiStyle(n)"></div>
           </div>
+
+          <!-- Celestial System -->
+          <div class="celestial-system">
+            <div class="sun">☀️</div>
+            <div class="orbit-earth">
+              <div class="earth-container">
+                <span class="earth">🌍</span>
+                <div class="orbit-moon">
+                  <div class="moon full-moon"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Trip Text Below Cake -->
+          <div class="trip-text-container">
+            <p class="trip-text">"First trip around the sun"</p>
+          </div>
+
+          <!-- Left Side Space Elements -->
+          <div class="left-space-elements">
+            <div class="planet-ringed">
+              <div class="ring"></div>
+            </div>
+            <div class="astronaut-mini">🧑‍🚀</div>
+            <div class="rocket-mini">🚀</div>
+          </div>
         </div>
 
         <!-- Bottom 30%: Title & Invite -->
@@ -89,8 +116,13 @@
             </button>
           </div>
           
-          <div class="msg-scroll-area custom-scroll">
+          <div ref="msgScrollRef" class="msg-scroll-area custom-scroll" @scroll="checkScroll">
              <p class="sweet-msg" style="white-space: pre-wrap;">{{ messages[currentLang] }}</p>
+          </div>
+
+          <div v-if="reachedBottom" class="next-hint" @click="scrollToNext">
+            <small>Next</small>
+            <i class="fas fa-chevron-down"></i>
           </div>
         </div>
       </section>
@@ -145,9 +177,12 @@
              ></iframe>
           </div>
 
-          <div class="signature">
-             With Love, <br>
-             <span class="family-name">The Abothu Family</span>
+          <div class="signature-wrap">
+            <div class="heart-pulse">❤️</div>
+            <div class="signature">
+               With Love...
+               <h3 class="family-name">The Abothu Family</h3>
+            </div>
           </div>
         </div>
       </section>
@@ -166,11 +201,14 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch, nextTick } from 'vue'
 
 const currentLang = ref('telugu')
 const isPlaying = ref(false)
 const audioRef = ref(null)
+const manualPause = ref(false)
+const reachedBottom = ref(false)
+const msgScrollRef = ref(null)
 
 const messages = {
   english: `🧸✨ My First Birthday Invitation ✨🧸
@@ -183,7 +221,7 @@ With a little smile,
 I filled our home with light...
 With tiny steps,
 I changed my mom and dad's world 💕
-I did a lot of mischief 😄
+Along with that, I did a lot of mischief 😄
 
 In this year, I smiled a little,
 Cried a little,
@@ -203,22 +241,22 @@ Bless me,
 That would be the biggest gift I could receive 🎁✨
 
 Yours,
-Sending lots of love... 💕
+With Love... 💕
 Dhanvik Vijay Krishna Datta
 (s/o Abothu Akhil & Tejaswi)`,
   telugu: `🧸✨ నా తొలి పుట్టినరోజు ఆహ్వానం ✨🧸
 
 అందరికీ నమస్కారం … 👶
-నేను మీ "ధన్విక్ విజయ్ కృష్ణ దత్త", ఈ బుధవారం అనగా జనవరి 28, 2026 నా మొదటి పుట్టిన రోజు  మీ అందరికీ ఇదే నా ఆహ్వానం. 
+నేను మీ "ధన్విక్ విజయ్ కృష్ణ దత్త" ను , ఈ బుధవారం అనగా జనవరి 28, 2026 నా మొదటి పుట్టిన రోజు,  మీ అందరికీ ఇదే నా ఆహ్వానం. 
 
 ఈ ఒక సంవత్సరంలో
 ఒక చిన్న చిరునవ్వుతో
-మా ఇంటిని  మొత్తం వెలుగులతో  నింపాను…
+మా ఇంటిని  మొತ್ತం వెలుగులతో  నింపాను…
 చిన్న అడుగులతో
-నా అమ్మా నాన్నల ప్రపంచాన్ని మార్చేశాను 💕
+నా అమ్మా నాన్నల ప్రపంచాన్ని మార్చేశాను 💕 దానితో పాటు 
 చాలా అల్లరి చేసాను 😄
 
-ఈ సంవత్సర కలం లో నేను చిన్నగా నవ్వాను,
+ఈ సంవత్సర కాలం  లో నేను చిన్నగా నవ్వాను,
 చిన్నగా ఏడ్చాను,
 కానీ ప్రతి రోజు
 నా చుట్టూ ఉన్న ప్రేమను
@@ -228,7 +266,7 @@ Dhanvik Vijay Krishna Datta
 మా కుటుంబానికి  ఒక మధురమైన జ్ఞాపకంగా మార్చాను. 
 
 
-ఈ మధురమైన ప్రయాణంలో
+ఈ మధురమైన ప్రಯಾಣంలో
 నా తొలి పుట్టినరోజు ఒక ప్రత్యేకమైన రోజు 🎂
 ఈ రోజును
 మీ అందరితో కలిసి జరుపుకోవాలని ఉంది 💙
@@ -238,54 +276,26 @@ Dhanvik Vijay Krishna Datta
 అదే నాకు దొరికే అతి పెద్ద గిఫ్ట్ 🎁✨
 
 ఇట్లు 
-పెద్ద ప్రేమ పంపుతూ… 💕
+ప్రేమతో … 💕
 మీ ధన్విక్ విజయ్ కృష్ణ దత్త 
-(s/o ఆబోతు అఖిల్ & తేజస్వి)`,
-  hindi: `🧸✨ मेरे पहले जन्मदिन का निमंत्रण ✨🧸
-
-सभी को नमस्कार... 👶
-मैं आपका "धन्विक विजय कृष्ण दत्त" हूँ। इस बुधवार, 28 जनवरी, 2026 को मेरा पहला जन्मदिन है। आप सभी को मेरा यह निमंत्रण है।
-
-इस एक साल में
-एक छोटी सी मुस्कान के साथ
-मैंने हमारे घर को रोशनी से भर दिया...
-छोटे-छोटे कदमों से
-मैंने अपने मम्मी और पापा की दुनिया बदल दी 💕
-मैंने बहुत शरारतें कीं 😄
-
-इस साल में मैं थोड़ा मुस्कुराया,
-थोड़ा रोया,
-लेकिन हर दिन
-मैंने अपने आस-पास के प्यार को
-पूरे दिल से महसूस किया 💕
-
-मैंने अपनी हर छोटी उपलब्धि को
-मेरे परिवार के लिए एक प्यारी याद बना दिया।
-
-इस खूबसूरत सफर में
-मेरा पहला जन्मदिन एक खास दिन है 🎂
-मैं इस दिन को
-आप सभी के साथ मिलकर मनाना चाहता हूँ 💙
-
-कृपया आप आएं और
-मुझे आशीर्वाद दें,
-यही मुझे मिलने वाला सबसे बड़ा उपहार होगा 🎁✨
-
-आपका,
-बहुत सारा प्यार भेजते हुए... 💕
-धन्विक विजय कृष्ण दत्त
-(सुपुत्र: आबोतु अखिल और तेजस्वी)`
+(s/o ఆబోతు అಖిల్ & తేజస్వి)`
 }
 
-const toggleMusic = () => {
+const toggleMusic = (event) => {
+  if (event) event.stopPropagation()
   if (!audioRef.value) return
+  
   if (isPlaying.value) {
     audioRef.value.pause()
+    isPlaying.value = false
+    manualPause.value = true // User explicitly paused
   } else {
-    audioRef.value.volume = 0.3
-    audioRef.value.play().catch(e => console.log("Blocked:", e))
+    audioRef.value.volume = 0.5
+    audioRef.value.play().then(() => {
+      isPlaying.value = true
+      manualPause.value = false // User explicitly played
+    }).catch(e => console.log("Blocked:", e))
   }
-  isPlaying.value = !isPlaying.value
 }
 
 const flagStyle = (n) => {
@@ -306,43 +316,80 @@ const confettiStyle = (n) => {
   }
 }
 
-const handleInteraction = () => {
-  const audio = audioRef.value
-  if (audio && !isPlaying.value) {
-    audio.play().then(() => {
-      isPlaying.value = true
-    }).catch(() => {})
+const checkScroll = () => {
+  const el = msgScrollRef.value
+  if (!el) return
+  
+  // If content is not scrollable, it's already at bottom
+  if (el.scrollHeight <= el.clientHeight + 20) {
+    reachedBottom.value = true
+    return
+  }
+
+  // Check if scrolled to bottom with 20px tolerance
+  const isBottom = el.scrollHeight - el.scrollTop <= el.clientHeight + 20
+  if (isBottom) {
+    reachedBottom.value = true
   }
 }
 
+// Reset scroll check when language changes
+watch(currentLang, () => {
+  reachedBottom.value = false
+  nextTick(() => {
+    if (msgScrollRef.value) {
+      msgScrollRef.value.scrollTop = 0
+      checkScroll()
+    }
+  })
+})
+
 onMounted(() => {
+  // Check initial scroll state
+  nextTick(() => {
+    checkScroll()
+  })
+
   const audio = audioRef.value
   if (!audio) return
 
   audio.volume = 0.5
   
-  // Attempt immediate play
+  // 1. Attempt immediate play
   audio.play().then(() => {
     isPlaying.value = true
   }).catch(() => {
     // Expected to fail on most browsers without interaction
+    console.log("Autoplay waiting for interaction")
   })
 
-  // Add global capture listeners for any interaction
+  // 2. Add global capture listeners for any FIRST interaction to start audio
   const events = ['click', 'touchstart', 'scroll', 'keydown', 'mousedown', 'pointerdown']
   
   const unlockAudio = () => {
-    if (!isPlaying.value) {
-      audio.play().then(() => {
+    // Only try interactions if user hasn't manually paused
+    if (manualPause.value) return
+
+    if (audio.paused && !isPlaying.value) {
+       audio.play().then(() => {
         isPlaying.value = true
         // Cleanup once playing
         events.forEach(e => document.removeEventListener(e, unlockAudio, true))
       }).catch(() => {})
+    } else if (isPlaying.value) {
+       // Already playing, cleanup
+       events.forEach(e => document.removeEventListener(e, unlockAudio, true))
     }
   }
 
   events.forEach(e => document.addEventListener(e, unlockAudio, true))
 })
+
+const scrollToNext = () => {
+  const container = document.querySelector('.cards-scroll-snap')
+  const height = window.innerHeight
+  container.scrollBy({ top: height, behavior: 'smooth' })
+}
 </script>
 
 <style scoped>
@@ -554,17 +601,25 @@ onMounted(() => {
 .card-box {
   width: 90%; max-width: 400px;
   background: white; border-radius: 20px;
-  padding: 20px;
+  padding: 20px 20px 50px 20px; /* Extra bottom padding for next button */
   box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
   position: relative;
-  max-height: 80vh; display: flex; flex-direction: column;
+  max-height: 85vh; 
+  display: flex; flex-direction: column;
+  overflow: visible;
+}
+.details-box {
+  height: auto;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding-bottom: 20px;
 }
 .playful-border { border: 4px dashed #FF6B6B; }
 .sticker-decor { position: absolute; font-size: 2.5rem; }
 .top-right { top: -20px; right: -20px; transform: rotate(15deg); }
 .bottom-left { bottom: -20px; left: -20px; transform: rotate(-15deg); }
 
-.lang-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+.lang-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; flex-shrink: 0; }
 .lang-tabs button {
   background: #f0f0f0; border: none; padding: 8px 15px; border-radius: 20px;
   font-family: 'Fredoka', sans-serif; font-weight: bold; color: #777;
@@ -572,7 +627,12 @@ onMounted(() => {
 }
 .lang-tabs button.active { background: #4ECDC4; color: white; transform: scale(1.05); }
 
-.msg-scroll-area { overflow-y: auto; text-align: center; }
+.msg-scroll-area { 
+  overflow-y: auto; 
+  text-align: center; 
+  flex: 1; /* Take all remaining space */
+  padding: 0 5px;
+}
 .sweet-msg {
   font-family: 'Nunito', sans-serif; font-size: 1.1rem; line-height: 1.6; color: #555;
 }
@@ -587,12 +647,68 @@ onMounted(() => {
 .fun-item.full { grid-column: span 2; }
 .fun-icon { font-size: 2rem; margin-bottom: 5px; }
 .item-text label { display: block; font-size: 0.7rem; color: #999; text-transform: uppercase; font-weight: bold; }
-.item-text strong { display: block; font-size: 1rem; color: #333; font-family: 'Fredoka', sans-serif; }
-.item-text span { font-size: 0.8rem; color: #777; }
+.item-text strong { display: block; font-size: 1rem; color: #333; font-family: 'Fredoka', sans-serif; margin-bottom: 3px; }
+.item-text span { 
+  display: block; 
+  font-size: 0.85rem; 
+  color: #777; 
+  line-height: 1.4;
+}
 
 .map-rounded { border-radius: 20px; overflow: hidden; border: 4px solid #FFD93D; margin-bottom: 15px; }
-.signature { text-align: center; color: #777; font-size: 0.9rem; }
-.family-name { font-family: 'Chewy', cursive; font-size: 1.5rem; color: #FF9F1C; }
+.signature-wrap {
+  text-align: center;
+  margin-top: 25px;
+  position: relative;
+  padding: 15px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+.heart-pulse {
+  font-size: 1.5rem;
+  animation: heartBeat 1.5s infinite;
+  margin-bottom: 5px;
+}
+.signature {
+  color: #888;
+  font-size: 0.9rem;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+}
+.family-name {
+  font-family: 'Chewy', cursive;
+  font-size: 1.8rem;
+  color: #FF9F1C;
+  margin: 5px 0 0 0;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.05);
+}
+
+@keyframes heartBeat {
+  0% { transform: scale(1); }
+  14% { transform: scale(1.3); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.3); }
+  70% { transform: scale(1); }
+}
+
+.next-hint {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: #FF6B6B;
+  cursor: pointer;
+  animation: bounceHint 2s infinite;
+  z-index: 10;
+  width: 100%;
+}
+.next-hint small { display: block; font-size: 0.7rem; font-weight: bold; }
+@keyframes bounceHint { 
+  0%, 100% { transform: translateX(-50%) translateY(0); } 
+  50% { transform: translateX(-50%) translateY(5px); } 
+}
 
 /* MUSIC BTN */
 .music-btn {
@@ -610,6 +726,147 @@ onMounted(() => {
 @media (max-width: 400px) {
   .kid-name-pop { font-size: 3rem; }
   .heading-pop { font-size: 1.5rem; }
+}
+
+/* Celestial System Styles */
+.celestial-system {
+  position: absolute;
+  top: 60px;
+  right: 50px;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+}
+.sun {
+  font-size: 2.5rem;
+  z-index: 2;
+  filter: drop-shadow(0 0 10px rgba(255, 200, 0, 0.5));
+}
+.orbit-earth {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border: 1px dashed rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  animation: rotateClockwise 20s linear infinite;
+}
+.earth-container {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.earth {
+  font-size: 1.2rem;
+}
+.orbit-moon {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border: 1px dashed rgba(0, 0, 0, 0.05);
+  border-radius: 50%;
+  animation: rotateClockwise 5s linear infinite;
+}
+.moon.full-moon {
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  background: #f1f5f9;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #fff, inset -2px -2px 0 rgba(0,0,0,0.1);
+  font-size: 0; /* Remove text space */
+}
+
+@keyframes rotateClockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Trip Text Styles */
+.trip-text-container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 10;
+}
+.trip-text {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1rem;
+  color: #FF9F1C;
+  font-weight: bold;
+  font-style: italic;
+  margin: 0;
+  text-shadow: 1px 1px 0 rgba(255,255,255,0.8);
+}
+
+/* Left Space Elements Styles */
+.left-space-elements {
+  position: absolute;
+  top: 40px;
+  left: 20px;
+  width: 150px;
+  height: 250px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.planet-ringed {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  width: 50px;
+  height: 50px;
+  background: radial-gradient(circle at 30% 30%, #a78bfa, #7c3aed);
+  border-radius: 50%;
+  animation: floatHand 6s ease-in-out infinite;
+}
+.planet-ringed .ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80px;
+  height: 20px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) rotate(-20deg);
+}
+
+.astronaut-mini {
+  position: absolute;
+  top: 100px;
+  left: 40px;
+  font-size: 2.5rem;
+  animation: floatHand 5s ease-in-out infinite alternate;
+}
+
+.rocket-mini {
+  position: absolute;
+  top: 180px;
+  left: 0;
+  font-size: 3rem;
+  transform: rotate(-45deg);
+  animation: rocketPulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes floatHand {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(10deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+@keyframes rocketPulse {
+  0% { transform: translate(0, 0) rotate(-45deg); }
+  100% { transform: translate(10px, -10px) rotate(-40deg); }
 }
 
 /* Add styling for the new calendar sheet icon */
