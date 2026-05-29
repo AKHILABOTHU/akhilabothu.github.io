@@ -32,7 +32,7 @@
     },
     {
       "name": "Microservices",
-      "percentage": 60,
+      "percentage": 20,
       "bgColor": "bg-info",
       "textColor": "text-info"
     }
@@ -83,7 +83,7 @@
       "company": "Capgemini Technology Services India Ltd",
       "client": "General Electric Corporate",
       "project": "WAM",
-      "duration": "Oct 2023 – till date",
+      "duration": "Oct 2023 – Mar-2026",
       "location": "Hyderabad, India",
       "icon": "fas fa-laptop-code",
       "description": "Access management system to assign roles to GE users through approval workflows.",
@@ -96,11 +96,10 @@
       ],
       "technologies": [
         "Java",
-        "Spring Boot 4",
-        "Angular 8",
+        "Spring Boot 3",
+        "Angular 19",
         "SQL",
-        "Maven",
-        "Eclipse"
+        "Maven"
       ]
     },
     {
@@ -120,7 +119,7 @@
       ],
       "technologies": [
         "Java",
-        "Spring Boot 4",
+        "Spring Boot 2",
         "Angular 13",
         "SQL",
         "Maven",
@@ -170,7 +169,7 @@
       ],
       "technologies": [
         "Java",
-        "Spring Boot",
+        "Spring Boot 2",
         "React",
         "MySQL",
         "Maven",
@@ -198,7 +197,7 @@
         "Vue.js",
         "MySQL",
         "Maven",
-        "JWT",
+        "Spring MVC",
         "Tomcat"
       ]
     },
@@ -252,40 +251,6 @@
       "quote": "Akhil consistently demonstrated strong technical expertise in Java and full stack development, playing a key role in driving the Delivery Excellence initiative from start to end. Beyond his technical skills, he stood out for his initiative and leadership — delivering technical sessions to upskill teams and support junior members. He would be a true asset to any team.",
       "author": "Snehal Kalke, Ex-Manager at Capgemini",
       "linkedin": "https://www.linkedin.com/in/snehal-kalke/"
-    }
-  ],
-  "projects": [
-    {
-      "title": "E-Commerce Platform",
-      "category": "Full Stack Application",
-      "status": "Yet To Start",
-      "icon": "fas fa-shopping-cart",
-      "gradient": "linear-gradient(135deg, #667eea, #764ba2)",
-      "description": "A comprehensive e-commerce solution with advanced features like AI-powered recommendations, real-time inventory management, and secure payment processing.",
-      "technologies": [
-        "Java Spring Boot",
-        "Vue.js",
-        "MySQL",
-        "Redis",
-        "Stripe API",
-        "Docker"
-      ]
-    },
-    {
-      "title": "AI Chat Assistant",
-      "category": "AI/ML Project",
-      "status": "Yet To Start",
-      "icon": "fas fa-robot",
-      "gradient": "linear-gradient(135deg, #a55eea, #26d0ce)",
-      "description": "An intelligent chatbot powered by OpenAI GPT-3.5, capable of understanding context and providing human-like responses for customer support.",
-      "technologies": [
-        "Python",
-        "FastAPI",
-        "OpenAI API",
-        "React",
-        "PostgreSQL",
-        "WebSocket"
-      ]
     }
   ]
 }

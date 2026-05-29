@@ -72,41 +72,17 @@
 
           <!-- Buttons -->
           <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3 mb-5">
-            <!-- Download Resume Button (Modal Trigger) -->
-            <button type="button" class="btn btn-gradient px-4 py-3 rounded-pill" data-bs-toggle="modal"
-                data-bs-target="#resumeModal">
-              <i class="fas fa-download me-2"></i>
-              Download Resume
-            </button>
+            <!-- View Resume Button -->
+            <a :href="resumeHtml" target="_blank" class="btn btn-gradient px-4 py-3 rounded-pill">
+              <i class="fas fa-eye me-2"></i>
+              View Resume
+            </a>
 
             <!-- Connect Button -->
             <button @click="scrollToSection('contact')"
                 class="btn btn-outline-light px-4 py-3 rounded-pill">
               Let's Connect
             </button>
-          </div>
-
-          <!-- Resume Download Modal -->
-          <div class="modal fade" id="resumeModal" tabindex="-1" aria-labelledby="resumeModalLabel"
-              aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header border-0">
-                  <h5 class="modal-title text-light" id="resumeModalLabel">Choose Resume Format</h5>
-                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                      aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center">
-                  <p class="text-white-50 mb-4">Select a format to download:</p>
-                  <a :href="resumeHtml" target="_blank" class="btn btn-outline-primary me-3">
-                    <i class="fas fa-code me-2"></i> HTML
-                  </a>
-                  <a :href="resumePdf" download class="btn btn-outline-danger">
-                    <i class="fas fa-file-pdf me-2"></i> PDF
-                  </a>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -124,8 +100,7 @@ const props = defineProps({
   phone: String,
   profileSummary: String,
   profileImage: String,
-  resumeHtml: String,
-  resumePdf: String
+  resumeHtml: String
 })
 
 const emit = defineEmits(['scroll-to-section'])

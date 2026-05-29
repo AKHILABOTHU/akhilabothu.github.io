@@ -203,7 +203,6 @@ const firstName = computed(() => {
 })
 
 const resumeHtml = '/assets/pages/akhil_abothu.html'
-const resumePdf = '/assets/pages/akhil_abothu.pdf'
 </script>
 
 <template>
@@ -226,7 +225,6 @@ const resumePdf = '/assets/pages/akhil_abothu.pdf'
         :profile-summary="data.profileSummary"
         :profile-image="profileImage"
         :resume-html="resumeHtml"
-        :resume-pdf="resumePdf"
         @scroll-to-section="scrollToSection"
       />
       
