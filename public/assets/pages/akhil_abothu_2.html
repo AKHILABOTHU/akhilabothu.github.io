@@ -1,0 +1,567 @@
+<html lang="en-US" xml:lang="en-US">
+
+<head>
+	<title>Akhil Abothu - Consultant</title>
+	<link href="https://fonts.googleapis.com/css2?family=Carlito&display=swap" rel="stylesheet">
+
+	<style type="text/css">
+		* {
+			font-family: "Carlito", "Segoe UI", sans-serif;
+			font-size: 15px;
+			font-weight: normal;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+		}
+
+		#whole {
+			border: 0px solid #36532B;
+			width: 800px;
+		}
+
+		#resume {
+			font-family: "Carlito", "Segoe UI", sans-serif;
+			padding-top: 4px;
+			font-size: 24px;
+			font-weight: bold;
+		}
+
+
+		#name {
+			padding: 0px;
+			margin: 0px;
+		}
+
+		td {
+			padding: 0px;
+		}
+
+		th {
+			font-family: "Times New Roman", Times, serif;
+			font-weight: normal;
+			text-align: left;
+		}
+
+		.box {
+			border: 0px solid #284F31;
+			padding: 0px;
+			text-align: justify;
+		}
+
+		h3 {
+			font-family: "Times New Roman", Times, serif;
+			font-weight: normal;
+			font-size: 16px;
+			margin-bottom: 4px;
+			white-space: nowrap;
+		}
+
+		h4 {
+			font-family: "Times New Roman", Times, serif;
+			font-weight: normal;
+			margin-bottom: 4px;
+			margin-top: 8px;
+			margin-left: -17px;
+		}
+
+		.box p {
+			text-indent: 40px;
+		}
+
+		.box span {
+			padding: 0px 0px 0px 1px;
+			display: block;
+			margin-bottom: 4px;
+		}
+
+		.innert {
+			border: 0px solid gray;
+			width: 720px;
+			padding: 2px 0px 0px 2px;
+			font-size: 13px;
+		}
+
+		.innert th {
+			padding: 2px 8px 2px 8px;
+			font-size: 15px;
+		}
+
+		.innert td {
+			padding: 0px 8px;
+			line-height: 20px;
+			vertical-align: top;
+		}
+
+		.hls {
+			font-family: "Times New Roman", Times, serif;
+			font-weight: normal;
+		}
+
+		ul {
+			margin: 2px auto 0px auto;
+		}
+
+		li {
+			text-align: justify;
+			margin-bottom: 4px;
+		}
+
+		img {
+			position: relative;
+			top: 2px;
+		}
+
+		/* Additional rules to ensure consistent font throughout */
+		b,
+		strong {
+			font-family: "Times New Roman", Times, serif;
+			font-weight: bold;
+		}
+
+		u {
+			font-family: "Times New Roman", Times, serif;
+			font-weight: normal;
+		}
+
+		small {
+			font-family: "Times New Roman", Times, serif;
+			font-weight: normal;
+		}
+
+		/* Prevent line breaks in experience spans */
+		#experience-years,
+		#experience-years-summary {
+			display: inline;
+			white-space: nowrap;
+			font-weight: normal;
+		}
+
+		/* Ensure heading stays on one line */
+		h3 {
+			white-space: nowrap;
+		}
+
+		/* PDF Download Button */
+		#pdf-download-btn {
+			position: fixed;
+			top: 20px;
+			right: 20px;
+			background-color: #007bff;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			padding: 10px 15px;
+			cursor: pointer;
+			font-size: 14px;
+			z-index: 1000;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+		}
+
+		#pdf-download-btn:hover {
+			background-color: #0056b3;
+		}
+
+		/* Hide PDF button when printing */
+		@media print {
+			#pdf-download-btn {
+				display: none !important;
+			}
+		}
+
+		/* Contact links styling */
+		.contact-link {
+			color: #007bff;
+			text-decoration: none;
+			font-weight: normal;
+		}
+
+		.contact-link:hover {
+			text-decoration: underline;
+		}
+
+		/* Ensure normal font weight for all text elements */
+		li,
+		p,
+		td,
+		span {
+			font-weight: normal;
+		}
+
+		/* Enhanced Print-specific styles for better PDF rendering */
+		@media print {
+			* {
+				font-family: "Times New Roman", Times, serif !important;
+				font-weight: normal !important;
+				-webkit-print-color-adjust: exact !important;
+				color-adjust: exact !important;
+				print-color-adjust: exact !important;
+				text-rendering: optimizeLegibility !important;
+				-webkit-font-smoothing: subpixel-antialiased !important;
+				-moz-osx-font-smoothing: auto !important;
+			}
+
+			/* Specific fixes for thin characters */
+			body,
+			td,
+			li,
+			p,
+			span {
+				font-family: "Times New Roman", Times, serif !important;
+				font-weight: 400 !important;
+				letter-spacing: 0.02em !important;
+			}
+
+			/* Bold elements should remain bold */
+			b,
+			strong,
+			#resume {
+				font-weight: 700 !important;
+			}
+
+			/* Ensure links are preserved and clickable in PDF */
+			.contact-link {
+				color: #007bff !important;
+				text-decoration: underline !important;
+				cursor: pointer !important;
+			}
+
+			a,
+			a:link,
+			a:visited {
+				color: #007bff !important;
+				text-decoration: underline !important;
+				cursor: pointer !important;
+				page-break-inside: avoid !important;
+			}
+
+			a[href^="tel:"],
+			a[href^="mailto:"],
+			a[href^="http"],
+			a[href^="https:"] {
+				color: #007bff !important;
+				text-decoration: underline !important;
+				cursor: pointer !important;
+				display: inline !important;
+			}
+
+			/* Improve character spacing for better readability */
+			li,
+			td,
+			p {
+				letter-spacing: 0.01em !important;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<button id="pdf-download-btn" onclick="downloadPDF()">Download as PDF</button>
+	<table id="whole" align="center" cellspacing="11px">
+		<tr>
+			<td id="resume">AKHIL ABOTHU <small>(Consultant at Capgemini)</small><br>
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">
+				<table id="name" cellspacing="0" width="100%">
+					<tr>
+						<td valign="top">
+							<a href="tel:+919573328125" class="contact-link">+91 9573328125</a> ||
+							<a href="mailto:akhilabothu@gmail.com" class="contact-link">akhilabothu@gmail.com</a> ||
+							<a href="https://www.linkedin.com/in/akhil-abothu/" class="contact-link">LinkedIn
+								Profile</a> ||
+							<a href="https://github.com/AKHILABOTHU" class="contact-link">GitHub Profile</a> ||
+							<a href="https://akhilabothu.github.io" class="contact-link">Portfolio</a>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		</tr>
+		<tr>
+			<td valign="top">
+				<table id="name" cellspacing="0" width="100%">
+					<tr>
+						<td valign="top">
+							2017 B.Tech graduate in CSE , from Sai Spurthi Institute Of Technology (JNTU Hyderabad,
+							TS)<br>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td class="box">
+				<h3><b>Professional Summary (<span id="experience-years"></span> years experience)</b></h3>
+				<ul type="square">
+					<li>Senior Full Stack Developer with <b><span id="experience-years-summary"></span> years of
+							experience</b> in designing, developing, and maintaining <b>scalable enterprise
+							applications</b> using <b>Java, J2EE, Spring Boot, and Spring MVC</b>.</li>
+					<li>Strong expertise in building <b>RESTful APIs and microservices-based architectures</b>, with
+						hands-on experience in modern frontend technologies including <b>React, Angular, and
+							Vue.js</b>.</li>
+					<li>Proficient in working within <b>Agile (Scrum) environments</b>, contributing across the full
+						software development lifecycle including <b>UI development, backend services, deployment, and
+							production support</b>.</li>
+					<li>Experience in application deployment and management using <b>JBoss (WildFly) and Apache
+							Tomcat</b>, with a focus on performance, reliability, and maintainability.</li>
+					<li>Demonstrated ability to <b>lead knowledge-sharing sessions, conduct technical workshops</b>,
+						and collaborate effectively within cross-functional teams.</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td class="box">
+				<h3><b>Technical Skills</b></h3>
+				<span>
+					<table cellspacing="0" class="innert">
+						<tr>
+							<td>
+								<u>Programming Languages</u>: Java<br />
+								<u>Frontend Technologies</u>: HTML5, CSS3, Bootstrap, JavaScript, JSON<br />
+								<u>Frontend Frameworks</u>: Angular, React, Vue.js<br />
+								<u>Backend Technologies</u>: Java (J2EE), Servlets, JSP<br />
+								<u>Backend Frameworks</u>: Spring Boot, Spring MVC, Hibernate<br />
+								<u>API & Architecture</u>: RESTful APIs, Microservices Architecture, JWT
+								Authentication<br />
+								<u>Databases</u>: MySQL<br />
+								<u>Cloud & Infrastructure</u>: AWS EC2, Azure Blob Storage<br />
+								<u>DevOps & Tools</u>: Maven, Jenkins, Git, Postman<br />
+								<u>Application Servers</u>: Apache Tomcat, JBoss (WildFly)<br />
+								<u>Development Tools / IDEs</u>: IntelliJ IDEA, Eclipse, Visual Studio Code<br />
+								<u>Operating Systems</u>: Linux, Windows<br />
+								<u>Code Quality & Security Tools</u>: Checkmarx<br />
+								<u>AI Tools & Productivity</u>: GitHub Copilot, Cursor<br />
+								<u>Other Skills</u>: Agile (Scrum), CI/CD, Production Support
+							</td>
+						</tr>
+					</table>
+				</span>
+			</td>
+		</tr>
+		<tr>
+			<td class="box">
+				<h3><b>Professional Experience</b></h3>
+				<ul type="square">
+					<h4><b>Capgemini – Consultant</b> (Apr 2021 – Present)</h4>
+					<li style="margin-left: 15px;">
+						<b class='hls'><b>Delivery Excellence SPOC</b> (AI Tools, Automation, Process Improvement)</b>
+						<ul type='disc'>
+							<li>Acted as the <b>Single Point of Contact (SPOC)</b> for the Delivery Excellence team
+								across the entire account tower</li>
+							<li>Evaluated and spearheaded the implementation of new <b>productivity and AI tools</b>
+								across my account and other accounts</li>
+							<li>Calculated efficiency benefits, generated adoption metrics, and presented insights to
+								higher management to drive continuous improvement</li>
+						</ul>
+					</li>
+					<h4><b>Client:</b> Subaru</h4>
+					<li style="margin-left: 15px;">
+						<b class='hls'><b>Accessibility Support</b> (May 2026 – Present | Spring Boot, React)</b>
+						<ul type='disc'>
+							<li>Working on <b>React</b> to fix accessibility issues to support <b>ADA</b> compliance.
+							</li>
+							<li>Working on migrating the legacy application from <b>Struts</b> to <b>Spring Boot</b>.
+							</li>
+						</ul>
+					</li>
+					<h4><b>Client:</b> General Electric (GE Aerospace & GE Vernova)</h4>
+					<li style="margin-left: 15px;">
+						<b class='hls'><b>WAM – Access Management System (GE Aerospace)</b> (Jan 2024 – May 2026 |
+							Java, Spring Boot, Angular, Node.js, MySQL, AWS EC2)</b>
+						<ul type='disc'>
+							<li>Designed and enhanced a <b>Role-Based Access Control (RBAC)</b> platform supporting
+								with multi-level approval workflows
+							</li>
+							<li>Led large-scale <b>Angular migration (v9 → v19)</b> using an incremental upgrade
+								strategy, achieving <b>zero production downtime</b></li>
+							<li>Upgraded <b>Spring Boot (2.6 → 3.x)</b> and <b>Node.js (16 → 22)</b>, improving
+								security compliance and application performance</li>
+							<li>Developed and optimized <b>RESTful APIs</b>, reducing approval workflow latency
+								through efficient backend query design</li>
+							<li>Drove <b>end-to-end delivery</b> from requirement analysis to UAT sign-off in an
+								Agile environment</li>
+							<li>Managed application deployments and hosting utilizing <b>AWS EC2</b> instances to ensure
+								scalable and reliable infrastructure</li>
+							<li>Leveraged <b>GitHub Copilot</b> for AI-assisted code generation, speeding up development
+								and improving code quality across Angular and Spring Boot components</li>
+							<li>Conducted <b>Knowledge Transfer (KT) sessions</b> for the <b>TCS team</b> as part of
+								vendor transition, ensuring smooth handover of the GE Aerospace application</li>
+						</ul>
+					</li>
+					<li style="margin-left: 15px;">
+						<b class='hls'><b>WAM – GE Vernova Migration</b> (Oct 2023 – Jan 2024 | Java, Spring Boot,
+							Angular, MySQL)</b>
+						<ul type='disc'>
+							<li>Led <b>application fork and enterprise re-platforming</b> for GE Vernova following
+								corporate split</li>
+							<li>Executed <b>data migration and cleanup</b>, aligning legacy GE data with new
+								organizational structures</li>
+							<li>Implemented <b>workflow and approval hierarchy changes</b> specific to Vernova
+								business processes</li>
+							<li>Delivered production rollout with <b>zero critical post-release defects</b></li>
+							<li>Conducted <b>Knowledge Transfer (KT) sessions</b> for the <b>Infosys team</b> as part of
+								vendor transition, ensuring smooth handover of the GE Vernova application</li>
+						</ul>
+					</li>
+					<li style="margin-left: 15px;">
+						<b class='hls'><b>Travel & Fleet Applications</b> (May 2022 – Oct 2023 | Java, Spring Boot,
+							Angular, MySQL, Azure Blob)</b>
+						<ul type='disc'>
+							<li>Led a <b>module-level team</b>, managing task distribution, code reviews, and sprint
+								deliveries</li>
+							<li>Built <b>scalable backend APIs and UI modules</b> supporting global workforce
+								operations</li>
+							<li>Transformed business requirements into <b>modular, deployable components</b></li>
+							<li>Integrated <b>Azure Blob Storage</b> for efficient and secure management of application
+								documents and attachments</li>
+							<li>Provided <b>production support and system monitoring</b> ensuring high availability
+							</li>
+						</ul>
+					</li>
+					<li style="margin-left: 15px;">
+						<b class='hls'><b>GPIT – Global Payroll Input Tool</b> (Jan 2022 – May 2022 | Java, Spring
+							MVC, Maven, WildFly)</b>
+						<ul type='disc'>
+							<li>Developed backend architecture using <b>Spring MVC layered design</b></li>
+							<li>Migrated build system from <b>Ant → Maven</b>, improving dependency management</li>
+							<li>Modernized legacy system by converting <b>XML configs to annotation-based
+									configuration</b></li>
+							<li>Integrated external payroll APIs and resolved <b>security vulnerabilities
+									(Checkmarx)</b></li>
+						</ul>
+					</li>
+					<li style="margin-left: 15px;">
+						<b class='hls'><b>CATBILL – Corporate Air Transport Billing System</b> (Apr 2021 – Jan 2022 |
+							Java, Spring Boot, React, MySQL)</b>
+						<ul type='disc'>
+							<li>Led <b>full-stack modernization</b> from Spring MVC + JSP to <b>Spring Boot +
+									React</b></li>
+							<li>Designed backend services and dynamic UI for <b>billing dashboards and reporting</b>
+							</li>
+							<li>Owned <b>end-to-end delivery</b>, including deployment and post-production support
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul type="square">
+					<h4><b>GV Soft Solutions Pvt Ltd</b> – Associate Software Developer (Jun 2018 – Feb 2021)</h4>
+					<li style="margin-left: 15px;">
+						<b class='hls'><b>COCO – Competitions & Collaborations</b> (Java, Spring MVC, Vue.js, MySQL,
+							JWT)</b>
+						<ul type='disc'>
+							<li>Developed <b>REST APIs with JWT authentication</b> and role-based access control</li>
+							<li>Implemented <b>OAuth2 social login integrations</b> (Google, Facebook, LinkedIn)</li>
+							<li>Built reusable <b>Vue.js components</b> and responsive UI</li>
+							<li>Maintained production systems with high availability</li>
+						</ul>
+					</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td class="box">
+				<h3 style="margin-left: 0px;"><b>Achievements</b></h3>
+				<ul type="square">
+					<li>Awarded <b>Capgemini XtraMile Award (2022)</b> for outstanding performance and contribution to
+						enterprise project delivery</li>
+					<li>Recognized for leading <b>critical system migrations and zero-downtime upgrades</b> in
+						production environments</li>
+				</ul>
+				<h4 style="margin-left: 0px;"><b>Certifications</b></h4>
+				<ul type="square">
+					<li><b>AWS Certified Cloud Practitioner</b> (Validation ID: BZQV9C31X2111JWZ)</li>
+					<li><b>Microsoft Azure Fundamentals (AZ-900)</b> (Certification ID: H985-9302)</li>
+					<li><b>Microsoft Technology Associate – Database Fundamentals</b> (Certification ID: F604-7349)
+					</li>
+					<li><b>Cisco Networking Academy – IT Essentials</b></li>
+				</ul>
+				<h4 style="margin-left: 0px;"><b>Additional Activities</b></h4>
+				<ul type="square">
+					<li>Conducted <b>technical workshop on Python programming (3-day session)</b></li>
+					<li>Experience in <b>event organization and coordination</b> during academic tenure</li>
+				</ul>
+			</td>
+		</tr>
+	</table>
+
+	<script>
+		// Calculate experience dynamically
+		function calculateExperience() {
+			const startDate = new Date('2018-06-18'); // Start date: 13-10-2017
+			const currentDate = new Date();
+
+			let years = currentDate.getFullYear() - startDate.getFullYear();
+			let months = currentDate.getMonth() - startDate.getMonth();
+
+			if (months < 0) {
+				years--;
+				months += 12;
+			}
+
+			// Calculate total experience in decimal format
+			const totalExperience = years + (months / 12);
+			const formattedExperience = totalExperience.toFixed(1);
+
+			// Update the experience in multiple places
+			document.getElementById('experience-years').textContent = formattedExperience;
+			document.getElementById('experience-years-summary').textContent = formattedExperience;
+		}
+		// Download as PDF function - Fixed to be globally accessible
+		window.downloadPDF = function () {
+			try {
+				// Hide the PDF button temporarily
+				const pdfButton = document.getElementById('pdf-download-btn');
+				if (pdfButton) {
+					pdfButton.style.display = 'none';
+				}
+
+				// Create a more comprehensive print instruction
+				const printInstructions = `
+For best results when saving as PDF:
+1. Use Chrome or Edge browser
+2. Press Ctrl+P (or Cmd+P on Mac)
+3. Select "Save as PDF" as destination
+4. Set margins to "Minimum"
+5. Make sure "Background graphics" is checked
+6. Click "More settings" and ensure "Headers and footers" is unchecked
+7. Click "Save"
+
+This will preserve all links as clickable in the PDF.
+				`;
+
+				// Show instructions
+				alert(printInstructions.trim())
+
+
+				// Add a small delay to ensure styles are applied
+				setTimeout(() => {
+					// Use browser's print functionality
+					// For better link preservation, use Chrome/Edge with "Save as PDF" option
+					window.print();
+
+					// Show the button again after printing
+					setTimeout(() => {
+						if (pdfButton) {
+							pdfButton.style.display = 'block';
+						}
+					}, 1000);
+				}, 100);
+			} catch (error) {
+				console.error('Error in downloadPDF:', error);
+				alert('There was an error generating the PDF. Please try again.');
+			}
+		};
+
+		// Make downloadPDF available globally
+		function downloadPDF() {
+			window.downloadPDF();
+		}
+
+		// Calculate experience when page loads
+		window.onload = function () {
+			calculateExperience();
+		};
+	</script>
+</body>
+
+</html>

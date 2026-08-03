@@ -196,33 +196,10 @@
         "Java",
         "Vue.js",
         "MySQL",
+        "Hibernate",
         "Maven",
         "Spring MVC",
         "Tomcat"
-      ]
-    },
-    {
-      "position": "Trainee Software Developer",
-      "company": "Wevio India Info Solutions Pvt Ltd",
-      "client": "Internal",
-      "project": "MyCube",
-      "duration": "Oct 2017 – May 2018",
-      "location": "Hyderabad, India",
-      "icon": "fas fa-cube",
-      "description": "Customizable safe-selling platform with user-configurable product features and purchasing flow.",
-      "achievements": [
-        "Developed views using JSP, HTML, and Java Beans",
-        "Wrote Spring controllers and JPA-based DB logic",
-        "Coordinated production deployment and testing",
-        "Handled defect fixing and debugging in Dev env"
-      ],
-      "technologies": [
-        "Java",
-        "Spring",
-        "JSP",
-        "MySQL",
-        "Tomcat",
-        "Eclipse"
       ]
     }
   ],
