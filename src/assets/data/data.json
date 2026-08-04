@@ -32,7 +32,7 @@
     },
     {
       "name": "Microservices",
-      "percentage": 20,
+      "percentage": 60,
       "bgColor": "bg-info",
       "textColor": "text-info"
     }
