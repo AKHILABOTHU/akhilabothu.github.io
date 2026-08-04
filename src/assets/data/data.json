@@ -72,7 +72,7 @@
     },
     {
       "name": "Generative AI",
-      "percentage": 10,
+      "percentage": 40,
       "bgColor": "bg-danger",
       "textColor": "text-info"
     }
