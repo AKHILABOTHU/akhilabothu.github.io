@@ -88,6 +88,7 @@
       "icon": "fas fa-laptop-code",
       "description": "Access management system to assign roles to GE users through approval workflows.",
       "achievements": [
+        "Presented Long Service Award - 2026 for completing 5 years of dedicated service with Capgemini India",
         "Gathered and analyzed client requirements",
         "Estimated and modularized business tasks",
         "Developed using Spring Boot and Angular 8",
@@ -228,6 +229,20 @@
       "quote": "Akhil consistently demonstrated strong technical expertise in Java and full stack development, playing a key role in driving the Delivery Excellence initiative from start to end. Beyond his technical skills, he stood out for his initiative and leadership — delivering technical sessions to upskill teams and support junior members. He would be a true asset to any team.",
       "author": "Snehal Kalke, Ex-Manager at Capgemini",
       "linkedin": "https://www.linkedin.com/in/snehal-kalke/"
+    }
+  ],
+  "awards": [
+    {
+      "title": "Long Service Award - 2026",
+      "organization": "Capgemini India",
+      "year": "2026",
+      "description": "Presented in recognition of completing 5 years of dedicated and continued service with Capgemini India."
+    },
+    {
+      "title": "Capgemini XtraMile Award",
+      "organization": "Capgemini India",
+      "year": "2022",
+      "description": "Awarded for outstanding performance and contribution to enterprise project delivery."
     }
   ]
 }

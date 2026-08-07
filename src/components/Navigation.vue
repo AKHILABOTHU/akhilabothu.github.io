@@ -21,6 +21,9 @@
             <a class="nav-link" href="javascript:void(0)" @click.prevent="scrollTo('experience')">Experience</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="javascript:void(0)" @click.prevent="scrollTo('awards')">Awards</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="javascript:void(0)" @click.prevent="scrollTo('contact')">Contact</a>
           </li>
           <li class="nav-item">

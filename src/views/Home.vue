@@ -5,6 +5,7 @@ import Hero from '../components/Hero.vue'
 import About from '../components/About.vue'
 import Skills from '../components/Skills.vue'
 import Experience from '../components/Experience.vue'
+import Awards from '../components/Awards.vue'
 import Testimonials from '../components/Testimonials.vue'
 import Contact from '../components/Contact.vue'
 import Footer from '../components/Footer.vue'
@@ -246,6 +247,11 @@ const resumeHtml = '/assets/pages/akhil_abothu.html'
       <Experience
         :dark-mode="darkMode"
         :experiences="data.experiences"
+      />
+      
+      <Awards
+        :dark-mode="darkMode"
+        :awards="data.awards"
       />
       
       <Testimonials
