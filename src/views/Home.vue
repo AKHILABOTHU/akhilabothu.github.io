@@ -1,278 +1,85 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed } from 'vue'
 import Navigation from '../components/Navigation.vue'
 import Hero from '../components/Hero.vue'
 import About from '../components/About.vue'
 import Skills from '../components/Skills.vue'
 import Experience from '../components/Experience.vue'
 import Awards from '../components/Awards.vue'
+import Certifications from '../components/Certifications.vue'
 import Testimonials from '../components/Testimonials.vue'
 import Contact from '../components/Contact.vue'
 import Footer from '../components/Footer.vue'
-import Loader from '../components/Loader.vue'
 import profileImage from '../assets/images/me.jpg'
-import portfolioData from '../assets/data/data.json'
+import data from '../assets/data/data.json'
 
-const loading = ref(true)
-const darkMode = ref(false)
-const animateSkills = ref(false)
-const data = ref(portfolioData)
-
-// Initialize on mount
-onMounted(async () => {
-  try {
-    data.value = portfolioData
-    
-    // Remove hash from URL if present on page load
-    if (window.location.hash) {
-      const hash = window.location.hash.substring(1)
-      history.replaceState(null, '', window.location.pathname + window.location.search)
-      
-      // Scroll to the section after a short delay to ensure DOM is ready
-      setTimeout(() => {
-        const element = document.getElementById(hash)
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' })
-        }
-      }, 100)
-    }
-    
-    // Prevent hash routing on page navigation
-    window.addEventListener('hashchange', (e) => {
-      e.preventDefault()
-      const hash = window.location.hash.substring(1)
-      if (hash) {
-        history.replaceState(null, '', window.location.pathname + window.location.search)
-        const element = document.getElementById(hash)
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' })
-        }
-      }
-    })
-    
-    // Initialize dark mode based on preference
-    darkMode.value = window.matchMedia('(prefers-color-scheme: dark)').matches
-    
-    // Listen for dark mode preference changes
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-      darkMode.value = e.matches
-    })
-
-    // Initialize EmailJS
-    if (window.emailjs) {
-      window.emailjs.init("lmtctuRbX4cLaf5JL")
-    }
-
-    // Set up skills animation observer
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          animateSkills.value = true
-        }
-      })
-    })
-
-    setTimeout(() => {
-      const skillsSection = document.getElementById('skills')
-      if (skillsSection) {
-        observer.observe(skillsSection)
-      }
-      loading.value = false
-    }, 500)
-  } catch (error) {
-    console.error('Failed to initialize:', error)
-    loading.value = false
-  }
-})
+const darkMode = ref(document.documentElement.getAttribute('data-theme') === 'dark')
 
 const toggleDarkMode = () => {
   darkMode.value = !darkMode.value
-}
-
-const scrollToSection = (sectionId) => {
-  const element = document.getElementById(sectionId)
-  if (element) {
-    // Remove hash from URL first
-    if (window.location.hash) {
-      history.replaceState(null, '', window.location.pathname + window.location.search)
-    }
-    element.scrollIntoView({ behavior: 'smooth' })
-  }
-}
-
-// Detect if we're in development
-const isDevelopment = computed(() => {
-  return window.location.hostname === 'localhost' || 
-         window.location.hostname === '127.0.0.1' ||
-         window.location.hostname === ''
-})
-
-const sendMessage = async (formData) => {
-  // Skip reCAPTCHA validation in development, or validate if available
-  if (!isDevelopment.value) {
-    if (!window.grecaptcha) {
-      await Swal.fire({
-        icon: 'warning',
-        title: 'Please verify',
-        text: 'Please confirm you are not a robot.',
-        confirmButtonColor: '#f0ad4e'
-      })
-      return
-    }
-
-    try {
-      const recaptchaResponse = window.grecaptcha.getResponse()
-      if (!recaptchaResponse || recaptchaResponse === '') {
-        await Swal.fire({
-          icon: 'warning',
-          title: 'Please verify',
-          text: 'Please confirm you are not a robot.',
-          confirmButtonColor: '#f0ad4e'
-        })
-        return
-      }
-    } catch (error) {
-      console.warn('reCAPTCHA error:', error)
-      // Continue without validation if reCAPTCHA fails
-    }
-  }
-
-  const { name, email, subject, message } = formData
-
-  if (!name || !email || !subject || !message) {
-    await Swal.fire({
-      icon: 'warning',
-      title: 'All fields are required!',
-      text: 'Please fill out every field before submitting.',
-      confirmButtonColor: '#f0ad4e'
-    })
-    return
-  }
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  if (!emailRegex.test(email)) {
-    await Swal.fire({
-      icon: 'error',
-      title: 'Invalid Email',
-      text: 'Please enter a valid email address.',
-      confirmButtonColor: '#d33'
-    })
-    return
-  }
-
-  const templateParams = { name, email, subject, message }
-
+  const theme = darkMode.value ? 'dark' : 'light'
+  document.documentElement.setAttribute('data-theme', theme)
   try {
-    if (window.emailjs) {
-      await window.emailjs.send("service_mg3q0ne", "template_929eyue", templateParams)
-      await Swal.fire({
-        icon: 'success',
-        title: 'Message Sent!',
-        text: 'Thank you for reaching out. I will get back to you soon.',
-        confirmButtonColor: '#3085d6'
-      })
-      // Emit form reset to Contact component
-      const contactSection = document.getElementById('contact')
-      if (contactSection) {
-        const resetEvent = new CustomEvent('reset-form')
-        contactSection.dispatchEvent(resetEvent)
-      }
-    }
+    localStorage.setItem('theme', theme)
   } catch (error) {
-    console.error("EmailJS error:", error)
-    await Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: 'Something went wrong while sending the message.',
-      confirmButtonColor: '#d33'
-    })
+    // Storage can be blocked; the theme still applies for this visit
   }
 }
 
 const experienceYears = computed(() => {
-  if (!data.value) return 0
-  const startDate = new Date("2017-10-13")
-  const today = new Date()
-  const diffYears = today.getFullYear() - startDate.getFullYear()
-  const monthDiff = today.getMonth() - startDate.getMonth()
-  return monthDiff < 0 ? diffYears - 1 : diffYears
+  const msPerYear = 365.25 * 24 * 60 * 60 * 1000
+  return Math.floor((Date.now() - new Date(data.careerStart)) / msPerYear)
 })
 
-const firstName = computed(() => {
-  if (!data.value) return ''
-  return data.value.fullName.split(' ')[0]
-})
-
-const resumeHtml = '/assets/pages/akhil_abothu.html'
+const stats = computed(() => [
+  { value: `${experienceYears.value}+`, label: 'years of experience' },
+  ...data.stats
+])
 </script>
 
 <template>
-  <div :class="{ 'dark-theme': darkMode }">
-    <Loader :loading="loading" />
-    
-    <div v-if="data">
-      <Navigation 
-        :full-name="data.fullName" 
-        :dark-mode="darkMode"
-        @toggle-dark-mode="toggleDarkMode"
-        @scroll-to="scrollToSection"
-      />
-      
+  <div class="site">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <Navigation
+      :full-name="data.fullName"
+      :dark-mode="darkMode"
+      @toggle-dark-mode="toggleDarkMode"
+    />
+
+    <main id="main">
       <Hero
-        :first-name="firstName"
-        :location="data.location"
-        :email="data.email"
-        :phone="data.phone"
+        :roles="data.roles"
         :profile-summary="data.profileSummary"
+        :currently="data.currently"
+        :full-name="data.fullName"
         :profile-image="profileImage"
-        :resume-html="resumeHtml"
-        @scroll-to-section="scrollToSection"
+        :resume-url="data.resumeUrl"
+        :stats="stats"
       />
-      
       <About
-        :dark-mode="darkMode"
-        :experience-years="experienceYears"
-        :projects-completed="data.projectsCompleted"
-        :certifications-count="data.certificationsCount"
-        :role="data.role"
+        :story="data.story"
+        :principles="data.principles"
+        :journey="data.journey"
       />
-      
-      <Skills
-        :backend-skills="data.backendSkills"
-        :frontend-skills="data.frontendSkills"
-        :database-a-i-skills="data.databaseAISkills"
-        :animate-skills="animateSkills"
-      />
-      
+      <Skills :skills="data.skills" />
       <Experience
-        :dark-mode="darkMode"
-        :experiences="data.experiences"
+        :positions="data.positions"
+        :case-studies="data.caseStudies"
+        :more-work="data.moreWork"
+        :resume-url="data.resumeUrl"
       />
-      
-      <Awards
-        :dark-mode="darkMode"
-        :awards="data.awards"
-      />
-      
-      <Testimonials
-        :testimonials="data.testimonials"
-      />
-      
+      <Awards :awards="data.awards" />
+      <Certifications :certifications="data.certifications" />
+      <Testimonials :testimonials="data.testimonials" />
       <Contact
         :location="data.location"
         :email="data.email"
         :phone="data.phone"
-        @send-message="sendMessage"
+        :links="data.links"
       />
-      
-      <Footer
-        :dark-mode="darkMode"
-        :full-name="data.fullName"
-      />
-    </div>
+    </main>
+
+    <Footer :full-name="data.fullName" />
   </div>
 </template>
-
-<style scoped>
-/* Scoped styles if any, or general resets moved here */
-</style>

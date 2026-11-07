@@ -1,248 +1,367 @@
 {
-  "darkMode": true,
-  "animateSkills": false,
-  "skillRecommendation": "",
-  "currentRole": "Full Stack Developer",
   "fullName": "Akhil Abothu",
+  "currentRole": "Senior Full Stack Developer",
+  "roles": [
+    "Senior Full Stack Developer",
+    "AI Enthusiast"
+  ],
+  "profileSummary": "Passionate Full Stack Developer specializing in Java Spring Boot, Vue.js, and Generative AI. I love creating innovative solutions that make a difference.",
+  "currently": "Currently at SpruceInfoTech, working with Arch Mortgage Insurance Company through Infosys.",
   "location": "Telangana, India",
   "email": "abothuakhil@gmail.com",
   "phone": "+91 8919059351",
-  "projectsCompleted": 7,
-  "certificationsCount": 2,
-  "role": "Consultant",
-  "profileSummary": "Passionate Full Stack Developer specializing in Java Spring Boot, Vue.js, and Generative AI. I love creating innovative solutions that make a difference.",
-  "contactForm": {
-    "name": "",
-    "email": "",
-    "subject": "",
-    "message": ""
-  },
-  "backendSkills": [
+  "careerStart": "2018-06-18",
+  "resumeUrl": "/assets/pages/akhil_abothu.html",
+  "links": [
+    { "label": "LinkedIn", "url": "https://www.linkedin.com/in/akhil-abothu/" },
+    { "label": "GitHub", "url": "https://github.com/AKHILABOTHU/" },
+    { "label": "Instagram", "url": "https://www.instagram.com/developerdiarieshq/" }
+  ],
+  "stats": [
+    { "value": "7", "label": "projects delivered" },
+    { "value": "4", "label": "certifications" }
+  ],
+  "story": [
+    "Today I'm a Senior Full Stack Developer at SpruceInfoTech, working with Arch Mortgage Insurance Company as a subcontractor for Infosys.",
+    "In 2021 I joined Capgemini and moved into enterprise systems for General Electric and later Subaru, with much of the work focused on upgrading applications the business relies on. I also led a module team, ran knowledge transfers during vendor transitions, and was the Delivery Excellence point of contact for AI and productivity tools.",
+    "I started in 2018 at GV Soft Solutions, working across the whole stack on a competitions and collaboration platform: APIs, secure login, Vue.js interfaces and production support."
+  ],
+  "principles": [
     {
-      "name": "Java Spring Boot",
-      "percentage": 80,
-      "bgColor": "bg-danger",
-      "textColor": "text-success"
+      "title": "Upgrade in steps",
+      "text": "I prefer incremental migrations that keep the business running."
     },
     {
-      "name": "RESTful APIs",
-      "percentage": 85,
-      "bgColor": "bg-warning",
-      "textColor": "text-warning"
+      "title": "Own it through production",
+      "text": "I stay with the work from requirement analysis through UAT sign-off, deployment and production support."
     },
     {
-      "name": "Microservices",
-      "percentage": 60,
-      "bgColor": "bg-info",
-      "textColor": "text-info"
+      "title": "Leave the team stronger",
+      "text": "Technical sessions for junior developers and knowledge transfers for incoming teams, so progress doesn't depend on one person."
     }
   ],
-  "frontendSkills": [
+  "journey": [
     {
-      "name": "Vue.js",
-      "percentage": 70,
-      "bgColor": "bg-success",
-      "textColor": "text-success"
+      "year": "2017",
+      "title": "B.Tech in Computer Science",
+      "detail": "Sai Spurthi Institute of Technology, JNTU Hyderabad"
     },
     {
-      "name": "JavaScript/ES6+",
-      "percentage": 60,
-      "bgColor": "bg-warning",
-      "textColor": "text-warning"
+      "year": "2018",
+      "title": "First developer role",
+      "detail": "GV Soft Solutions"
     },
     {
-      "name": "HTML5/CSS3",
-      "percentage": 85,
-      "bgColor": "bg-primary",
-      "textColor": "text-primary"
+      "year": "2021",
+      "title": "Joined Capgemini",
+      "detail": "Enterprise work for General Electric"
     },
     {
-      "name": "Bootstrap",
-      "percentage": 70,
-      "bgColor": "bg-info",
-      "textColor": "text-info"
+      "year": "2023",
+      "title": "Worked on the GE split (Corporate, Aerospace, Vernova, Healthcare)",
+      "detail": "Fork, data migration and rollout"
+    },
+    {
+      "year": "Now",
+      "title": "Senior Full Stack Developer",
+      "detail": "SpruceInfoTech, for Arch Mortgage Insurance through Infosys"
     }
   ],
-  "databaseAISkills": [
+  "skills": [
     {
-      "name": "MySQL",
-      "percentage": 60,
-      "bgColor": "bg-primary",
-      "textColor": "text-primary"
-    },
-    {
-      "name": "Generative AI",
-      "percentage": 40,
-      "bgColor": "bg-danger",
-      "textColor": "text-info"
-    }
-  ],
-  "experiences": [
-    {
-      "position": "Consultant",
-      "company": "Capgemini Technology Services India Ltd",
-      "client": "General Electric Corporate",
-      "project": "WAM",
-      "duration": "Oct 2023 – Mar-2026",
-      "location": "Hyderabad, India",
-      "icon": "fas fa-laptop-code",
-      "description": "Access management system to assign roles to GE users through approval workflows.",
-      "achievements": [
-        "Presented Long Service Award - 2026 for completing 5 years of dedicated service with Capgemini India",
-        "Gathered and analyzed client requirements",
-        "Estimated and modularized business tasks",
-        "Developed using Spring Boot and Angular 8",
-        "Deployed on Tomcat, handled unit testing and UAT bugs",
-        "Managed code commits, releases, and coordination"
+      "group": "Back end",
+      "tools": [
+        { "name": "Java", "icon": "java/java-original" },
+        { "name": "Spring Boot", "icon": "spring/spring-original" },
+        { "name": "Hibernate", "icon": "hibernate/hibernate-original" },
+        { "name": "Node.js", "icon": "nodejs/nodejs-original" }
       ],
-      "technologies": [
+      "also": "REST APIs, microservices, JWT, OAuth2, role-based access control"
+    },
+    {
+      "group": "Front end",
+      "tools": [
+        { "name": "Angular", "icon": "angular/angular-original" },
+        { "name": "React", "icon": "react/react-original" },
+        { "name": "Vue.js", "icon": "vuejs/vuejs-original" },
+        { "name": "JavaScript", "icon": "javascript/javascript-original" }
+      ],
+      "also": "HTML5, CSS3, Bootstrap, accessibility fixes for ADA compliance"
+    },
+    {
+      "group": "Data and cloud",
+      "tools": [
+        { "name": "MySQL", "icon": "mysql/mysql-original" },
+        { "name": "AWS", "icon": "amazonwebservices/amazonwebservices-original-wordmark" },
+        { "name": "Azure", "icon": "azure/azure-original" },
+        { "name": "Linux", "icon": "linux/linux-original" }
+      ],
+      "also": "AWS EC2, Azure Blob Storage"
+    },
+    {
+      "group": "Delivery and AI",
+      "tools": [
+        { "name": "Git", "icon": "git/git-original" },
+        { "name": "Jenkins", "icon": "jenkins/jenkins-original" },
+        { "name": "Maven", "icon": "maven/maven-original" },
+        { "name": "Tomcat", "icon": "tomcat/tomcat-original" }
+      ],
+      "also": "CI/CD, JBoss (WildFly), Checkmarx, Agile (Scrum), Generative AI, GitHub Copilot, Cursor"
+    }
+  ],
+  "positions": [
+    {
+      "company": "SpruceInfoTech",
+      "monogram": "S",
+      "role": "Senior Full Stack Developer",
+      "detail": "Arch Mortgage Insurance Company, as a subcontractor for Infosys",
+      "period": "Sep 2026 – Present",
+      "current": true
+    },
+    {
+      "company": "Capgemini",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Capgemini_201x_logo.svg",
+      "monogram": "C",
+      "role": "Consultant",
+      "detail": "General Electric and Subaru",
+      "period": "Feb 2021 – Aug 2026"
+    },
+    {
+      "company": "GV Soft Solutions",
+      "monogram": "GV",
+      "role": "Associate Software Developer",
+      "detail": "Internal product development",
+      "period": "Jun 2018 – Feb 2021"
+    }
+  ],
+  "caseStudies": [
+    {
+      "client": "GE Aerospace",
+      "period": "2024 – 2026",
+      "title": "Moving a live access platform from Angular 9 to 19",
+      "challenge": "WAM decides which roles GE Aerospace users get, through multi-level approval workflows. The platform had to stay up while its whole stack moved forward.",
+      "steps": [
+        "Led the Angular migration using an incremental upgrade strategy.",
+        "Upgraded Spring Boot and Node.js, improving security compliance and performance.",
+        "Reduced approval workflow latency by optimizing REST APIs and backend queries."
+      ],
+      "changes": [
+        {
+          "label": "Front end",
+          "from": "Angular 9",
+          "to": "Angular 19"
+        },
+        {
+          "label": "Back end",
+          "from": "Spring Boot 2.6",
+          "to": "Spring Boot 3.x"
+        },
+        {
+          "label": "Runtime",
+          "from": "Node.js 16",
+          "to": "Node.js 22"
+        }
+      ],
+      "outcome": "Migration completed with no production downtime.",
+      "stack": [
         "Java",
-        "Spring Boot 3",
-        "Angular 19",
-        "SQL",
-        "Maven"
+        "Spring Boot",
+        "Angular",
+        "Node.js",
+        "MySQL",
+        "AWS EC2"
       ]
     },
     {
-      "position": "Consultant",
-      "company": "Capgemini Technology Services India Ltd",
-      "client": "General Electric Corporate",
-      "project": "Travel & Fleet Applications",
-      "duration": "May 2022 – Oct 2023",
-      "location": "Hyderabad, India",
-      "icon": "fas fa-car",
-      "description": "Travel provided GE users access to cards, news, and travel-related services. Fleet managed vehicle assignment records.",
-      "achievements": [
-        "Analyzed and modularized requirements for Travel & Fleet apps",
-        "Built backend with Spring Boot and frontend with Angular 13",
-        "Deployed on Tomcat and supported UAT bug fixes",
-        "Led team collaboration and task allocation"
+      "client": "GE Vernova",
+      "period": "2023 – 2024",
+      "title": "Splitting one application in two when GE became separate companies",
+      "challenge": "After the corporate split, GE Vernova needed its own version of WAM, with its own data and its own approval rules.",
+      "steps": [
+        "Led the application fork and enterprise re-platforming.",
+        "Migrated and cleaned legacy GE data to match the new organization.",
+        "Handed the application over to the Infosys team through knowledge transfer sessions."
       ],
-      "technologies": [
+      "changes": [
+        {
+          "label": "Application",
+          "from": "Shared GE app",
+          "to": "Vernova fork"
+        },
+        {
+          "label": "Data",
+          "from": "Legacy GE data",
+          "to": "New org structure"
+        },
+        {
+          "label": "Approvals",
+          "from": "GE hierarchy",
+          "to": "Vernova hierarchy"
+        }
+      ],
+      "outcome": "Rolled out to production with no critical post-release defects.",
+      "stack": [
         "Java",
-        "Spring Boot 2",
-        "Angular 13",
-        "SQL",
-        "Maven",
-        "Eclipse"
+        "Spring Boot",
+        "Angular",
+        "MySQL"
       ]
     },
     {
-      "position": "Associate Consultant",
-      "company": "Capgemini Technology Services India Ltd",
-      "client": "General Electric Corporate",
-      "project": "GPIT (Global Payroll Input Tool)",
-      "duration": "Jan 2022 – May 2022",
-      "location": "Hyderabad, India",
-      "icon": "fas fa-file-invoice-dollar",
-      "description": "Standardized tool for placing employee payroll deductions and payment requests.",
-      "achievements": [
-        "Built Spring MVC controllers, services, repositories",
-        "Migrated project from Ant to Maven",
-        "Converted XML configs to Java-based config",
-        "Integrated with third-party APIs",
-        "Fixed vulnerabilities and UAT bugs"
+      "client": "General Electric",
+      "period": "2021 – 2022",
+      "title": "Rebuilding a corporate billing tool on a modern full stack",
+      "challenge": "CATBILL runs monthly billing for GE's corporate air transport through recurring job batches. It was built on Spring MVC and JSP.",
+      "steps": [
+        "Led the full-stack modernization to Spring Boot and React.",
+        "Designed backend services and the UI for billing dashboards and reporting.",
+        "Owned delivery through deployment and post-production support."
       ],
-      "technologies": [
-        "Java",
-        "Spring MVC",
-        "HTML",
-        "JavaScript",
-        "Maven",
-        "Wildfly",
-        "GIT"
-      ]
-    },
-    {
-      "position": "Associate Consultant",
-      "company": "Capgemini Technology Services India Ltd",
-      "client": "General Electric Corporate",
-      "project": "CATBILL (Corporate Air Transport)",
-      "duration": "Apr 2021 – Jan 2022",
-      "location": "Hyderabad, India",
-      "icon": "fas fa-plane-departure",
-      "description": "Monthly billing tool for GE trip expenditures, organized through recurring job batches.",
-      "achievements": [
-        "Built Spring Boot modules and front-end React components",
-        "Configured queues and handled interface communication",
-        "Migrated project from Spring MVC with JSP to Spring Boot + React",
-        "Managed deployment, testing, and bug fixes"
+      "changes": [
+        {
+          "label": "Back end",
+          "from": "Spring MVC",
+          "to": "Spring Boot"
+        },
+        {
+          "label": "Front end",
+          "from": "JSP",
+          "to": "React"
+        }
       ],
-      "technologies": [
+      "outcome": "Delivered and supported in production after go-live.",
+      "stack": [
         "Java",
-        "Spring Boot 2",
+        "Spring Boot",
         "React",
-        "MySQL",
-        "Maven",
-        "Tomcat",
-        "GIT"
-      ]
-    },
-    {
-      "position": "Associate Software Developer",
-      "company": "GV Soft Solutions Pvt Ltd",
-      "client": "Internal",
-      "project": "COCO (Competitions & Collaborations)",
-      "duration": "Jun 2018 – Feb 2021",
-      "location": "Hyderabad, India",
-      "icon": "fas fa-users-cog",
-      "description": "A collaborative platform where users can host/join competitions, hire talent, and communicate.",
-      "achievements": [
-        "Built secure APIs, JWT validations, and social login integrations",
-        "Created custom Vue.js components and UIs",
-        "Handled backend API dev and production support",
-        "Manual tested and deployed on Tomcat"
-      ],
-      "technologies": [
-        "Java",
-        "Vue.js",
-        "MySQL",
-        "Hibernate",
-        "Maven",
-        "Spring MVC",
-        "Tomcat"
+        "MySQL"
       ]
     }
   ],
-  "testimonials": [
+  "moreWork": [
     {
-      "quote": "Akhil is one of the most dependable and driven professionals I’ve come across. His proactive mindset and attention to detail have made a real impact on our projects.",
-      "author": "Navita, Sr. Consultant at Capgemini",
-      "linkedin": "https://www.linkedin.com/in/navita-009a76208/"
+      "name": "Accessibility Support",
+      "client": "Subaru",
+      "summary": "Fixed accessibility issues in React to support ADA compliance, and worked on moving a legacy application from Struts to Spring Boot.",
+      "stack": [
+        "React",
+        "Spring Boot"
+      ]
     },
     {
-      "quote": "Your exceptional problem-solving skills and ability to engage well with the team have made a significant contribution to the success of our projects.",
-      "author": "Siddhartha Malempati, Commons Collective",
-      "linkedin": "https://www.linkedin.com/in/siddhartha-malempati-1a274b120/"
+      "name": "Travel & Fleet Applications",
+      "client": "General Electric",
+      "summary": "Led a module-level team building services for GE's global workforce: travel cards and news, plus vehicle assignment records.",
+      "stack": [
+        "Spring Boot",
+        "Angular",
+        "Azure Blob"
+      ]
     },
     {
-      "quote": "Akhil is a go-getter who adds great value to the team.",
-      "author": "Nithin Reddy Kesari, MD at RUI Labs",
-      "linkedin": "https://www.linkedin.com/in/kesarinithin/"
+      "name": "GPIT: Global Payroll Input Tool",
+      "client": "General Electric",
+      "summary": "Modernized a payroll deductions tool: Ant to Maven, XML to annotation-based configuration, and Checkmarx security findings resolved.",
+      "stack": [
+        "Spring MVC",
+        "Maven",
+        "WildFly"
+      ]
     },
     {
-      "quote": "Akhil is one of the most talented backend developers I've worked with. His strong technical skills, problem-solving mindset, and commitment to quality consistently stand out. He fosters a collaborative and positive work environment.",
-      "author": "Shrutika Kamble, Associate Consultant at Capgemini",
-      "linkedin": "https://www.linkedin.com/in/shrutika-kamble-193195261/"
-    },
-    {
-      "quote": "Akhil consistently demonstrated strong technical expertise in Java and full stack development, playing a key role in driving the Delivery Excellence initiative from start to end. Beyond his technical skills, he stood out for his initiative and leadership — delivering technical sessions to upskill teams and support junior members. He would be a true asset to any team.",
-      "author": "Snehal Kalke, Ex-Manager at Capgemini",
-      "linkedin": "https://www.linkedin.com/in/snehal-kalke/"
+      "name": "COCO: Competitions & Collaborations",
+      "client": "GV Soft Solutions",
+      "summary": "Built APIs, JWT security, Google, Facebook and LinkedIn login, and reusable Vue.js components for a platform to host competitions and hire talent.",
+      "stack": [
+        "Spring MVC",
+        "Vue.js",
+        "MySQL"
+      ]
     }
   ],
   "awards": [
     {
-      "title": "Long Service Award - 2026",
+      "title": "Long Service Award",
       "organization": "Capgemini India",
       "year": "2026",
-      "description": "Presented in recognition of completing 5 years of dedicated and continued service with Capgemini India."
+      "description": "For completing 5 years of continued service."
     },
     {
-      "title": "Capgemini XtraMile Award",
+      "title": "XtraMile Award",
       "organization": "Capgemini India",
       "year": "2022",
-      "description": "Awarded for outstanding performance and contribution to enterprise project delivery."
+      "description": "For outstanding performance and contribution to enterprise project delivery."
+    }
+  ],
+  "certifications": [
+    { "title": "AWS Certified Cloud Practitioner", "organization": "Amazon Web Services", "logo": "https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
+    { "title": "Azure Fundamentals (AZ-900)", "organization": "Microsoft", "logo": "https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/azure/azure-original.svg" },
+    { "title": "Technology Associate: Database Fundamentals", "organization": "Microsoft", "logo": "https://cdn.jsdelivr.net/npm/super-tiny-icons@0.4.0/images/svg/microsoft.svg" },
+    { "title": "IT Essentials", "organization": "Cisco Networking Academy", "logo": "https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/cisco.svg" }
+  ],
+  "testimonials": [
+    {
+      "name": "Kushagra Setia",
+      "title": "Senior Software Engineer at Accenture, Ex-Capgemini",
+      "relation": "Worked with Akhil on the same team",
+      "quote": [
+        "I had the pleasure of working with Akhil at Capgemini on an application for one of our GE client projects. He is one of the most generous and kind colleagues I've worked with, and he's always ready to lend a hand, whether it's unblocking a teammate or sharing what he knows.",
+        "Technically, Akhil is very strong. He has a solid command of Java backend development and is equally comfortable working with frontend frameworks, which made him valuable across the full stack. He's dependable, quick to pick up new problems, and delivers quality work.",
+        "Beyond his project responsibilities, Akhil actively takes part in corporate events and contributes to a positive team culture.",
+        "Any team would be lucky to have him. I highly recommend Akhil."
+      ]
+    },
+    {
+      "name": "Snehal Kalke",
+      "title": "Software Engineer, Ex-Capgemini",
+      "relation": "Worked with Akhil on the same team",
+      "linkedin": "https://www.linkedin.com/in/snehal-kalke/",
+      "quote": [
+        "I had the pleasure of working closely with Akhil on the Delivery Excellence initiative for the GE account. He consistently demonstrated strong technical expertise in Java and full stack development, playing a key role in driving the initiative from start to end.",
+        "Beyond his technical skills, he stood out for his initiative and leadership — delivering technical sessions across the account to upskill teams, reduce manual effort, and promote tool-based excellence. His ability to simplify complex topics and support junior team members made a lasting impact. He would be a true asset to any team."
+      ]
+    },
+    {
+      "name": "Shrutika Kamble",
+      "title": "Associate Consultant at Capgemini",
+      "relation": "Worked with Akhil on the same team",
+      "linkedin": "https://www.linkedin.com/in/shrutika-kamble-193195261/",
+      "quote": [
+        "I've had the pleasure of working with Akhil Abothu, and I can confidently say he is one of the most talented backend developer I’ve worked with. His strong technical skills, problem-solving mindset, and commitment to quality consistently stand out. Beyond his technical expertise, Akhil is a true team player who fosters a collaborative and positive work environment.",
+        "Any team would be lucky to have him onboard."
+      ]
+    },
+    {
+      "name": "Navita",
+      "title": "Sr. Consultant at Capgemini",
+      "relation": "Worked with Akhil on the same team",
+      "linkedin": "https://www.linkedin.com/in/navita-009a76208/",
+      "quote": [
+        "I’ve had the pleasure of working with Akhil, and I can confidently say he’s one of the most dependable and driven professionals I’ve come across. His ability to navigate complex challenges with clarity and precision makes him a standout contributor in any team.",
+        "Akhil brings a unique blend of technical expertise and collaborative spirit. Whether it's solving tough problems, supporting teammates, or delivering high-quality work under pressure, he consistently goes above and beyond. His proactive mindset and attention to detail have made a real impact on our projects.",
+        "Beyond his skills, Akhil’s positive attitude and willingness to help others make him a joy to work with. I highly recommend him to any team looking for a reliable, talented, and growth-oriented professional."
+      ]
+    },
+    {
+      "name": "Siddhartha Malempati",
+      "title": "Directing Council, Commons Collective",
+      "relation": "Senior to Akhil",
+      "linkedin": "https://www.linkedin.com/in/siddhartha-malempati-1a274b120/",
+      "quote": [
+        "I am writing this recommendation letter to express my appreciation for the hard work and dedication you show at Commons Collective in the field of Software Development. Your exceptional problem-solving skills and ability to engage well with the team have made a significant contribution to the success of our projects.",
+        "You have always demonstrated a keen sense of professionalism and commitment to your work. Your team has always spoken highly of your work and praised your ability to work under pressure while still delivering excellent results.",
+        "Your exceptional ability to work with a team and your eagerness to learn and adapt to new technologies have been invaluable to our organization. It is rare to find someone with your level of technical expertise and interpersonal skills. We are truly fortunate to have you as a member of our team.",
+        "In conclusion, I strongly recommend Akhil for any role in Software Development. He is a highly motivated, skilled, and personable individual who will bring value to any organization he chooses to work with."
+      ]
+    },
+    {
+      "name": "Nithin Reddy Kesari",
+      "title": "Managing Director at RUI Laboratories",
+      "relation": "Managed Akhil directly",
+      "linkedin": "https://www.linkedin.com/in/kesarinithin/",
+      "quote": [
+        "Akhil is a go-getter who adds great value to the team."
+      ]
     }
   ]
 }

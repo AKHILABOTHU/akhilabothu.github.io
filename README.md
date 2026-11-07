@@ -15,9 +15,7 @@ A modern, responsive portfolio website built with Vue.js 3 and Vite.
 
 - **Vue.js 3** - Progressive JavaScript framework
 - **Vite** - Next generation frontend tooling
-- **Bootstrap 5** - CSS framework
-- **Font Awesome** - Icons
-- **SweetAlert2** - Beautiful alerts
+- **IBM Plex** - Typeface
 - **EmailJS** - Email service
 - **Google reCAPTCHA** - Spam protection
 

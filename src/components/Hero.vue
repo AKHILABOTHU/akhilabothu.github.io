@@ -1,137 +1,323 @@
 <template>
-  <section class="hero-section d-flex align-items-center gradient-bg mesh-bg">
-    <div class="hero-overlay"></div>
+  <section class="hero">
+    <div class="wrap hero__inner">
+      <div class="hero__head">
+        <h1>Hi, I'm {{ firstName }}.</h1>
+        <p class="role">
+          <span class="sr-only">{{ roles.join(', ') }}</span>
+          <Transition name="roll" mode="out-in">
+            <span :key="roleIndex" class="role__text" aria-hidden="true">{{ roles[roleIndex] }}</span>
+          </Transition>
+        </p>
+      </div>
 
-    <div class="container position-relative">
-      <div class="row align-items-center">
-        <!-- Profile Picture Section -->
-        <div class="col-lg-5 d-flex justify-content-center order-1 mb-4 mb-lg-0">
-          <div class="position-relative">
-            <!-- Floating Profile Card -->
-            <div class="floating glass-card p-4" style="max-width: 20rem;">
-              <!-- Profile Image -->
-              <div class="text-center mb-4">
-                <div class="position-relative d-inline-block">
-                  <div class="rounded-circle p-2 shadow-lg"
-                      style="width: 12rem; height: 12rem; background: linear-gradient(135deg, #667eea, #764ba2);">
-                    <div
-                        class="w-100 h-100 rounded-circle bg-white d-flex align-items-center justify-content-center overflow-hidden">
-                      <img :src="profileImage" alt="Profile" class="rounded-circle"
-                          style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+      <div class="portrait">
+        <img :src="profileImage" :alt="`Portrait of ${fullName}`" width="288" height="288">
+      </div>
 
-            <!-- Floating Tech Icons -->
-            <div class="floating-icon floating-icon-1 animate-pulse-slow">
-              <i class="fab fa-java fs-4"></i>
-            </div>
-            <div class="floating-icon floating-icon-2 animate-pulse-slow" style="animation-delay: 1s;">
-              <i class="fab fa-vuejs fs-4"></i>
-            </div>
-            <div class="floating-icon floating-icon-3 animate-pulse-slow" style="animation-delay: 2s;">
-              <i class="fas fa-robot"></i>
-            </div>
-          </div>
-        </div>
-
-        <!-- Content Section -->
-        <div class="col-lg-7 text-white fade-in-up order-2 text-center text-lg-start">
-          <div class="mb-4">
-            <span class="badge bg-light bg-opacity-10 text-white px-3 py-2 rounded-pill">
-              🚀 Available for new opportunities
-            </span>
-          </div>
-          <h1 class="display-1 fw-bold mb-4">
-            Hi, I'm <span class="text-warning">{{ firstName }}</span>
-          </h1>
-          <div class="display-5 mb-4 text-info text-center text-lg-start" style="height: 5rem;">
-            <div class="typewriter">{{ currentRole }}</div>
-          </div>
-          <p class="lead mb-4 text-light">
-            {{ profileSummary }}
-          </p>
-
-          <!-- Contact Info Pills -->
-          <div class="d-flex flex-wrap justify-content-center justify-content-lg-start mb-4">
-            <div class="contact-pill">
-              <i class="fas fa-map-marker-alt text-warning"></i>
-              <span>{{ location }}</span>
-            </div>
-            <div class="contact-pill">
-              <i class="fas fa-envelope text-warning"></i>
-              <span>{{ email }}</span>
-            </div>
-            <div class="contact-pill">
-              <i class="fas fa-phone text-warning"></i>
-              <span>{{ phone }}</span>
-            </div>
-          </div>
-
-          <!-- Buttons -->
-          <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3 mb-5">
-            <!-- View Resume Button -->
-            <a :href="resumeHtml" target="_blank" class="btn btn-gradient px-4 py-3 rounded-pill">
-              <i class="fas fa-eye me-2"></i>
-              View Resume
-            </a>
-
-            <!-- Connect Button -->
-            <button @click="scrollToSection('contact')"
-                class="btn btn-outline-light px-4 py-3 rounded-pill">
-              Let's Connect
-            </button>
-          </div>
+      <div class="hero__body">
+        <p class="summary">{{ profileSummary }}</p>
+        <p class="currently"><span class="dot" aria-hidden="true"></span>{{ currently }}</p>
+        <div class="actions">
+          <a class="button" href="#experience">
+            See my work <span class="button__arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="button button--ghost" :href="resumeUrl" target="_blank" rel="noopener">View résumé</a>
         </div>
       </div>
+    </div>
+
+    <div class="wrap">
+      <dl class="stats">
+        <div v-for="stat in stats" :key="stat.label" class="stat">
+          <dt>{{ stat.label }}</dt>
+          <dd>{{ stat.value }}</dd>
+        </div>
+      </dl>
     </div>
   </section>
 </template>
 
 <script setup>
-import { ref, onMounted, defineProps, defineEmits } from 'vue'
+import { computed, ref, onMounted, onUnmounted } from 'vue'
 
 const props = defineProps({
-  firstName: String,
-  location: String,
-  email: String,
-  phone: String,
+  roles: Array,
   profileSummary: String,
+  currently: String,
+  fullName: String,
   profileImage: String,
-  resumeHtml: String
+  resumeUrl: String,
+  stats: Array
 })
 
-const emit = defineEmits(['scroll-to-section'])
+const firstName = computed(() => props.fullName.split(' ')[0])
 
-const currentRole = ref('Full Stack Developer')
+const roleIndex = ref(0)
 
-const scrollToSection = (sectionId) => {
-  emit('scroll-to-section', sectionId)
-}
-
+let timer = null
 
 onMounted(() => {
-  const roles = [
-    'Full Stack Developer',
-    'Java Spring Expert',
-    'Vue.js Specialist',
-    'AI Enthusiast',
-    'Problem Solver'
-  ]
-  let currentIndex = 0
-  currentRole.value = roles[currentIndex]
-  setInterval(() => {
-    currentIndex = (currentIndex + 1) % roles.length
-    currentRole.value = roles[currentIndex]
-  }, 3000)
+  if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+    timer = setInterval(() => {
+      roleIndex.value = (roleIndex.value + 1) % props.roles.length
+    }, 3200)
+  }
 })
+
+onUnmounted(() => clearInterval(timer))
 </script>
 
 <style scoped>
-.badge {
+.hero {
+  position: relative;
+  /* The stats card straddles the bottom edge of the green area */
+  background: linear-gradient(var(--panel), var(--panel)) top / 100% calc(100% - 2.75rem) no-repeat;
+  color: var(--panel-ink);
+  --accent: var(--panel-ink);
+}
+
+.hero__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 14rem;
+  grid-template-areas:
+    'head portrait'
+    'body portrait';
+  grid-template-rows: auto 1fr;
+  column-gap: 4rem;
+  padding-block: clamp(2.25rem, 5vw, 3.5rem);
+}
+
+.hero__head {
+  grid-area: head;
+}
+
+.hero__body {
+  grid-area: body;
+}
+
+.hero h1 {
+  font-size: clamp(2.25rem, 4.4vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+}
+
+.hero .role {
+  min-height: 1.6em;
+  margin-top: 0.5rem;
+  color: var(--panel-highlight);
+  font-size: clamp(1.125rem, 2vw, 1.375rem);
+  font-weight: 500;
+}
+
+.role__text {
   display: inline-block;
 }
-</style>
 
+.roll-enter-active,
+.roll-leave-active {
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.roll-enter-from {
+  opacity: 0;
+  transform: translateY(0.5em);
+}
+
+.roll-leave-to {
+  opacity: 0;
+  transform: translateY(-0.5em);
+}
+
+.hero .summary {
+  max-width: 38rem;
+  margin-top: 1.125rem;
+  font-size: 1.125rem;
+}
+
+.hero .currently {
+  display: flex;
+  gap: 0.625rem;
+  max-width: 38rem;
+  margin-top: 0.875rem;
+  color: var(--panel-muted);
+  font-size: 0.9375rem;
+}
+
+.dot {
+  flex: none;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-top: 0.5rem;
+  border-radius: 50%;
+  background: var(--panel-accent);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% {
+    box-shadow: 0 0 0 5px rgba(159, 220, 201, 0.2);
+  }
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.site .button {
+  display: inline-block;
+  padding: 0.625rem 1.25rem;
+  border: 1px solid var(--panel-highlight);
+  border-radius: 6px;
+  background: var(--panel-highlight);
+  color: #1d1503;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.site .button--ghost {
+  border-color: var(--panel-field);
+  background: transparent;
+  color: var(--panel-ink);
+  font-weight: 500;
+}
+
+.site .button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.site .button--ghost:hover {
+  border-color: var(--panel-ink);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.button__arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.button:hover .button__arrow {
+  transform: translateX(4px);
+}
+
+.portrait {
+  position: relative;
+  grid-area: portrait;
+  align-self: center;
+  justify-self: end;
+  width: 100%;
+  margin-right: 0.75rem;
+}
+
+/* Offset block behind the photo */
+.portrait::before {
+  content: '';
+  position: absolute;
+  inset: 0.75rem -0.75rem -0.75rem 0.75rem;
+  border-radius: 10px;
+  background: var(--panel-highlight);
+}
+
+.portrait img {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow-hover);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  padding: 1rem 1.5rem;
+}
+
+.stat + .stat {
+  border-left: 1px solid var(--rule);
+}
+
+.stat dd {
+  color: var(--highlight);
+  font-size: clamp(1.625rem, 3vw, 2.25rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.stat dt {
+  margin-top: 0.25rem;
+  color: var(--muted);
+  font-size: 0.9375rem;
+  line-height: 1.3;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+
+.hero__head,
+.hero__body,
+.portrait,
+.stats {
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+}
+
+.portrait { animation-delay: 0.1s; }
+.hero__body { animation-delay: 0.14s; }
+.stats { animation-delay: 0.26s; }
+
+/* Text and photo stay side by side on phones too */
+@media (max-width: 760px) {
+  .hero__inner {
+    grid-template-columns: minmax(0, 1fr) 6.5rem;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      'head portrait'
+      'body body';
+    align-items: center;
+    column-gap: 1.25rem;
+    padding-block: 2rem 1.75rem;
+  }
+
+  .portrait {
+    margin-right: 0.5rem;
+  }
+
+  .portrait::before {
+    inset: 0.5rem -0.5rem -0.5rem 0.5rem;
+  }
+
+  .hero .summary {
+    margin-top: 1.5rem;
+    font-size: 1.0625rem;
+  }
+
+  .stat {
+    padding: 0.875rem;
+  }
+
+  .stat dt {
+    font-size: 0.8125rem;
+  }
+}
+</style>

@@ -1,143 +1,161 @@
 <template>
-  <section id="about" class="py-5" :class="darkMode ? 'bg-dark' : 'bg-light'">
-    <div class="container">
-      <div class="text-center mb-5">
-        <h2 class="display-4 fw-bold mb-3" :class="darkMode ? 'text-white' : 'text-dark'">
-          About <span class="gradient-text">Me</span>
-        </h2>
-        <div class="mx-auto mb-4"
-            style="width: 6rem; height: 0.25rem; background: linear-gradient(135deg, #667eea, #764ba2);">
+  <section id="about" class="section">
+    <div class="wrap">
+      <div class="intro">
+        <h2 v-reveal class="section__title">From my first API to enterprise modernization</h2>
+        <div v-reveal class="story">
+          <p v-for="paragraph in story" :key="paragraph">{{ paragraph }}</p>
         </div>
       </div>
 
-      <div class="row">
-        <!-- Main About Content -->
-        <div class="col-lg-8">
-          <div class="card card-hover h-100 border-0 shadow-sm" :class="darkMode ? 'bg-dark text-light' : ''">
-            <div class="card-body p-4">
-              <h4 class="card-title mb-4" :class="darkMode ? 'text-white' : ''">
-                <i class="fas fa-user-tie text-primary me-3"></i>
-                Professional Journey
-              </h4>
-              <div class="fs-6" :class="darkMode ? 'text-light' : 'text-muted'">
-                <p class="mb-3">
-                  With <strong>{{ experienceYears }}+ years</strong> of experience in software
-                  development, I've evolved from a curious computer science graduate to a seasoned
-                  full-stack developer with a passion for cutting-edge technologies.
-                </p>
-                <p class="mb-3">
-                  My expertise spans across <strong>Java Spring Boot</strong> for robust backend
-                  architectures and <strong>Vue.js</strong> for dynamic frontend experiences.
-                  Recently, I've been diving deep into the world of <strong>Generative
-                      AI</strong>, exploring how artificial intelligence can transform business
-                  solutions.
-                </p>
-                <p class="mb-0">
-                  I believe in writing clean, scalable code and building applications that not
-                  only meet business requirements but also provide exceptional user experiences.
-                  My goal is to bridge the gap between traditional development and AI-powered
-                  solutions.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Side Stats & Skills -->
-        <div class="col-lg-4">
-          <div class="row g-3">
-            <!-- Quick Stats -->
-            <div class="col-12">
-              <div class="card card-hover border-0 shadow-sm" :class="darkMode ? 'bg-dark text-light' : ''">
-                <div class="card-body p-4">
-                  <h5 class="card-title mb-3" :class="darkMode ? 'text-white' : ''">
-                    <i class="fas fa-chart-line text-success me-2"></i>
-                    Quick Stats
-                  </h5>
-                  <div class="d-flex justify-content-between align-items-center mb-3">
-                    <span :class="darkMode ? 'text-light' : 'text-muted'">Experience</span>
-                    <span class="fw-bold text-primary">{{ experienceYears }}+ Years</span>
-                  </div>
-                  <div class="d-flex justify-content-between align-items-center mb-3">
-                    <span :class="darkMode ? 'text-light' : 'text-muted'">Projects</span>
-                    <span class="fw-bold text-success">{{ projectsCompleted }}+</span>
-                  </div>
-                  <div class="d-flex justify-content-between align-items-center mb-3">
-                    <span :class="darkMode ? 'text-light' : 'text-muted'">Certifications</span>
-                    <span class="fw-bold" style="color: #a55eea;">{{ certificationsCount }}</span>
-                  </div>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <span :class="darkMode ? 'text-light' : 'text-muted'">Current Role</span>
-                    <span class="fw-bold text-success">{{ role }}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Work Focus -->
-            <div class="col-12">
-              <div class="card card-hover border-0 shadow-sm" :class="darkMode ? 'bg-dark text-light' : ''">
-                <div class="card-body p-4">
-                  <h5 class="card-title mb-3" :class="darkMode ? 'text-white' : ''">
-                    <i class="fas fa-bullseye text-danger me-2"></i>
-                    Work Focus
-                  </h5>
-                  <div class="mb-2">
-                    <div class="d-flex align-items-center">
-                      <div class="bg-primary rounded-circle me-3"
-                          style="width: 0.75rem; height: 0.75rem;"></div>
-                      <span :class="darkMode ? 'text-light' : 'text-muted'">Backend Development</span>
-                    </div>
-                  </div>
-                  <div class="mb-2">
-                    <div class="d-flex align-items-center">
-                      <div class="bg-success rounded-circle me-3"
-                          style="width: 0.75rem; height: 0.75rem;"></div>
-                      <span :class="darkMode ? 'text-light' : 'text-muted'">Frontend Development</span>
-                    </div>
-                  </div>
-                  <div class="mb-2">
-                    <div class="d-flex align-items-center">
-                      <div class="rounded-circle me-3"
-                          style="width: 0.75rem; height: 0.75rem; background-color: #a55eea;">
-                      </div>
-                      <span :class="darkMode ? 'text-light' : 'text-muted'">AI Integration</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+      <div class="principles">
+        <div v-for="principle in principles" :key="principle.title" v-reveal>
+          <div class="card card--lift principle">
+            <h3>{{ principle.title }}</h3>
+            <p>{{ principle.text }}</p>
           </div>
         </div>
       </div>
+
+      <ol v-reveal class="journey" aria-label="Career milestones">
+        <li v-for="step in journey" :key="step.year + step.title" class="milestone">
+          <span class="milestone__year">{{ step.year }}</span>
+          <span class="milestone__title">{{ step.title }}</span>
+          <span class="milestone__detail">{{ step.detail }}</span>
+        </li>
+      </ol>
     </div>
   </section>
 </template>
 
 <script setup>
-import { computed, defineProps } from 'vue'
-
-const props = defineProps({
-  darkMode: Boolean,
-  experienceYears: [String, Number],
-  projectsCompleted: Number,
-  certificationsCount: Number,
-  role: String
+defineProps({
+  story: Array,
+  principles: Array,
+  journey: Array
 })
 </script>
 
 <style scoped>
-.card {
-  transition: all 0.3s ease;
+.intro {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 2rem clamp(2rem, 5vw, 4.5rem);
 }
 
-.dark-theme .card {
-  background-color: #2d2d2d !important;
-  color: #ffffff;
+.story {
+  display: grid;
+  gap: 1rem;
+  font-size: 1.0625rem;
 }
 
-.dark-theme .card strong {
-  color: #ffffff;
+.principles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 3.5rem;
+}
+
+.principle {
+  height: 100%;
+  padding: 1.5rem;
+  border-top: 3px solid var(--accent);
+}
+
+h3 {
+  font-size: 1.1875rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.principle p {
+  margin-top: 0.5rem !important;
+  color: var(--muted);
+}
+
+.journey {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin: 4rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.milestone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-top: 1.25rem;
+  border-top: 2px solid var(--rule);
+}
+
+/* Marker sitting on the timeline */
+.milestone::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: -7px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  background: var(--bg);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.milestone__year {
+  color: var(--highlight);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.milestone__title {
+  margin-top: 0.375rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.milestone__detail {
+  margin-top: 0.25rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+@media (hover: hover) {
+  .milestone:hover::before {
+    background: var(--accent);
+    transform: scale(1.25);
+  }
+}
+
+@media (max-width: 960px) {
+  .intro,
+  .principles {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .journey {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    margin-left: 0.375rem;
+  }
+
+  .milestone {
+    padding: 0 0 1.75rem 1.5rem;
+    border-top: 0;
+    border-left: 2px solid var(--rule);
+  }
+
+  .milestone::before {
+    left: -7px;
+    top: 0.25rem;
+  }
+
+  .milestone:last-child {
+    padding-bottom: 0;
+  }
 }
 </style>
-

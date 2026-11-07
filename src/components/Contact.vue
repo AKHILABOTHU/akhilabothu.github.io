@@ -1,136 +1,59 @@
 <template>
-  <section id="contact" class="py-5 gradient-bg">
-    <div class="container">
-      <div class="text-center mb-5">
-        <h2 class="display-4 fw-bold mb-3 text-white">
-          Let's <span class="text-warning">Connect</span>
-        </h2>
-        <div class="mx-auto mb-4"
-            style="width: 6rem; height: 0.25rem; background: linear-gradient(135deg, #ffd700, #ff8c00);">
-        </div>
-        <p class="lead text-light">
-          Ready to bring your ideas to life? Let's discuss your next project!
+  <section id="contact" class="contact">
+    <div class="wrap section">
+      <h2 v-reveal class="section__title">Let's talk.</h2>
+      <div>
+        <p v-reveal class="lede">
+          Have a role or a project in mind? Email me directly, or send a message here.
         </p>
-      </div>
 
-      <div class="row">
-        <!-- Contact Form -->
-        <div class="col-lg-8 mx-auto">
-          <div class="glass-card p-4">
-            <form @submit.prevent.stop="sendMessage">
-              <div class="row g-3">
-                <div class="col-md-6">
-                  <label class="form-label text-white fw-semibold">
-                    <i class="fas fa-user me-2"></i>
-                    Full Name
-                  </label>
-                  <input v-model="contactForm.name" type="text"
-                      class="form-control form-control-lg" placeholder="Your full name" required>
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label text-white fw-semibold">
-                    <i class="fas fa-envelope me-2"></i>
-                    Email Address
-                  </label>
-                  <input v-model="contactForm.email" type="email"
-                      class="form-control form-control-lg" placeholder="your.email@example.com"
-                      required>
-                </div>
-                <div class="col-12">
-                  <label class="form-label text-white fw-semibold">
-                    <i class="fas fa-tag me-2"></i>
-                    Subject
-                  </label>
-                  <input v-model="contactForm.subject" type="text"
-                      class="form-control form-control-lg" placeholder="What's this about?"
-                      required>
-                </div>
-                <div class="col-12">
-                  <label class="form-label text-white fw-semibold">
-                    <i class="fas fa-comment me-2"></i>
-                    Message
-                  </label>
-                  <textarea v-model="contactForm.message" class="form-control" rows="5"
-                      placeholder="Tell me about your project or idea..." required></textarea>
-                </div>
-                <!-- Centered Google reCAPTCHA -->
-                <div v-if="showRecaptcha" class="d-flex justify-content-center my-3">
-                  <div class="g-recaptcha"
-                      :key="`recaptcha-${recaptchaSiteKey}`"
-                      :data-sitekey="recaptchaSiteKey"></div>
-                </div>
-                <div class="col-12 text-center">
-                  <button type="submit" class="btn btn-gradient btn-lg px-5 py-3 rounded-pill">
-                    <i class="fas fa-paper-plane me-2"></i>
-                    Send Message
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
+        <div class="columns">
+          <dl class="details">
+            <div>
+              <dt>Email</dt>
+              <dd><a :href="`mailto:${email}`">{{ email }}</a></dd>
+            </div>
+            <div>
+              <dt>Phone</dt>
+              <dd><a :href="`tel:${phone.replace(/\s/g, '')}`">{{ phone }}</a></dd>
+            </div>
+            <div>
+              <dt>Location</dt>
+              <dd>{{ location }}</dd>
+            </div>
+            <div>
+              <dt>Elsewhere</dt>
+              <dd v-for="link in links" :key="link.url">
+                <a :href="link.url" target="_blank" rel="noopener">{{ link.label }}</a>
+              </dd>
+            </div>
+          </dl>
 
-      <!-- Contact Info Cards -->
-      <div class="row g-4 mt-5">
-        <div class="col-md-4">
-          <div class="glass-card p-4 text-center">
-            <div class="mb-3">
-              <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto"
-                  style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #ff6b6b, #ee5a24);">
-                <i class="fas fa-map-marker-alt text-white fs-4"></i>
-              </div>
+          <form class="form" @submit.prevent="sendMessage">
+            <div class="field">
+              <label for="contact-name">Name</label>
+              <input id="contact-name" v-model="contactForm.name" type="text" autocomplete="name" required>
             </div>
-            <h5 class="text-white fw-bold mb-2">Location</h5>
-            <p class="text-light mb-0">{{ location }}</p>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="glass-card p-4 text-center">
-            <div class="mb-3">
-              <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto"
-                  style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #26d0ce, #1a9be6);">
-                <i class="fas fa-envelope text-white fs-4"></i>
-              </div>
+            <div class="field">
+              <label for="contact-email">Email</label>
+              <input id="contact-email" v-model="contactForm.email" type="email" autocomplete="email" required>
             </div>
-            <h5 class="text-white fw-bold mb-2">Email</h5>
-            <p class="text-light mb-0">
-              <a :href="`mailto:${email}`" class="text-light text-decoration-none">{{ email }}</a>
-            </p>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="glass-card p-4 text-center">
-            <div class="mb-3">
-              <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto"
-                  style="width: 4rem; height: 4rem; background: linear-gradient(135deg, #a55eea, #fd79a8);">
-                <i class="fas fa-phone text-white fs-4"></i>
-              </div>
+            <div class="field field--full">
+              <label for="contact-subject">Subject</label>
+              <input id="contact-subject" v-model="contactForm.subject" type="text" required>
             </div>
-            <h5 class="text-white fw-bold mb-2">Phone</h5>
-            <p class="text-light mb-0">
-              <a :href="`tel:${phone}`" class="text-light text-decoration-none">{{ phone }}</a>
-            </p>
-          </div>
-        </div>
-      </div>
+            <div class="field field--full">
+              <label for="contact-message">Message</label>
+              <textarea id="contact-message" v-model="contactForm.message" rows="5" required></textarea>
+            </div>
 
-      <!-- Social Links -->
-      <div class="text-center mt-5">
-        <h5 class="text-white fw-bold mb-3">Follow Me</h5>
-        <div class="d-flex justify-content-center gap-3">
-          <a href="https://www.linkedin.com/in/akhil-abothu/" target="_blank"
-              class="btn btn-outline-light rounded-circle" style="width: 3rem; height: 3rem;">
-            <i class="fab fa-linkedin-in"></i>
-          </a>
-          <a href="https://github.com/AKHILABOTHU/" target="_blank"
-              class="btn btn-outline-light rounded-circle" style="width: 3rem; height: 3rem;">
-            <i class="fab fa-github"></i>
-          </a>
-          <a href="https://www.instagram.com/developerdiarieshq/" target="_blank"
-              class="btn btn-outline-light rounded-circle" style="width: 3rem; height: 3rem;">
-            <i class="fab fa-instagram"></i>
-          </a>
+            <div ref="recaptchaEl" class="recaptcha field--full"></div>
+
+            <div class="submit field--full">
+              <button type="submit" :disabled="sending">{{ sending ? 'Sending…' : 'Send message' }}</button>
+              <p class="status" :class="{ 'status--error': status.isError }" role="status">{{ status.text }}</p>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -138,87 +61,264 @@
 </template>
 
 <script setup>
-import { ref, computed, defineProps, defineEmits, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 const props = defineProps({
   location: String,
   email: String,
-  phone: String
+  phone: String,
+  links: Array
 })
 
-const emit = defineEmits(['send-message', 'form-reset'])
+const contactForm = ref({ name: '', email: '', subject: '', message: '' })
+const sending = ref(false)
+const status = ref({ text: '', isError: false })
+const recaptchaEl = ref(null)
 
-const contactForm = ref({
-  name: '',
-  email: '',
-  subject: '',
-  message: ''
-})
+const isDevelopment = ['localhost', '127.0.0.1', ''].includes(window.location.hostname)
 
-const resetForm = () => {
-  contactForm.value = { name: '', email: '', subject: '', message: '' }
-  // Reset reCAPTCHA if available
-  if (window.grecaptcha) {
-    try {
-      window.grecaptcha.reset()
-    } catch (error) {
-      // Silently fail
+// Google's test key always passes on localhost
+const recaptchaSiteKey = isDevelopment
+  ? '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
+  : '6LdZnoUrAAAAANwP2oXJ0X5mNINaARMipJDReelZ'
+
+let recaptchaWidget = null
+let recaptchaTimer = null
+let recaptchaObserver = null
+
+const loadRecaptcha = () => {
+  const script = document.createElement('script')
+  script.src = 'https://www.google.com/recaptcha/api.js?render=explicit'
+  script.async = true
+  document.head.append(script)
+
+  // The script loads asynchronously, so wait until it can render
+  recaptchaTimer = setInterval(() => {
+    if (window.grecaptcha?.render) {
+      clearInterval(recaptchaTimer)
+      recaptchaWidget = window.grecaptcha.render(recaptchaEl.value, {
+        sitekey: recaptchaSiteKey,
+        theme: 'dark'
+      })
     }
-  }
+  }, 200)
 }
 
 onMounted(() => {
-  const contactSection = document.getElementById('contact')
-  if (contactSection) {
-    contactSection.addEventListener('reset-form', resetForm)
+  if (window.emailjs) {
+    window.emailjs.init('lmtctuRbX4cLaf5JL')
   }
+
+  // Only visitors who reach the form need reCAPTCHA, so don't slow down the page for everyone
+  recaptchaObserver = new IntersectionObserver((entries) => {
+    if (entries.some((entry) => entry.isIntersecting)) {
+      recaptchaObserver.disconnect()
+      loadRecaptcha()
+    }
+  }, { rootMargin: '300px 0px' })
+  recaptchaObserver.observe(recaptchaEl.value)
 })
 
 onUnmounted(() => {
-  const contactSection = document.getElementById('contact')
-  if (contactSection) {
-    contactSection.removeEventListener('reset-form', resetForm)
+  clearInterval(recaptchaTimer)
+  recaptchaObserver.disconnect()
+})
+
+const showError = (text) => {
+  status.value = { text, isError: true }
+}
+
+const sendMessage = async () => {
+  status.value = { text: '', isError: false }
+
+  const { name, email, subject, message } = contactForm.value
+  if (![name, email, subject, message].every((value) => value.trim())) {
+    showError('Please fill in every field.')
+    return
   }
-})
 
-// Detect if we're in development (localhost)
-const isDevelopment = computed(() => {
-  return window.location.hostname === 'localhost' || 
-         window.location.hostname === '127.0.0.1' ||
-         window.location.hostname === ''
-})
-
-// Use test key for development, production key for production
-// Google test key always passes on localhost: 6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI
-const recaptchaSiteKey = computed(() => {
-  if (isDevelopment.value) {
-    // Google's test key that always passes on localhost
-    return '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
+  if (!isDevelopment) {
+    if (recaptchaWidget === null) {
+      showError(`The verification check did not load. Please email me at ${props.email}.`)
+      return
+    }
+    if (!window.grecaptcha.getResponse(recaptchaWidget)) {
+      showError('Please complete the verification check.')
+      return
+    }
   }
-  // Production key - replace with your actual production key
-  return '6LdZnoUrAAAAANwP2oXJ0X5mNINaARMipJDReelZ'
-})
 
-const showRecaptcha = computed(() => {
-  // You can also disable reCAPTCHA entirely in development by returning false
-  return true
-})
-
-const sendMessage = (event) => {
-  // Prevent default form submission
-  if (event) {
-    event.preventDefault()
-    event.stopPropagation()
+  if (!window.emailjs) {
+    showError(`The message could not be sent. Please email me at ${props.email}.`)
+    return
   }
-  emit('send-message', { ...contactForm.value })
-  // Don't reset form here - let parent handle success first
+
+  sending.value = true
+  try {
+    await window.emailjs.send('service_mg3q0ne', 'template_929eyue', { name, email, subject, message })
+    contactForm.value = { name: '', email: '', subject: '', message: '' }
+    if (recaptchaWidget !== null) {
+      window.grecaptcha.reset(recaptchaWidget)
+    }
+    status.value = { text: 'Thank you. Your message has been sent.', isError: false }
+  } catch (error) {
+    console.error('EmailJS error:', error)
+    showError(`The message could not be sent. Please email me at ${props.email}.`)
+  } finally {
+    sending.value = false
+  }
 }
 </script>
 
 <style scoped>
-.glass-card {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(16px);
+.contact {
+  background: var(--panel);
+  color: var(--panel-ink);
+  --accent: var(--panel-ink);
+}
+
+.lede {
+  max-width: 34rem;
+  margin-top: 0.75rem !important;
+  color: var(--panel-muted);
+  font-size: 1.125rem;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: 14rem minmax(0, 1fr);
+  gap: 3rem;
+  margin-top: 2.75rem;
+}
+
+.details {
+  display: grid;
+  align-content: start;
+  gap: 1.25rem;
+}
+
+dt,
+label {
+  color: var(--panel-muted);
+  font-size: 0.875rem;
+}
+
+dd {
+  overflow-wrap: anywhere;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.field--full {
+  grid-column: 1 / -1;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+input,
+textarea {
+  display: block;
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid var(--panel-field);
+  border-radius: 3px;
+  background: transparent;
+  color: var(--panel-ink);
+  font: inherit;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+input:hover,
+textarea:hover {
+  border-color: var(--panel-ink);
+}
+
+input:focus,
+textarea:focus {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+textarea {
+  resize: vertical;
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--panel-ink);
+  outline: 1px solid var(--panel-ink);
+  outline-offset: 0;
+}
+
+.recaptcha {
+  min-height: 78px;
+}
+
+.submit {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+}
+
+button {
+  padding: 0.6875rem 1.25rem;
+  border: 0;
+  border-radius: 3px;
+  background: var(--panel-highlight);
+  color: #1d1503;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28);
+}
+
+button:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+button:focus-visible {
+  outline-color: var(--panel-ink);
+}
+
+.status {
+  flex: 1 1 14rem;
+  font-size: 0.9375rem;
+}
+
+.status--error {
+  color: #ffc9b8;
+}
+
+@media (max-width: 860px) {
+  .columns {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .form {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* The reCAPTCHA widget has a fixed 304px width */
+@media (max-width: 340px) {
+  .recaptcha {
+    transform: scale(0.92);
+    transform-origin: left top;
+  }
 }
 </style>
-
