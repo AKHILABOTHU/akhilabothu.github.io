@@ -77,14 +77,17 @@ const recaptchaEl = ref(null)
 
 const isDevelopment = ['localhost', '127.0.0.1', ''].includes(window.location.hostname)
 
-// Google's test key always passes on localhost
+// Invisible reCAPTCHA v2: no checkbox, Google only shows a challenge to suspicious visitors.
+// EmailJS verifies the token with the secret key stored in the template settings.
+// Google's test key always passes on localhost, but EmailJS will reject its tokens.
 const recaptchaSiteKey = isDevelopment
   ? '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
-  : '6LdZnoUrAAAAANwP2oXJ0X5mNINaARMipJDReelZ'
+  : '6LfsHiAuAAAAADPHH9hSlfTL8KfKC2ZZ5Fw-Ruin'
 
 let recaptchaWidget = null
 let recaptchaTimer = null
 let recaptchaObserver = null
+let pendingToken = null
 
 const loadRecaptcha = () => {
   const script = document.createElement('script')
@@ -98,7 +101,12 @@ const loadRecaptcha = () => {
       clearInterval(recaptchaTimer)
       recaptchaWidget = window.grecaptcha.render(recaptchaEl.value, {
         sitekey: recaptchaSiteKey,
-        theme: 'dark'
+        size: 'invisible',
+        badge: 'inline',
+        theme: 'dark',
+        callback: (token) => pendingToken?.resolve(token),
+        'expired-callback': () => pendingToken?.reject(new Error('reCAPTCHA expired')),
+        'error-callback': () => pendingToken?.reject(new Error('reCAPTCHA error'))
       })
     }
   }, 200)
@@ -128,6 +136,18 @@ const showError = (text) => {
   status.value = { text, isError: true }
 }
 
+// Runs the invisible check; resolves once Google hands back a token,
+// which may take a moment if the visitor is asked to solve a challenge
+const getRecaptchaToken = () => new Promise((resolve, reject) => {
+  const timeout = setTimeout(() => reject(new Error('reCAPTCHA timed out')), 120000)
+  pendingToken = {
+    resolve: (token) => { clearTimeout(timeout); pendingToken = null; resolve(token) },
+    reject: (error) => { clearTimeout(timeout); pendingToken = null; reject(error) }
+  }
+  window.grecaptcha.reset(recaptchaWidget)
+  window.grecaptcha.execute(recaptchaWidget)
+})
+
 const sendMessage = async () => {
   status.value = { text: '', isError: false }
 
@@ -137,15 +157,9 @@ const sendMessage = async () => {
     return
   }
 
-  if (!isDevelopment) {
-    if (recaptchaWidget === null) {
-      showError(`The verification check did not load. Please email me at ${props.email}.`)
-      return
-    }
-    if (!window.grecaptcha.getResponse(recaptchaWidget)) {
-      showError('Please complete the verification check.')
-      return
-    }
+  if (recaptchaWidget === null) {
+    showError(`The verification check did not load. Please email me at ${props.email}.`)
+    return
   }
 
   if (!window.emailjs) {
@@ -154,12 +168,25 @@ const sendMessage = async () => {
   }
 
   sending.value = true
+  let token
   try {
-    await window.emailjs.send('service_06up8g3', 'template_mkt70qk', { name, email, subject, message })
+    token = await getRecaptchaToken()
+  } catch (error) {
+    console.error('reCAPTCHA error:', error)
+    showError('The verification check was not completed. Please try again.')
+    sending.value = false
+    return
+  }
+
+  try {
+    await window.emailjs.send('service_06up8g3', 'template_mkt70qk', {
+      name,
+      email,
+      subject,
+      message,
+      'g-recaptcha-response': token
+    })
     contactForm.value = { name: '', email: '', subject: '', message: '' }
-    if (recaptchaWidget !== null) {
-      window.grecaptcha.reset(recaptchaWidget)
-    }
     status.value = { text: 'Thank you. Your message has been sent.', isError: false }
   } catch (error) {
     console.error('EmailJS error:', error)
@@ -257,7 +284,7 @@ textarea:focus {
 }
 
 .recaptcha {
-  min-height: 78px;
+  min-height: 60px;
 }
 
 .submit {
@@ -314,7 +341,7 @@ button:focus-visible {
   }
 }
 
-/* The reCAPTCHA widget has a fixed 304px width */
+/* The reCAPTCHA badge has a fixed width */
 @media (max-width: 340px) {
   .recaptcha {
     transform: scale(0.92);

@@ -135,7 +135,7 @@ Update the EmailJS configuration in `src/components/Contact.vue`:
 ### reCAPTCHA Setup
 
 - Development: Uses Google's test key (always passes)
-- Production: Uses your production key in `src/components/Contact.vue`
+- Production: Invisible reCAPTCHA v2 site key in `src/components/Contact.vue`; the token is sent to EmailJS as `g-recaptcha-response` and verified with the secret key in the EmailJS template settings
 
 ## License
 
