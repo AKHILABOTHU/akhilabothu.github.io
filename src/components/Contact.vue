@@ -155,7 +155,7 @@ const sendMessage = async () => {
 
   sending.value = true
   try {
-    await window.emailjs.send('service_og00tck', 'template_ylujjvw', { name, email, subject, message })
+    await window.emailjs.send('service_06up8g3', 'template_mkt70qk', { name, email, subject, message })
     contactForm.value = { name: '', email: '', subject: '', message: '' }
     if (recaptchaWidget !== null) {
       window.grecaptcha.reset(recaptchaWidget)
