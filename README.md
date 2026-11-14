@@ -18,6 +18,7 @@ A modern, responsive portfolio website built with Vue.js 3 and Vite.
 - **IBM Plex** - Typeface
 - **EmailJS** - Email service
 - **Google reCAPTCHA** - Spam protection
+- **Google Tag Manager** - Analytics (container `GTM-KGLGWWVK`, loaded in `index.html`)
 
 ## Development
 
