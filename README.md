@@ -126,10 +126,10 @@ GitHub Actions will automatically build and deploy your site.
 
 ### EmailJS Setup
 
-Update the EmailJS configuration in `src/App.vue`:
-- Service ID: `service_mg3q0ne`
-- Template ID: `template_929eyue`
-- Public Key: `lmtctuRbX4cLaf5JL`
+Update the EmailJS configuration in `src/components/Contact.vue`:
+- Service ID: `service_og00tck`
+- Template ID: `template_ylujjvw`
+- Public Key: `hUJLzTdVhvcFPW0_r`
 
 ### reCAPTCHA Setup
 

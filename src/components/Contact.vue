@@ -106,7 +106,7 @@ const loadRecaptcha = () => {
 
 onMounted(() => {
   if (window.emailjs) {
-    window.emailjs.init('lmtctuRbX4cLaf5JL')
+    window.emailjs.init('hUJLzTdVhvcFPW0_r')
   }
 
   // Only visitors who reach the form need reCAPTCHA, so don't slow down the page for everyone
@@ -155,7 +155,7 @@ const sendMessage = async () => {
 
   sending.value = true
   try {
-    await window.emailjs.send('service_mg3q0ne', 'template_929eyue', { name, email, subject, message })
+    await window.emailjs.send('service_og00tck', 'template_ylujjvw', { name, email, subject, message })
     contactForm.value = { name: '', email: '', subject: '', message: '' }
     if (recaptchaWidget !== null) {
       window.grecaptcha.reset(recaptchaWidget)
