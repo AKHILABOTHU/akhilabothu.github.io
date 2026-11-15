@@ -46,7 +46,7 @@
               <label for="contact-message">Message</label>
               <textarea id="contact-message" v-model="contactForm.message" rows="5" required></textarea>
             </div>
-
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAACDLxQoJ7Oq-Jv3v"></div>
             <div class="submit field--full">
               <button type="submit" :disabled="sending">{{ sending ? 'Sending…' : 'Send message' }}</button>
               <p class="status" :class="{ 'status--error': status.isError }" role="status">{{ status.text }}</p>
