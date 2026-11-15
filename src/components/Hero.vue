@@ -19,11 +19,26 @@
         <p class="summary">{{ profileSummary }}</p>
         <p class="currently"><span class="dot" aria-hidden="true"></span>{{ currently }}</p>
         <div class="actions">
+          <!-- Bootstrap Icons: briefcase, envelope, file-earmark-text (MIT) -->
           <a class="button" href="#experience">
+            <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true">
+              <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5m1.886 6.914L15 7.151V12.5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5V7.15l6.614 1.764a1.5 1.5 0 0 0 .772 0M1.5 4h13a.5.5 0 0 1 .5.5v1.616L8.129 7.948a.5.5 0 0 1-.258 0L1 6.116V4.5a.5.5 0 0 1 .5-.5" />
+            </svg>
             See my work
           </a>
-          <a class="button button--ghost" href="#contact">Contact me</a>
-          <a class="text-link" :href="resumeUrl" target="_blank" rel="noopener">View Resume</a>
+          <a class="button button--ghost" href="#contact">
+            <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true">
+              <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z" />
+            </svg>
+            Contact me
+          </a>
+          <a class="text-link" :href="resumeUrl" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true">
+              <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5" />
+              <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z" />
+            </svg>
+            View Resume
+          </a>
         </div>
       </div>
     </div>
@@ -170,8 +185,14 @@ onUnmounted(() => clearInterval(timer))
   margin-top: 1.5rem;
 }
 
+.site .button,
+.site .text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .site .button {
-  display: inline-block;
   padding: 0.625rem 1.25rem;
   border: 1px solid var(--panel-highlight);
   border-radius: 6px;
