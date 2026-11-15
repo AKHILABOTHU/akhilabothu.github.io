@@ -51,7 +51,27 @@
 
             <div class="submit field--full">
               <button type="submit" :disabled="sending">{{ sending ? 'Sending…' : 'Send message' }}</button>
-              <p class="status" :class="{ 'status--error': status.isError }" role="status">{{ status.text }}</p>
+            </div>
+
+            <!-- Always present, so screen readers announce new messages -->
+            <div class="notice-region field--full" aria-live="polite">
+              <Transition name="notice">
+                <div v-if="status.type" :key="status.type + status.text" class="notice" :class="`notice--${status.type}`">
+                  <span class="notice__icon" aria-hidden="true">
+                    <svg v-if="status.type === 'success'" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path class="notice__check" d="M5 12.5l4.5 4.5L19 7.5" />
+                    </svg>
+                    <svg v-else viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                      <path d="M12 7v6" />
+                      <path d="M12 17h.01" />
+                    </svg>
+                  </span>
+                  <div>
+                    <p class="notice__title">{{ status.title }}</p>
+                    <p class="notice__text">{{ status.text }}</p>
+                  </div>
+                </div>
+              </Transition>
             </div>
           </form>
         </div>
@@ -72,7 +92,8 @@ const props = defineProps({
 
 const contactForm = ref({ name: '', email: '', subject: '', message: '' })
 const sending = ref(false)
-const status = ref({ text: '', isError: false })
+// type is 'success', 'warning' (something to fix in the form) or 'error' (sending failed)
+const status = ref({ type: '', title: '', text: '' })
 const recaptchaEl = ref(null)
 
 // reCAPTCHA v2 checkbox. EmailJS verifies the token with the secret key in the template settings.
@@ -124,16 +145,24 @@ onUnmounted(() => {
   recaptchaObserver.disconnect()
 })
 
+const setStatus = (type, title, text) => {
+  status.value = { type, title, text }
+}
+
 const showError = (text) => {
-  status.value = { text, isError: true }
+  setStatus('error', 'Your message wasn’t sent', text)
+}
+
+const showWarning = (text) => {
+  setStatus('warning', 'One more step', text)
 }
 
 const sendMessage = async () => {
-  status.value = { text: '', isError: false }
+  setStatus('', '', '')
 
   const { name, email, subject, message } = contactForm.value
   if (![name, email, subject, message].every((value) => value.trim())) {
-    showError('Please fill in every field.')
+    showWarning('Please fill in every field.')
     return
   }
 
@@ -144,7 +173,7 @@ const sendMessage = async () => {
 
   const token = window.grecaptcha.getResponse(recaptchaWidget)
   if (!token) {
-    showError('Please tick “I’m not a robot” first.')
+    showWarning('Please tick “I’m not a robot” before sending.')
     return
   }
 
@@ -163,10 +192,10 @@ const sendMessage = async () => {
       'g-recaptcha-response': token
     })
     contactForm.value = { name: '', email: '', subject: '', message: '' }
-    status.value = { text: 'Thank you. Your message has been sent.', isError: false }
+    setStatus('success', `Thanks, ${name.trim().split(' ')[0]}! Your message is on its way.`, `I’ll get back to you at ${email.trim()} as soon as I can.`)
   } catch (error) {
     console.error('EmailJS error:', error)
-    showError(`The message could not be sent. Please email me at ${props.email}.`)
+    showError(`Something went wrong on my side. Please try again, or email me at ${props.email}.`)
   } finally {
     // Each token can only be used once
     window.grecaptcha.reset(recaptchaWidget)
@@ -306,13 +335,95 @@ button:focus-visible {
   outline-color: var(--panel-ink);
 }
 
-.status {
-  flex: 1 1 14rem;
-  font-size: 0.9375rem;
+.notice-region:empty {
+  display: none;
 }
 
-.status--error {
-  color: #ffc9b8;
+.notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+  padding: 1rem 1.125rem;
+  border: 1px solid;
+  border-radius: 8px;
+}
+
+.notice--success {
+  border-color: rgba(159, 220, 201, 0.45);
+  background: rgba(159, 220, 201, 0.1);
+}
+
+.notice--warning {
+  border-color: rgba(242, 182, 84, 0.5);
+  background: rgba(242, 182, 84, 0.1);
+}
+
+.notice--error {
+  border-color: rgba(255, 201, 184, 0.5);
+  background: rgba(255, 201, 184, 0.1);
+}
+
+.notice__icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  color: #0b211e;
+}
+
+.notice--success .notice__icon {
+  background: var(--panel-accent);
+}
+
+.notice--warning .notice__icon {
+  background: var(--panel-highlight);
+}
+
+.notice--error .notice__icon {
+  background: #ffc9b8;
+}
+
+.notice__title {
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.notice__text {
+  margin-top: 0.125rem;
+  color: var(--panel-muted);
+  font-size: 0.9375rem;
+  overflow-wrap: anywhere;
+}
+
+.notice-enter-active {
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.notice-enter-from {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+/* The tick draws itself once the card appears */
+.notice__check {
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  animation: draw-check 0.45s ease 0.2s forwards;
+}
+
+@keyframes draw-check {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .notice__check {
+    stroke-dashoffset: 0;
+    animation: none;
+  }
 }
 
 @media (max-width: 860px) {
