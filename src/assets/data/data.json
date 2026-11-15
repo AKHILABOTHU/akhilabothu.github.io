@@ -74,9 +74,10 @@
         { "name": "Java", "icon": "java/java-original" },
         { "name": "Spring Boot", "icon": "spring/spring-original" },
         { "name": "Hibernate", "icon": "hibernate/hibernate-original" },
-        { "name": "Node.js", "icon": "nodejs/nodejs-original" }
+        { "name": "Node.js", "icon": "nodejs/nodejs-original" },
+        { "name": "OAuth2", "icon": "oauth/oauth-original" }
       ],
-      "also": "REST APIs, microservices, JWT, OAuth2, role-based access control"
+      "also": "REST APIs, microservices, JWT, role-based access control"
     },
     {
       "group": "Front end",
@@ -84,9 +85,12 @@
         { "name": "Angular", "icon": "angular/angular-original" },
         { "name": "React", "icon": "react/react-original" },
         { "name": "Vue.js", "icon": "vuejs/vuejs-original" },
-        { "name": "JavaScript", "icon": "javascript/javascript-original" }
+        { "name": "JavaScript", "icon": "javascript/javascript-original" },
+        { "name": "HTML5", "icon": "html5/html5-original" },
+        { "name": "CSS3", "icon": "css3/css3-original" },
+        { "name": "Bootstrap", "icon": "bootstrap/bootstrap-original" }
       ],
-      "also": "HTML5, CSS3, Bootstrap, accessibility fixes for ADA compliance"
+      "also": "Accessibility fixes for ADA compliance"
     },
     {
       "group": "Data and cloud",
@@ -104,14 +108,18 @@
         { "name": "Git", "icon": "git/git-original" },
         { "name": "Jenkins", "icon": "jenkins/jenkins-original" },
         { "name": "Maven", "icon": "maven/maven-original" },
-        { "name": "Tomcat", "icon": "tomcat/tomcat-original" }
+        { "name": "Tomcat", "icon": "tomcat/tomcat-original" },
+        { "name": "GitHub Copilot", "src": "https://cdn.jsdelivr.net/npm/devicon@2.18.0/icons/githubcopilot/githubcopilot-plain.svg" },
+        { "name": "Cursor", "src": "https://cdn.jsdelivr.net/npm/devicon@2.18.0/icons/cursor/cursor-original.svg" }
       ],
-      "also": "CI/CD, JBoss (WildFly), Checkmarx, Agile (Scrum), Generative AI, GitHub Copilot, Cursor"
+      "also": "CI/CD, JBoss (WildFly), Checkmarx, Agile (Scrum), Generative AI"
     }
   ],
   "positions": [
     {
       "company": "SpruceInfoTech",
+      "logo": "spruce_infotech_inc_logo.jpg",
+      "logoFit": "cover",
       "monogram": "S",
       "role": "Senior Full Stack Developer",
       "detail": "Arch Mortgage Insurance Company, as a subcontractor for Infosys",
@@ -120,7 +128,7 @@
     },
     {
       "company": "Capgemini",
-      "logo": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Capgemini_201x_logo.svg",
+      "logo": "Capgemini_201x_logo.svg",
       "monogram": "C",
       "role": "Consultant",
       "detail": "General Electric and Subaru",

@@ -7,7 +7,7 @@
         <li v-for="position in positions" :key="position.company" v-reveal class="position-slot">
           <div class="card card--lift position" :class="{ 'position--current': position.current }">
             <div class="position__head">
-              <LogoTile :src="position.logo" :monogram="position.monogram" />
+              <LogoTile :src="logoUrl(position.logo)" :fit="position.logoFit" :monogram="position.monogram" />
               <span v-if="position.current" class="tag">Current</span>
             </div>
             <p class="position__period">{{ position.period }}</p>
@@ -87,7 +87,7 @@
 
       <p v-reveal class="foot">
         Want the full history?
-        <a :href="resumeUrl" target="_blank" rel="noopener">Read my résumé</a>
+        <a :href="resumeUrl" target="_blank" rel="noopener">Read my resume</a>
       </p>
     </div>
   </section>
@@ -95,6 +95,9 @@
 
 <script setup>
 import LogoTile from './LogoTile.vue'
+
+// Company logos live in src/assets/images; data.json stores just the file name
+const logoUrl = (file) => file && new URL(`../assets/images/${file}`, import.meta.url).href
 
 defineProps({
   positions: Array,
@@ -306,7 +309,7 @@ h5 {
   font-weight: 600;
 }
 
-/* Connector that draws itself when the card fades in */
+/* Connecting line that draws itself when the card fades in */
 .line {
   position: relative;
   flex: 1 1 1rem;
@@ -317,17 +320,6 @@ h5 {
   transform-origin: left;
 }
 
-.line::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: -3px;
-  width: 8px;
-  height: 8px;
-  border-top: 2px solid var(--panel-highlight);
-  border-right: 2px solid var(--panel-highlight);
-  transform: rotate(45deg);
-}
 
 .reveal .line {
   transform: scaleX(0);

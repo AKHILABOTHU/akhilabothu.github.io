@@ -20,9 +20,10 @@
         <p class="currently"><span class="dot" aria-hidden="true"></span>{{ currently }}</p>
         <div class="actions">
           <a class="button" href="#experience">
-            See my work <span class="button__arrow" aria-hidden="true">→</span>
+            See my work
           </a>
-          <a class="button button--ghost" :href="resumeUrl" target="_blank" rel="noopener">View résumé</a>
+          <a class="button button--ghost" href="#contact">Contact me</a>
+          <a class="text-link" :href="resumeUrl" target="_blank" rel="noopener">View Resume</a>
         </div>
       </div>
     </div>
@@ -164,6 +165,7 @@ onUnmounted(() => clearInterval(timer))
 .actions {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 0.75rem;
   margin-top: 1.5rem;
 }
@@ -197,14 +199,13 @@ onUnmounted(() => clearInterval(timer))
   background: rgba(255, 255, 255, 0.08);
 }
 
-.button__arrow {
-  display: inline-block;
-  transition: transform 0.2s ease;
+.site .text-link {
+  padding-inline: 0.25rem;
+  color: var(--panel-ink);
+  font-weight: 500;
 }
 
-.button:hover .button__arrow {
-  transform: translateX(4px);
-}
+
 
 .portrait {
   position: relative;

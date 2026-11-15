@@ -61,9 +61,14 @@
                     <svg v-if="status.type === 'success'" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                       <path class="notice__check" d="M5 12.5l4.5 4.5L19 7.5" />
                     </svg>
-                    <svg v-else viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-                      <path d="M12 7v6" />
+                    <svg v-else-if="status.type === 'warning'" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M10.3 3.9L2.4 17.6A2 2 0 0 0 4.1 20.6h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" />
+                      <path d="M12 9.5v4" />
                       <path d="M12 17h.01" />
+                    </svg>
+                    <svg v-else viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M7 7l10 10" />
+                      <path d="M17 7L7 17" />
                     </svg>
                   </span>
                   <div>

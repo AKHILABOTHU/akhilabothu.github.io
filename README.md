@@ -4,11 +4,11 @@ A modern, responsive portfolio website built with Vue.js 3 and Vite.
 
 ## Features
 
-- 🎨 Modern UI with dark mode support
-- 📱 Fully responsive design
-- 🚀 Fast performance with Vite
-- ✉️ Contact form with EmailJS integration
-- 💼 Professional portfolio sections (About, Skills, Experience, Testimonials, Contact)
+- Modern UI with dark mode support
+- Fully responsive design
+- Fast performance with Vite
+- Contact form with EmailJS integration
+- Portfolio sections: About, Skills, Experience, Awards, Certifications, Recommendations and Contact
 
 ## Tech Stack
 

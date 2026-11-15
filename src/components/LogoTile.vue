@@ -1,5 +1,5 @@
 <template>
-  <span class="logo">
+  <span class="logo" :class="{ 'logo--cover': fit === 'cover' && src && !failed }">
     <img v-if="src && !failed" :src="src" alt="" loading="lazy" @error="failed = true">
     <span v-else class="logo__monogram" aria-hidden="true">{{ monogram }}</span>
   </span>
@@ -10,7 +10,9 @@ import { ref } from 'vue'
 
 defineProps({
   src: String,
-  monogram: String
+  monogram: String,
+  // 'cover' fills the tile edge to edge, for logos that come with their own background
+  fit: String
 })
 
 const failed = ref(false)
@@ -36,6 +38,15 @@ const failed = ref(false)
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+.logo--cover {
+  padding: 0;
+  overflow: hidden;
+}
+
+.logo--cover img {
+  object-fit: cover;
 }
 
 .logo__monogram {
