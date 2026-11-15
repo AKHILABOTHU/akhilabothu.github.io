@@ -16,6 +16,7 @@ A modern, responsive portfolio website built with Vue.js 3 and Vite.
 - **Vite** - Next generation frontend tooling
 - **IBM Plex** - Typeface
 - **EmailJS** - Email service
+- **Google reCAPTCHA v2** - Spam protection (checkbox, verified by EmailJS)
 - **Google Tag Manager** - Analytics (container `GTM-KGLGWWVK`, loaded in `index.html`)
 
 ## Development
@@ -129,6 +130,12 @@ Update the EmailJS configuration in `src/components/Contact.vue`:
 - Service ID: `service_06up8g3`
 - Template ID: `template_mkt70qk`
 - Public Key: `hUJLzTdVhvcFPW0_r`
+
+### reCAPTCHA Setup
+
+- reCAPTCHA v2 "I'm not a robot" checkbox; site key in `src/components/Contact.vue`
+- The token is sent to EmailJS as `g-recaptcha-response` and verified with the secret key set in the EmailJS template settings
+- Localhost uses Google's test key, so sends fail locally because EmailJS rejects test tokens
 
 ## License
 

@@ -46,7 +46,9 @@
               <label for="contact-message">Message</label>
               <textarea id="contact-message" v-model="contactForm.message" rows="5" required></textarea>
             </div>
-            <div class="cf-turnstile" data-sitekey="0x4AAAAAAGBi2XlSTSJ8bZM2"></div>
+
+            <div ref="recaptchaEl" class="recaptcha field--full"></div>
+
             <div class="submit field--full">
               <button type="submit" :disabled="sending">{{ sending ? 'Sending…' : 'Send message' }}</button>
               <p class="status" :class="{ 'status--error': status.isError }" role="status">{{ status.text }}</p>
@@ -59,7 +61,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 const props = defineProps({
   location: String,
@@ -71,11 +73,55 @@ const props = defineProps({
 const contactForm = ref({ name: '', email: '', subject: '', message: '' })
 const sending = ref(false)
 const status = ref({ text: '', isError: false })
+const recaptchaEl = ref(null)
+
+// reCAPTCHA v2 checkbox. EmailJS verifies the token with the secret key in the template settings.
+// Google's test key always passes on localhost, but EmailJS will reject its tokens.
+const isDevelopment = ['localhost', '127.0.0.1', ''].includes(window.location.hostname)
+const recaptchaSiteKey = isDevelopment
+  ? '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
+  : '6LdZnoUrAAAAANwP2oXJ0X5mNINaARMipJDReelZ'
+
+let recaptchaWidget = null
+let recaptchaTimer = null
+let recaptchaObserver = null
+
+const loadRecaptcha = () => {
+  const script = document.createElement('script')
+  script.src = 'https://www.google.com/recaptcha/api.js?render=explicit'
+  script.async = true
+  document.head.append(script)
+
+  // The script loads asynchronously, so wait until it can render
+  recaptchaTimer = setInterval(() => {
+    if (window.grecaptcha?.render) {
+      clearInterval(recaptchaTimer)
+      recaptchaWidget = window.grecaptcha.render(recaptchaEl.value, {
+        sitekey: recaptchaSiteKey,
+        theme: 'dark'
+      })
+    }
+  }, 200)
+}
 
 onMounted(() => {
   if (window.emailjs) {
     window.emailjs.init('hUJLzTdVhvcFPW0_r')
   }
+
+  // Only visitors who reach the form need reCAPTCHA, so don't slow down the page for everyone
+  recaptchaObserver = new IntersectionObserver((entries) => {
+    if (entries.some((entry) => entry.isIntersecting)) {
+      recaptchaObserver.disconnect()
+      loadRecaptcha()
+    }
+  }, { rootMargin: '300px 0px' })
+  recaptchaObserver.observe(recaptchaEl.value)
+})
+
+onUnmounted(() => {
+  clearInterval(recaptchaTimer)
+  recaptchaObserver.disconnect()
 })
 
 const showError = (text) => {
@@ -91,6 +137,17 @@ const sendMessage = async () => {
     return
   }
 
+  if (recaptchaWidget === null) {
+    showError(`The verification check did not load. Please email me at ${props.email}.`)
+    return
+  }
+
+  const token = window.grecaptcha.getResponse(recaptchaWidget)
+  if (!token) {
+    showError('Please tick “I’m not a robot” first.')
+    return
+  }
+
   if (!window.emailjs) {
     showError(`The message could not be sent. Please email me at ${props.email}.`)
     return
@@ -98,13 +155,21 @@ const sendMessage = async () => {
 
   sending.value = true
   try {
-    await window.emailjs.send('service_06up8g3', 'template_mkt70qk', { name, email, subject, message })
+    await window.emailjs.send('service_06up8g3', 'template_mkt70qk', {
+      name,
+      email,
+      subject,
+      message,
+      'g-recaptcha-response': token
+    })
     contactForm.value = { name: '', email: '', subject: '', message: '' }
     status.value = { text: 'Thank you. Your message has been sent.', isError: false }
   } catch (error) {
     console.error('EmailJS error:', error)
     showError(`The message could not be sent. Please email me at ${props.email}.`)
   } finally {
+    // Each token can only be used once
+    window.grecaptcha.reset(recaptchaWidget)
     sending.value = false
   }
 }
@@ -155,6 +220,18 @@ dd {
 
 .field--full {
   grid-column: 1 / -1;
+}
+
+.recaptcha {
+  min-height: 78px;
+}
+
+/* The reCAPTCHA checkbox has a fixed 304px width */
+@media (max-width: 340px) {
+  .recaptcha {
+    transform: scale(0.92);
+    transform-origin: left top;
+  }
 }
 
 label {
