@@ -29,42 +29,18 @@
   "principles": [
     {
       "title": "Upgrade in steps",
+      "icon": "layers",
       "text": "I prefer incremental migrations that keep the business running."
     },
     {
       "title": "Own it through production",
+      "icon": "shield-check",
       "text": "I stay with the work from requirement analysis through UAT sign-off, deployment and production support."
     },
     {
       "title": "Leave the team stronger",
+      "icon": "people",
       "text": "Technical sessions for junior developers and knowledge transfers for incoming teams, so progress doesn't depend on one person."
-    }
-  ],
-  "journey": [
-    {
-      "year": "2017",
-      "title": "B.Tech in Computer Science",
-      "detail": "Sai Spurthi Institute of Technology, JNTU Hyderabad"
-    },
-    {
-      "year": "2018",
-      "title": "First developer role",
-      "detail": "GV Soft Solutions"
-    },
-    {
-      "year": "2021",
-      "title": "Joined Capgemini",
-      "detail": "Enterprise work for General Electric"
-    },
-    {
-      "year": "2023",
-      "title": "Worked on the GE split (Corporate, Aerospace, Vernova, Healthcare)",
-      "detail": "Fork, data migration and rollout"
-    },
-    {
-      "year": "Now",
-      "title": "Senior Full Stack Developer",
-      "detail": "SpruceInfoTech, for Arch Mortgage Insurance through Infosys"
     }
   ],
   "skills": [

@@ -60,7 +60,6 @@ const stats = computed(() => [
       <About
         :story="data.story"
         :principles="data.principles"
-        :journey="data.journey"
       />
       <Skills :skills="data.skills" />
       <Experience

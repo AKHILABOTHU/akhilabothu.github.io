@@ -3,20 +3,34 @@
     <div class="wrap">
       <h2 v-reveal class="section__title">Experience</h2>
 
-      <ol class="positions">
-        <li v-for="position in positions" :key="position.company" v-reveal class="position-slot">
-          <div class="card card--lift position" :class="{ 'position--current': position.current }">
-            <div class="position__head">
-              <LogoTile :src="logoUrl(position.logo)" :fit="position.logoFit" :monogram="position.monogram" />
+      <p v-reveal class="section__lead">Three teams so far, each with more ownership than the last.</p>
+
+      <!-- Career path: oldest on the left, climbing to today on the right -->
+      <div ref="pathEl" v-reveal class="path">
+        <svg class="path__line" :viewBox="`0 0 ${size.w} ${size.h}`" :width="size.w" :height="size.h" aria-hidden="true">
+          <path :d="curve" />
+        </svg>
+
+        <ol class="stops">
+          <li
+            v-for="(position, index) in timeline"
+            :key="position.company"
+            class="stop"
+            :class="{ 'stop--current': position.current }"
+            :style="{ '--rise': timeline.length - 1 - index, '--order': index }"
+          >
+            <span :ref="(el) => { dotEls[index] = el }" class="stop__dot" aria-hidden="true"></span>
+            <LogoTile :src="logoUrl(position.logo)" :fit="position.logoFit" :monogram="position.monogram" />
+            <h3 class="stop__company">
+              {{ position.company }}
               <span v-if="position.current" class="tag">Current</span>
-            </div>
-            <p class="position__period">{{ position.period }}</p>
-            <h3 class="position__company">{{ position.company }}</h3>
-            <p class="position__role">{{ position.role }}</p>
-            <p class="position__detail">{{ position.detail }}</p>
-          </div>
-        </li>
-      </ol>
+            </h3>
+            <p class="stop__role">{{ position.role }}</p>
+            <p class="stop__period">{{ position.period }}</p>
+            <p class="stop__detail">{{ position.detail }}</p>
+          </li>
+        </ol>
+      </div>
 
       <h3 v-reveal class="group-title">Selected work</h3>
       <p v-reveal class="group-lead">A closer look at three projects from my time at Capgemini.</p>
@@ -94,67 +108,204 @@
 </template>
 
 <script setup>
+import { computed, ref, onMounted, onUnmounted } from 'vue'
 import LogoTile from './LogoTile.vue'
 
 // Company logos live in src/assets/images; data.json stores just the file name
 const logoUrl = (file) => file && new URL(`../assets/images/${file}`, import.meta.url).href
 
-defineProps({
+const props = defineProps({
   positions: Array,
   caseStudies: Array,
   moreWork: Array,
   resumeUrl: String
 })
+
+// data.json lists today first; the path reads oldest to newest, left to right
+const timeline = computed(() => [...props.positions].reverse())
+
+const pathEl = ref(null)
+const dotEls = []
+const size = ref({ w: 0, h: 0 })
+const curve = ref('')
+
+// Draws a smooth curve through the dots, entering low on the left and leaving high on the right
+const drawCurve = () => {
+  const root = pathEl.value
+  const dots = dotEls.filter(Boolean)
+  if (!root || !dots.length || getComputedStyle(root.querySelector('.path__line')).display === 'none') {
+    curve.value = ''
+    return
+  }
+  const box = { width: root.offsetWidth, height: root.offsetHeight }
+  // Layout offsets, not screen positions, so the fade-in movement doesn't skew the curve
+  const points = dots.map((dot) => {
+    let x = dot.offsetWidth / 2
+    let y = dot.offsetHeight / 2
+    for (let el = dot; el && el !== root; el = el.offsetParent) {
+      x += el.offsetLeft
+      y += el.offsetTop
+    }
+    return { x, y }
+  })
+  const first = points[0]
+  const last = points[points.length - 1]
+  const rise = points.length > 1 ? (first.y - last.y) / (points.length - 1) : 40
+  points.unshift({ x: 0, y: first.y + rise * 0.6 })
+  points.push({ x: box.width, y: Math.max(last.y - rise * 0.5, 4) })
+
+  // Catmull-Rom spline turned into cubic Bezier segments
+  let d = `M${points[0].x},${points[0].y}`
+  for (let i = 0; i < points.length - 1; i++) {
+    const p0 = points[i - 1] || points[i]
+    const p1 = points[i]
+    const p2 = points[i + 1]
+    const p3 = points[i + 2] || p2
+    // Keep handles between their own two points, so the line never loops back on itself
+    const clampX = (x) => Math.min(Math.max(x, p1.x), p2.x)
+    const c1 = { x: clampX(p1.x + (p2.x - p0.x) / 6), y: p1.y + (p2.y - p0.y) / 6 }
+    const c2 = { x: clampX(p2.x - (p3.x - p1.x) / 6), y: p2.y - (p3.y - p1.y) / 6 }
+    d += ` C${c1.x},${c1.y} ${c2.x},${c2.y} ${p2.x},${p2.y}`
+  }
+  size.value = { w: box.width, h: box.height }
+  curve.value = d
+}
+
+let resizeObserver = null
+
+onMounted(() => {
+  drawCurve()
+  resizeObserver = new ResizeObserver(drawCurve)
+  resizeObserver.observe(pathEl.value)
+})
+
+onUnmounted(() => resizeObserver?.disconnect())
 </script>
 
 <style scoped>
-.positions {
+/* ---------- Career path ---------- */
+/* Positioned, so the dots' offsets are measured from here */
+.path {
+  position: relative;
+  margin-top: 1rem;
+  padding-top: 3rem;
+}
+
+.stops,
+.stop {
+  position: relative;
+}
+
+.path__line {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.path__line path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-dasharray: 6 7;
+  stroke-linecap: round;
+  opacity: 0.55;
+}
+
+.stops {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.25rem;
-  margin: 2.5rem 0 0;
+  gap: 2rem;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.position {
-  height: 100%;
-  padding: 1.5rem;
+/* Each later job sits higher, so the dots climb */
+.stop {
+  padding-top: calc(var(--rise) * 5.5rem);
 }
 
-.position--current {
-  border-top: 3px solid var(--accent);
+.stop__dot {
+  display: block;
+  width: 0.875rem;
+  height: 0.875rem;
+  margin: 0 0 1.125rem calc(2.75rem - 0.4375rem);
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 5px var(--bg);
 }
 
-.position__head {
+.stop--current .stop__dot {
+  background: var(--highlight);
+}
+
+.stop__company {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-}
-
-.position__period {
-  margin-top: 0.875rem;
-  color: var(--muted);
-  font-size: 0.875rem;
-}
-
-.position__company {
-  margin-top: 0.125rem;
+  gap: 0.5rem;
+  margin-top: 1rem;
   font-size: 1.25rem;
   font-weight: 600;
   line-height: 1.3;
 }
 
-.position__role {
-  margin-top: 0.125rem;
+.stop__role {
+  margin-top: 0.25rem;
   font-weight: 500;
 }
 
-.position__detail {
-  margin-top: 0.375rem;
+.stop__period {
+  margin-top: 0.125rem;
   color: var(--muted);
   font-size: 0.9375rem;
+}
+
+.stop__detail {
+  max-width: 18rem;
+  margin-top: 0.5rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+/* The line draws itself from left to right, then each stop arrives in turn */
+.reveal .path__line {
+  clip-path: inset(0 100% 0 0);
+}
+
+.reveal .stop {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.reveal--in .path__line {
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+}
+
+.reveal--in .stop {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(0.35s + var(--order) * 0.35s);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .stop--current .stop__dot {
+    animation: pulse 2.4s ease-out infinite;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 5px var(--bg), 0 0 0 5px color-mix(in srgb, var(--highlight) 45%, transparent);
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 5px var(--bg), 0 0 0 14px transparent;
+  }
 }
 
 .group-title {
@@ -385,8 +536,52 @@ h5 {
   color: var(--muted);
 }
 
+/* Phones: a vertical dashed timeline, today on top */
 @media (max-width: 860px) {
-  .positions,
+  .path {
+    margin-top: 2rem;
+    padding-top: 0;
+  }
+
+  .path__line {
+    display: none;
+  }
+
+  .stops {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 2.25rem;
+    padding-left: 2rem;
+  }
+
+  .stops::before {
+    content: '';
+    position: absolute;
+    left: 0.375rem;
+    top: 0.75rem;
+    bottom: 0.75rem;
+    border-left: 2px dashed var(--accent);
+    opacity: 0.55;
+  }
+
+  .stop {
+    position: relative;
+    padding-top: 0;
+  }
+
+  .stop__dot {
+    position: absolute;
+    left: -2rem;
+    top: 0.9375rem;
+    margin: 0;
+  }
+
+  .stop__detail {
+    max-width: none;
+  }
+}
+
+@media (max-width: 860px) {
   .study,
   .study--flip,
   .more {

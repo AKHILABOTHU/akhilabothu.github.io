@@ -1,5 +1,5 @@
 <template>
-  <section class="hero">
+  <section id="home" class="hero">
     <div class="wrap hero__inner">
       <div class="hero__head">
         <h1>Hi, I'm {{ firstName }}.</h1>
