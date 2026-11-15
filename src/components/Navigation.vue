@@ -8,9 +8,16 @@
         type="button"
         :aria-expanded="menuOpen"
         aria-controls="site-nav"
+        :aria-label="menuOpen ? 'Close menu' : 'Open menu'"
         @click="menuOpen = !menuOpen"
       >
-        {{ menuOpen ? 'Close' : 'Menu' }}
+        <!-- Bootstrap Icons: x-lg and list (MIT) -->
+        <svg v-if="menuOpen" class="bi bi-x-lg" viewBox="0 0 16 16" width="20" height="20" fill="currentColor" aria-hidden="true">
+          <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+        </svg>
+        <svg v-else class="bi bi-list" viewBox="0 0 16 16" width="24" height="24" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+        </svg>
       </button>
 
       <nav id="site-nav" class="nav" :class="{ 'nav--open': menuOpen }" aria-label="Main">
@@ -211,10 +218,16 @@ button:hover {
 
 .menu-toggle {
   display: none;
-  font-size: 0.9375rem;
-  min-height: 2.75rem;
-  padding-inline: 0.5rem;
-  margin-right: -0.5rem;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-right: -0.625rem;
+  border-radius: 8px;
+  color: var(--ink);
+}
+
+.menu-toggle:hover {
+  background: var(--tint);
 }
 
 @keyframes menu-in {
@@ -226,7 +239,7 @@ button:hover {
 
 @media (max-width: 980px) {
   .menu-toggle {
-    display: block;
+    display: grid;
   }
 
   .nav {
